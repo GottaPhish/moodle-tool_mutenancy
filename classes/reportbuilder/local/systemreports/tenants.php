@@ -1,0 +1,103 @@
+<?php
+// This file is part of Multi-tenancy plugin for Moodle™.
+
+namespace tool_mutenancy\reportbuilder\local\systemreports;
+
+use tool_mutenancy\reportbuilder\local\entities\tenant;
+use core_course\reportbuilder\local\entities\course_category;
+use core_reportbuilder\system_report;
+
+/**
+ * Embedded tenants report.
+ *
+ * @package     tool_mutenancy
+ * @copyright   2025 Petr Skoda
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+final class tenants extends system_report {
+
+    #[\Override]
+    protected function initialise(): void {
+        $tenantentity = new tenant();
+        $tenantalias = $tenantentity->get_table_alias('tool_mutenancy_tenant');
+
+        $this->set_main_table('tool_mutenancy_tenant', $tenantalias);
+        $this->add_entity($tenantentity);
+
+        $this->add_base_fields("{$tenantalias}.id, {$tenantalias}.archived");
+
+        $categoryentity = new course_category();
+        $categoryalias = $categoryentity->get_table_alias('course_categories');
+
+        $this->add_entity($categoryentity->add_join(
+            "JOIN {course_categories} {$categoryalias} ON {$categoryalias}.id = {$tenantalias}.categoryid"));
+
+        $this->add_columns();
+        $this->add_filters();
+
+        $this->set_downloadable(true);
+    }
+
+    #[\Override]
+    protected function can_view(): bool {
+        return has_capability('tool/mutenancy:view', \context_system::instance());
+    }
+
+    /**
+     * Adds the columns we want to display in the report.
+     */
+    public function add_columns(): void {
+        $columns = [
+            'tenant:name',
+            'tenant:idnumber',
+            'course_category:namewithlink',
+            'tenant:usercount',
+            'tenant:memberlimit',
+            'tenant:archived',
+            'tenant:loginurl',
+        ];
+        $this->add_columns_from_entities($columns);
+
+        $this->get_column('course_category:namewithlink')
+            ->set_title(new \lang_string('categoryname'))
+            ->set_callback(static function($ignored, \stdClass $category): string {
+                if (empty($category->id)) {
+                    return '';
+                }
+                $context = \context_coursecat::instance($category->id);
+                $url = null;
+                if (has_capability('moodle/category:manage', $context)) {
+                    $url = new \moodle_url('/course/management.php', ['categoryid' => $category->id]);
+                } else if (has_capability('moodle/category:viewcourselist', $context)) {
+                    $url = new \moodle_url('/course/index.php', ['categoryid' => $category->id]);
+                }
+                $name = format_string($category->name, true, ['context' => $context]);
+                if ($url) {
+                    $name = \html_writer::link($url, $name);
+                }
+                return $name;
+            });
+    }
+
+    /**
+     * Adds the filters we want to display in the report.
+     */
+    protected function add_filters(): void {
+        $filters = [
+            'tenant:name',
+            'tenant:idnumber',
+            'tenant:archived',
+        ];
+        $this->add_filters_from_entities($filters);
+    }
+
+    /**
+     * Row class
+     *
+     * @param \stdClass $row
+     * @return string
+     */
+    public function get_row_class(\stdClass $row): string {
+        return $row->archived ? 'text-muted' : '';
+    }
+}
