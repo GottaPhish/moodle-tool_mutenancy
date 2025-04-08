@@ -42,8 +42,8 @@ final class form_user_allocate_tenantid extends \tool_mulib\external\form_autoco
     /**
      * Gets list of tenant allocation targets.
      *
-     * @param int $tenantid 0 menas no tenant
      * @param string $query The search request.
+     * @param int $tenantid 0 menas no tenant
      * @return array
      */
     public static function execute(string $query, int $tenantid): array {

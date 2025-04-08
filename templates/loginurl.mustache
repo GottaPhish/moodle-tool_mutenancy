@@ -1,10 +1,22 @@
 {{!
-// This file is part of Multi-tenancy plugin for Moodle™.
-// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+This file is part of Multi-tenancy plugin for Moodle™.
 
 @copyright   2025 Petr Skoda
 @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 
+}}
+{{!
+    @template tool_mutenancy/loginurl
+
+    Template to display tenant login URL with copy to clipboard button.
+
+    Context variables required for this template:
+    * url - Tenant login URL
+
+    Example context (json):
+    {
+        "url": "https://example.com/login/?tenant=TEN1",
+    }
 }}
 {{#url}}
 <div>

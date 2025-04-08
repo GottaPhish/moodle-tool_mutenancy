@@ -344,6 +344,7 @@ final class user {
     /**
      * Allocate user to tenant or de-allocate user.
      *
+     * @param int $userid
      * @param int|null $tenantid null means global user
      * @return stdClass user record
      */
