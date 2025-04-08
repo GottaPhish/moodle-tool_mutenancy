@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\patch;
 
@@ -15,6 +18,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class userlib_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -105,7 +109,7 @@ final class userlib_test extends \advanced_testcase {
     public function test_user_update_user(): void {
         global $DB, $CFG;
         require_once("$CFG->dirroot/user/lib.php");
-        
+
         /** @var \tool_mutenancy_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('tool_mutenancy');
 

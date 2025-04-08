@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 use tool_mutenancy\local\tenancy;
 use tool_mutenancy\local\tenant;
@@ -16,10 +17,10 @@ use tool_mutenancy\local\tenant;
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
 
+// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
 if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
     define('AJAX_SCRIPT', true);
 }
-
 require(__DIR__.'/../../../../config.php');
 
 $tenantid = required_param('id', PARAM_INT);

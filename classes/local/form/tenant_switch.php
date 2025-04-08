@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\local\form;
 
@@ -25,6 +26,7 @@ final class tenant_switch extends \tool_mulib\local\dialog_form {
         $this->add_action_buttons(true, get_string('tenant_switch', 'tool_mutenancy'));
     }
 
+    #[\Override]
     public function validation($data, $files) {
         $errors = parent::validation($data, $files);
 

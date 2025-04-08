@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\local;
 
@@ -20,9 +23,13 @@ use tool_mutenancy\local\config;
  */
 final class tenant_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
+    /**
+     * @coversNothing
+     */
     public function test_idnumber_regex(): void {
         $this->assertSame(1, preg_match(tenant::IDNUMBER_REGEX, 'abcxyz01234567890'));
         $this->assertSame(1, preg_match(tenant::IDNUMBER_REGEX, 'AbC'));

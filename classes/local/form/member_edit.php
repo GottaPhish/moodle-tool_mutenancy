@@ -1,5 +1,7 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
 
 namespace tool_mutenancy\local\form;
 
@@ -22,6 +24,8 @@ final class member_edit extends \tool_mulib\local\dialog_form {
     public function definition() {
         global $CFG;
 
+        // phpcs:disable
+
         $mform = $this->_form;
 
         $editoroptions = $this->_customdata['editoroptions'];
@@ -42,8 +46,8 @@ final class member_edit extends \tool_mulib\local\dialog_form {
         $mform->addElement('header', 'moodle', $strgeneral);
 
         $auths = core_component::get_plugin_list('auth');
-        $cannotchangepass = array();
-        $cannotchangeusername = array();
+        $cannotchangepass = [];
+        $cannotchangeusername = [];
         foreach ($auths as $auth => $unused) {
             $authinst = get_auth_plugin($auth);
 

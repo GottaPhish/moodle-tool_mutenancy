@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\patch;
 
@@ -15,6 +18,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class accesslib_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -61,7 +65,7 @@ final class accesslib_test extends \advanced_testcase {
         $course2 = $this->getDataGenerator()->create_course(['category' => $tenant2->categoryid]);
         $coursecontext2 = \context_course::instance($course2->id);
 
-        // Any capability will do here, the default user role override
+        // Any capability will do here, the default user role override.
         $capability = 'moodle/course:view';
         $userrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
         assign_capability($capability, CAP_ALLOW, $userrole->id, $syscontext->id);
@@ -379,7 +383,7 @@ final class accesslib_test extends \advanced_testcase {
         $course2 = $this->getDataGenerator()->create_course(['category' => $tenant2->categoryid]);
         $coursecontext2 = \context_course::instance($course2->id);
 
-        // Any capability will do here, the default user role override
+        // Any capability will do here, the default user role override.
         $capability = 'moodle/course:view';
         $userrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
         assign_capability($capability, CAP_ALLOW, $userrole->id, $syscontext->id);

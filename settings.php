@@ -1,16 +1,20 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
-
-use tool_mutenancy\local\tenancy;
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 /**
- * Multi-tenancy settings.
+ * Tenant settings.
  *
  * @package     tool_mutenancy
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+
+defined('MOODLE_INTERNAL') || die();
+
+// phpcs:ignore moodle.Commenting.InlineComment.TypeHintingMatch
 /** @var admin_root $ADMIN */
 
 if (tenancy::is_active()) {
@@ -45,4 +49,3 @@ $settings->add(new admin_setting_configtext(
 ));
 
 $ADMIN->add('root', $settings, 'tool_mutenancy_tenants');
-

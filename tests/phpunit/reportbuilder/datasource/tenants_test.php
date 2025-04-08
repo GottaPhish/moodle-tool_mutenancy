@@ -1,7 +1,10 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
-namespace tool_mutenancy\phpunit\reportbuidler\datasource;
+namespace tool_mutenancy\phpunit\reportbuilder\datasource;
 
 use tool_mutenancy\reportbuilder\datasource\tenants as templatesource;
 
@@ -17,6 +20,7 @@ use tool_mutenancy\reportbuilder\datasource\tenants as templatesource;
  */
 final class tenants_test extends \core_reportbuilder\tests\core_reportbuilder_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 

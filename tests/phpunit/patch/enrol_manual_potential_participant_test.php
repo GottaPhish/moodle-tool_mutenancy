@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\patch;
 
@@ -17,6 +20,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class enrol_manual_potential_participant_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 

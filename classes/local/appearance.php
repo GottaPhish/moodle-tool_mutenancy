@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\local;
 
@@ -207,7 +208,7 @@ final class appearance {
      * @return bool
      */
     public static function is_valid_color(string $value): bool {
-        // See original code in \admin_setting_configcolourpicker::validate()
+        // See original code in \admin_setting_configcolourpicker::validate().
         $colornames = [
             'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure',
             'beige', 'bisque', 'black', 'blanchedalmond', 'blue',
@@ -239,7 +240,7 @@ final class appearance {
             'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue',
             'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue', 'tan',
             'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'wheat', 'white',
-            'whitesmoke', 'yellow', 'yellowgreen'
+            'whitesmoke', 'yellow', 'yellowgreen',
         ];
 
         if (preg_match('/^#([[:xdigit:]]{3}){1,2}$/', $value)) {

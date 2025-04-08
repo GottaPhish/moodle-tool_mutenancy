@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\output;
 
@@ -13,8 +14,12 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class logintenantselector implements \renderable, \core\output\named_templatable {
+    /** @var \action_menu|null  */
     protected $menu = null;
 
+    /**
+     * Constructor.
+     */
     public function __construct() {
         global $DB;
 
@@ -51,6 +56,11 @@ final class logintenantselector implements \renderable, \core\output\named_templ
         }
     }
 
+    /**
+     * Does menu have items?
+     *
+     * @return bool
+     */
     public function has_items(): bool {
         return isset($this->menu);
     }

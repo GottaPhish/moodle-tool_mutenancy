@@ -1,5 +1,7 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
 
 namespace tool_mutenancy\local;
 
@@ -450,7 +452,7 @@ final class tenant {
                        AND {context}.instanceid IN (
                            SELECT bi.id
                              FROM {block_instances} bi
-                             JOIN {context} uc ON uc.id = bi.parentcontextid 
+                             JOIN {context} uc ON uc.id = bi.parentcontextid
                             WHERE uc.contextlevel = :userlevel)";
         $params = [
             'tenantid' => $tenant->id,
@@ -483,7 +485,7 @@ final class tenant {
         if ($suspendmembers) {
             $sql = "SELECT u.id
                       FROM {user} u
-                     WHERE u.deleted = 0 AND u.suspended = 0 
+                     WHERE u.deleted = 0 AND u.suspended = 0
                            AND u.tenantid = :tenantid
                   ORDER BY u.id ASC";
             $rs = $DB->get_recordset_sql($sql, ['tenantid' => $tenant->id]);

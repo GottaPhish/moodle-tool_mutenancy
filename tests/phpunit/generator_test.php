@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit;
 
@@ -15,6 +18,7 @@ namespace tool_mutenancy\phpunit;
  */
 final class generator_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -129,14 +133,14 @@ final class generator_test extends \advanced_testcase {
         $this->assertSame(null, $context0->tenantid);
 
         $user1 = $this->getDataGenerator()->create_user([
-            'tenantid' => $tenant->id
+            'tenantid' => $tenant->id,
         ]);
         $this->assertSame($tenant->id, $user1->tenantid);
         $context1 = \context_user::instance($user1->id);
         $this->assertSame((int)$tenant->id, $context1->tenantid);
 
         $user2 = $this->getDataGenerator()->create_user([
-            'tenant' => $tenant->idnumber
+            'tenant' => $tenant->idnumber,
         ]);
         $this->assertSame($tenant->id, $user2->tenantid);
         $context2 = \context_user::instance($user2->id);

@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\local;
 
@@ -276,6 +277,8 @@ final class tenancy {
             $tenantid = self::get_current_tenantid();
         }
 
+        // phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameLowerCase
+
         if (isset($GLOBALS['SITE']->tenantid)) {
             if ($GLOBALS['SITE']->tenantid == $tenantid) {
                 return;
@@ -310,6 +313,8 @@ final class tenancy {
             $GLOBALS['COURSE'] = clone($GLOBALS['SITE']);
             unset($GLOBALS['COURSE']->tenantid);
         }
+
+        // phpcs:enable moodle.NamingConventions.ValidVariableName.VariableNameLowerCase
     }
 
     /**
@@ -371,7 +376,7 @@ final class tenancy {
                 // Return something always true as WHERE condition.
                 return "1=1";
             } else {
-                // This is expected to be appended to existing WHERE conditions
+                // This is expected to be appended to existing WHERE conditions.
                 return "";
             }
         }

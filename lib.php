@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 use tool_mutenancy\local\tenancy;
 use tool_mutenancy\local\tenant;
@@ -80,7 +81,7 @@ function tool_mutenancy_myprofile_navigation(\core_user\output\myprofile\tree $t
             $name = format_string($tenant->name);
             $tenantcontext = context_tenant::instance($tenant->id);
             if (has_capability('tool/mutenancy:view', $tenantcontext)) {
-                $url = new moodle_url('/admin/tool/mutenancy/tenant.php', ['id'=> $tenant->id]);
+                $url = new moodle_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenant->id]);
                 $name = html_writer::link($url, $name);
             }
         } else {
@@ -112,7 +113,7 @@ function tool_mutenancy_myprofile_navigation(\core_user\output\myprofile\tree $t
                 $name = format_string($tenant->name);
                 $tenantcontext = context_tenant::instance($tenant->id);
                 if (has_capability('tool/mutenancy:view', $tenantcontext)) {
-                    $url = new moodle_url('/admin/tool/mutenancy/tenant.php', ['id'=> $tenant->id]);
+                    $url = new moodle_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenant->id]);
                     $name = html_writer::link($url, $name);
                 }
                 $list[] = $name;
@@ -140,7 +141,8 @@ function tool_mutenancy_render_navbar_output(renderer_base $renderer): string {
 
     $backurl = $PAGE->url->out_as_local_url(false);
     $url = new moodle_url('/admin/tool/mutenancy/tenant_switch.php', ['backurl' => $backurl]);
-    $icon = new \tool_mulib\output\dialog_form\icon($url, get_string('tenant_switch', 'tool_mutenancy'), 'switch', 'tool_mutenancy');
+    $icon = new \tool_mulib\output\dialog_form\icon($url,
+        get_string('tenant_switch', 'tool_mutenancy'), 'switch', 'tool_mutenancy');
     $icon->set_dialog_size('');
     $icon->set_class('nav-link icon-no-margin'); // Use the same styling as notification.
 

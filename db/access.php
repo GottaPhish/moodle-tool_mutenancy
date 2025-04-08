@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 /**
  * Multi-tenancy capabilities.
@@ -8,6 +9,8 @@
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
     // View tenant details.
@@ -19,7 +22,7 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
-    /** Add, update and delete tenants; add and remove tenant managers */
+    // Add, update and delete tenants; add and remove tenant managers.
     'tool/mutenancy:admin' => [
         'captype' => 'write',
         'riskbitmask' => RISK_PERSONAL || RISK_DATALOSS || RISK_SPAM,
@@ -28,7 +31,7 @@ $capabilities = [
             'manager' => CAP_ALLOW, // Excluded from tenantmanager archetype.
         ],
     ],
-    /** Switch to tenant site - not applicable to tenant members, view cap is also needed in tenant */
+    // Switch to tenant site - not applicable to tenant members, view cap is also needed in tenant.
     'tool/mutenancy:switch' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,

@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\patch;
 
@@ -15,6 +18,7 @@ use tool_mutenancy\local\config;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class moodlelib_test extends \advanced_testcase {
+    /** @var null|string previous error log target */
     protected $oldlog = null;
 
     public function setUp(): void {

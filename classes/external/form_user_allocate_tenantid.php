@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\external;
 
@@ -14,6 +15,7 @@ use core_external\external_value;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class form_user_allocate_tenantid extends \tool_mulib\external\form_autocomplete_field {
+    /** @var int max returned results */
     const MAX_RESULTS = 20;
 
     /**

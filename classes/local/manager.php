@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\local;
 
@@ -252,7 +253,7 @@ final class manager {
                   FROM {tool_mutenancy_manager} m
                   JOIN {tool_mutenancy_tenant} t ON t.id = m.tenantid
              LEFT JOIN {user} u ON u.id = m.userid AND u.deleted = 0 AND (u.tenantid IS NULL OR u.tenantid = t.id)
-                 WHERE u.id IS NULL 
+                 WHERE u.id IS NULL
               ORDER BY m.userid ASC, m.tenantid ASC";
         $params = [];
         $rs = $DB->get_recordset_sql($sql, $params);

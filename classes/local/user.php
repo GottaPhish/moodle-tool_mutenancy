@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\local;
 
@@ -123,7 +124,7 @@ final class user {
         $sql = "SELECT t.cohortid, u.id AS userid
                   FROM {tool_mutenancy_tenant} t
                   JOIN {user} u ON u.tenantid = t.id
-             LEFT JOIN {cohort_members} cm ON cm.cohortid = t.cohortid AND cm.userid = u.id  
+             LEFT JOIN {cohort_members} cm ON cm.cohortid = t.cohortid AND cm.userid = u.id
                  WHERE u.deleted = 0";
         $params = [];
         if ($tenantid) {
@@ -147,7 +148,7 @@ final class user {
                   FROM {tool_mutenancy_tenant} t
                   JOIN {user} u ON u.tenantid IS NULL
                   JOIN {cohort_members} acm ON acm.cohortid = t.assoccohortid AND acm.userid = u.id
-             LEFT JOIN {cohort_members} cm ON cm.cohortid = t.cohortid AND cm.userid = u.id  
+             LEFT JOIN {cohort_members} cm ON cm.cohortid = t.cohortid AND cm.userid = u.id
                  WHERE u.deleted = 0";
         $params = [];
         if ($tenantid) {
@@ -169,7 +170,7 @@ final class user {
 
         $sql = "SELECT t.cohortid, cm.userid
                   FROM {tool_mutenancy_tenant} t
-                  JOIN {cohort_members} cm ON cm.cohortid = t.cohortid  
+                  JOIN {cohort_members} cm ON cm.cohortid = t.cohortid
                  WHERE NOT EXISTS (
                             SELECT 'x'
                               FROM {user} u
@@ -201,7 +202,7 @@ final class user {
 
         $sql = "SELECT t.id AS itemid, cm.userid, c.id AS contextid
                   FROM {tool_mutenancy_tenant} t
-                  JOIN {cohort_members} cm ON cm.cohortid = t.cohortid    
+                  JOIN {cohort_members} cm ON cm.cohortid = t.cohortid
                   JOIN {context} c ON c.contextlevel = :catlevel AND c.instanceid = t.categoryid
              LEFT JOIN {role_assignments} ra ON ra.contextid = c.id AND ra.roleid = :roleid
                                                 AND ra.userid = cm.userid AND ra.component = 'tool_mutenancy'

@@ -1,12 +1,14 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
 
 namespace tool_mutenancy\reportbuilder\local\systemreports;
 
 use core_reportbuilder\local\entities\user;
 use core_reportbuilder\local\helpers\user_profile_fields;
 use core_reportbuilder\system_report;
-use \core_reportbuilder\local\helpers\database;
+use core_reportbuilder\local\helpers\database;
 use core_user\fields;
 use lang_string;
 use moodle_url;
@@ -30,7 +32,7 @@ final class users extends system_report {
     protected function initialise(): void {
         global $DB, $CFG;
 
-        $this->tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $this->get_context()->instanceid],'*', MUST_EXIST);
+        $this->tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $this->get_context()->instanceid], '*', MUST_EXIST);
         if ($this->tenant->assoccohortid) {
             $this->cohort = $DB->get_record('cohort', ['id' => $this->tenant->assoccohortid]);
         }
@@ -55,7 +57,7 @@ final class users extends system_report {
             $this->add_base_condition_sql("{$entityuseralias}.id IN (
                 SELECT tuser.id
                   FROM {user} tuser
-             LEFT JOIN {cohort_members} cm ON cm.cohortid = {$this->tenant->assoccohortid} AND cm.userid = tuser.id 
+             LEFT JOIN {cohort_members} cm ON cm.cohortid = {$this->tenant->assoccohortid} AND cm.userid = tuser.id
                  WHERE (tuser.tenantid IS NULL AND cm.id IS NOT NULL)
                        OR tuser.tenantid = {$this->tenant->id}
                )");
@@ -173,9 +175,9 @@ final class users extends system_report {
     }
 
     /**
-    * Add the system report actions. An extra column will be appended to each row, containing all actions added here
-    *
-    * Note the use of ":id" placeholder which will be substituted according to actual values in the row
+     * Add the system report actions. An extra column will be appended to each row, containing all actions added here
+     *
+     * Note the use of ":id" placeholder which will be substituted according to actual values in the row
      */
     protected function add_actions(): void {
         global $SCRIPT;

@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\patch;
 
@@ -16,6 +19,7 @@ use tool_mutenancy\local\config;
  */
 final class mutenancylib_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -232,6 +236,9 @@ final class mutenancylib_test extends \advanced_testcase {
         tenancy::unforce_current_tenantid();
     }
 
+    /**
+     * @covers ::mutenancy_is_user_archived()
+     */
     public function test_mutenancy_is_user_archived(): void {
         if (tenancy::is_active()) {
             tenancy::deactivate();

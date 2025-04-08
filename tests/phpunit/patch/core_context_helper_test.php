@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\patch;
 
@@ -17,6 +20,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class core_context_helper_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -69,7 +73,8 @@ final class core_context_helper_test extends \advanced_testcase {
         tenancy::activate();
 
         $sql = \core\context_helper::get_preload_record_columns_sql('x');
-        $expected = 'x.id AS ctxid, x.path AS ctxpath, x.depth AS ctxdepth, x.contextlevel AS ctxlevel, x.instanceid AS ctxinstance, x.locked AS ctxlocked, x.tenantid AS ctxtenantid';
+        $expected = 'x.id AS ctxid, x.path AS ctxpath, x.depth AS ctxdepth, x.contextlevel AS ctxlevel,'
+            . ' x.instanceid AS ctxinstance, x.locked AS ctxlocked, x.tenantid AS ctxtenantid';
         $this->assertSame($expected, $sql);
     }
 }

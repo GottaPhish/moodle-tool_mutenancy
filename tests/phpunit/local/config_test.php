@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\local;
 
@@ -18,6 +21,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class config_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -84,7 +88,7 @@ final class config_test extends \advanced_testcase {
         config::override($tenant1->id, 'xyz', null, 'core');
         $record = $DB->get_record('tool_mutenancy_config',
             ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz']);
-        $this->assertSame(False, $record);
+        $this->assertSame(false, $record);
 
         config::override($tenant1->id, 'xyz', '123', 'tool_mutenancy');
         $record = $DB->get_record('tool_mutenancy_config',

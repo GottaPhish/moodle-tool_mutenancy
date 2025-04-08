@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\local;
 
@@ -17,6 +20,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class tenancy_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -54,7 +58,7 @@ final class tenancy_test extends \advanced_testcase {
     /**
      * @covers ::is_active
      */
-    public function test_is_active() {
+    public function test_is_active(): void {
         if (defined('TEST_MUTENANCY_INIT_ACTIVATE') && constant('TEST_MUTENANCY_INIT_ACTIVATE')) {
             $this->assertTrue(tenancy::is_active());
         } else {
@@ -91,6 +95,9 @@ final class tenancy_test extends \advanced_testcase {
      */
     public function test_get_current_tenantid(): void {
         global $SESSION;
+
+        // phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameLowerCase
+
         /** @var \tool_mutenancy_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('tool_mutenancy');
 

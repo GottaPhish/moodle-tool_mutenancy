@@ -1,5 +1,6 @@
 <?php
-// This file is part of Certifications plugin for Moodle™.
+// This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 /**
  * Multi-tenancy tasks.
@@ -20,6 +21,6 @@ $tasks = [
         'day' => '*',
         'month' => '*',
         'dayofweek' => '*',
-        'disabled' => 0
+        'disabled' => 0,
     ],
 ];

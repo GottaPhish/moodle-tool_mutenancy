@@ -1,5 +1,7 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
 
 namespace tool_mutenancy\local\form;
 
@@ -63,7 +65,8 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
         $mform->addGroup($group, 'backgroundimage_group',
             '<div>' . get_string('backgroundimage', 'theme_boost') . '<div class="small text-muted">theme_boost | backgroundimage</div></div>',
             ' ', false);
-        $mform->addElement('filemanager', 'backgroundimage', '<span class="accesshide">'.get_string('backgroundimage', 'theme_boost').'</span>', null, self::get_logo_options());
+        $mform->addElement('filemanager', 'backgroundimage', '<span class="accesshide">'.get_string('backgroundimage', 'theme_boost').'</span>',
+            null, self::get_logo_options());
         if (config::is_overridden($tenant->id, 'theme_boost', 'backgroundimage')) {
             $mform->setDefault('backgroundimage_override', '1');
         } else {
@@ -78,7 +81,8 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
         $mform->addGroup($group, 'loginbackgroundimage_group',
             '<div>' . get_string('loginbackgroundimage', 'theme_boost') . '<div class="small text-muted">theme_boost | loginbackgroundimage</div></div>',
             ' ', false);
-        $mform->addElement('filemanager', 'loginbackgroundimage', '<span class="accesshide">'.get_string('loginbackgroundimage', 'theme_boost').'</span>', null, self::get_logo_options());
+        $mform->addElement('filemanager', 'loginbackgroundimage', '<span class="accesshide">'.get_string('loginbackgroundimage', 'theme_boost').'</span>',
+            null, self::get_logo_options());
         if (config::is_overridden($tenant->id, 'theme_boost', 'loginbackgroundimage')) {
             $mform->setDefault('loginbackgroundimage_override', '1');
         } else {

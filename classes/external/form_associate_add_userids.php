@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\external;
 
@@ -97,8 +98,6 @@ final class form_associate_add_userids extends \tool_mulib\external\form_autocom
             global $DB;
 
             $record = $DB->get_record('user', ['id' => $value]);
-
-
             $context = \context_tenant::instance($arguments['tenantid']);
 
             return self::prepare_user_label($record, $context);

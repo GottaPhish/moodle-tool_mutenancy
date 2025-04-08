@@ -1,7 +1,10 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
-namespace tool_mutenancy\phpunit\local;
+namespace tool_mutenancy\phpunit\task;
 
 use tool_mutenancy\task\cron;
 use tool_mutenancy\local\tenancy;
@@ -18,6 +21,7 @@ use tool_mutenancy\local\tenancy;
  */
 final class cron_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 

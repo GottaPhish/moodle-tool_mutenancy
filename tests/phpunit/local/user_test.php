@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\local;
 
@@ -20,9 +23,13 @@ use tool_mutenancy\local\manager;
  */
 final class user_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
+    /**
+     * @coversNothing
+     */
     public function test_userarchetype_constant(): void {
         $this->assertSame('tenantuser', user::ROLESHORTNAME);
     }

@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 namespace tool_mutenancy\local\form;
 
@@ -25,7 +26,7 @@ final class associate_add extends \tool_mulib\local\dialog_form {
         $mform->addElement('html', $info);
 
         $tenants = $DB->get_records_menu('tool_mutenancy_tenant', ['assoccohortid' => $cohort->id], 'name ASC', 'id, name');
-        $tenants =array_map('format_string', $tenants);
+        $tenants = array_map('format_string', $tenants);
         $mform->addElement('static', 'tenants',
             (count($tenants) > 1) ? get_string('tenants', 'tool_mutenancy') : get_string('tenant', 'tool_mutenancy'),
             implode(', ', $tenants)

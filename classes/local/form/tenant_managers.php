@@ -1,5 +1,7 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
 
 namespace tool_mutenancy\local\form;
 
@@ -21,7 +23,6 @@ final class tenant_managers extends \tool_mulib\local\dialog_form {
 
         $info = '<div class="alert alert-info">' . markdown_to_html(get_string('member_managers_info', 'tool_mutenancy')) . '</div>';
         $mform->addElement('html', $info);
-
 
         form_tenant_managers_userids::add_form_element(
             $mform, ['tenantid' => $tenant->id], 'userids', get_string('tenant_managers', 'tool_mutenancy'));

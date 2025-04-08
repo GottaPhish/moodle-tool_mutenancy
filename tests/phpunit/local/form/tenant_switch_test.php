@@ -1,5 +1,8 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
+// phpcs:disable moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
 namespace tool_mutenancy\phpunit\local\form;
 
@@ -17,6 +20,7 @@ use tool_mutenancy\local\form\tenant_switch as form;
  */
 final class tenant_switch_test extends \advanced_testcase {
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest();
     }
 
@@ -89,7 +93,7 @@ final class tenant_switch_test extends \advanced_testcase {
             'My tenants' => [
                 $tenant1->id => $tenant1->name,
                 $tenant2->id => $tenant2->name,
-            ]
+            ],
         ];
         $this->assertSame($expected, form::get_options());
 

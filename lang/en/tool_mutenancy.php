@@ -1,5 +1,6 @@
 <?php
 // This file is part of Multi-tenancy plugin for Moodle™.
+// phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 /**
  * Multi-tenancy language strings.
@@ -9,7 +10,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['boost_edit'] = 'Edit Boost';
 $string['associate'] = 'Associated user';
 $string['associate_add'] = 'Associate users';
 $string['associate_add_info'] = 'Non-tenant users can be associated with tenant by adding them to the associated users cohort.
@@ -19,6 +19,7 @@ $string['associate_remove'] = 'Disassociate user';
 $string['associate_remove_info'] = 'Users are disassociated from tenant by removing them from the associated users cohort.
 This may affect multiple tenants when tenants share the same associated users cohort.';
 $string['auth_edit'] = 'Update authentication';
+$string['boost_edit'] = 'Edit Boost';
 $string['cachedef_config'] = 'Tenant config cache';
 $string['cachedef_tenant'] = 'Tenant record cache';
 $string['config_default'] = 'Default value';
@@ -26,17 +27,19 @@ $string['config_default_value'] = 'Default value ({$a})';
 $string['config_override'] = 'Override';
 $string['config_override_value'] = 'Override default ({$a})';
 $string['config_value'] = 'Value';
-$string['environment_corepatch_ok'] = 'Correct patch version detected';
 $string['environment_corepatch_error'] = 'Required Multi-tenancy patch is missing or version is invalid';
+$string['environment_corepatch_ok'] = 'Correct patch version detected';
 $string['error:changerequired'] = 'Change required';
 $string['error:memberlimitreached'] = 'Member limit reached';
 $string['login_tenant_select'] = 'Select site';
 $string['logos_edit'] = 'Edit logos';
-$string['member_create'] = 'Create account';
 $string['member_confirm_info'] = 'In most cases member accounts should not be confirmed here.
 
 It is recommended to use *Resend confirmation email* option if user did not receive the confirmation email.';
+$string['member_create'] = 'Create account';
 $string['member_delete_info'] = 'Deleting of tenant member account is not reversible.';
+$string['member_managers_info'] = 'Tenant managers are not automatically visible in tenants. They should be added to
+the associated users cohort if they are expected to participate in the tenant.';
 $string['member_resend_info'] = 'New account confirmation emails instruct users to prove they
 own the email provided during sign up.
 
@@ -50,10 +53,10 @@ $string['member_unlock_info'] = 'User accounts get locked after repeated failed 
 $string['member_unsuspend_info'] = 'After account is re-activated user should be able to log in again
 and they will start receiving emails and notifications.';
 $string['member_update'] = 'Update account';
-$string['mutenancy:allocate'] = 'Allocate users to tenants';
-$string['mutenancy:configauth'] = 'Configure tenant authentication';
-$string['mutenancy:configappearance'] = 'Configure tenant theme and branding';
 $string['mutenancy:admin'] = 'Administer tenants';
+$string['mutenancy:allocate'] = 'Allocate users to tenants';
+$string['mutenancy:configappearance'] = 'Configure tenant theme and branding';
+$string['mutenancy:configauth'] = 'Configure tenant authentication';
 $string['mutenancy:membercreate'] = 'Create account for tenant member';
 $string['mutenancy:memberdelete'] = 'Delete account of tenant member';
 $string['mutenancy:memberupdate'] = 'Update account of tenant member';
@@ -63,25 +66,25 @@ $string['pluginname'] = 'Multi-tenancy';
 $string['privacy:metadata'] = 'Multi-tenancy plugin does not store any personal data.';
 $string['privacy:metadata:tool_mutenancy_manager'] = 'Tenant managers';
 $string['privacy:metadata:tool_mutenancy_manager:tenantid'] = 'Tenant id';
-$string['privacy:metadata:tool_mutenancy_manager:userid'] = 'Manager id';
-$string['privacy:metadata:tool_mutenancy_manager:usercreated'] = 'User who created tenant';
 $string['privacy:metadata:tool_mutenancy_manager:timecreated'] = 'Time of creation';
+$string['privacy:metadata:tool_mutenancy_manager:usercreated'] = 'User who created tenant';
+$string['privacy:metadata:tool_mutenancy_manager:userid'] = 'Manager id';
 $string['role_tenantmanager_archetype'] = 'ARCHETYPE: Tenant manager';
-$string['role_tenantmanager_description'] = 'Tenant manager role gets assigned to all tenant mangers automatically in tenant and tenant category contexts. 
+$string['role_tenantmanager_description'] = 'Tenant manager role gets assigned to all tenant mangers automatically in tenant and tenant category contexts.
 
 This role is not supposed to be assigned manually, do not change the role short name.';
 $string['role_tenantmanager_name'] = 'Tenant manager';
 $string['role_tenantuser_archetype'] = 'ARCHETYPE: Tenant user';
-$string['role_tenantuser_description'] = 'Tenant user role gets assigned to all tenant users automatically in tenant category contexts. 
+$string['role_tenantuser_description'] = 'Tenant user role gets assigned to all tenant users automatically in tenant category contexts.
 
 This role is not supposed to be assigned manually, do not change the role short name.';
 $string['role_tenantuser_name'] = 'Tenant user';
-$string['setting_tenantlimit'] = 'Tenant limit';
-$string['setting_tenantlimit_desc'] = 'Specifies how many tenants can be created. Note that sites with more than 100 tenants may encounter performance and usability problems.';
 $string['secondary_tenant_appearance'] = 'Appearance';
 $string['secondary_tenant_auth'] = 'Authentication';
 $string['secondary_tenant_details'] = 'Details';
 $string['secondary_tenant_users'] = 'Users';
+$string['setting_tenantlimit'] = 'Tenant limit';
+$string['setting_tenantlimit_desc'] = 'Specifies how many tenants can be created. Note that sites with more than 100 tenants may encounter performance and usability problems.';
 $string['settings'] = 'Multi-tenancy settings';
 $string['taskcron'] = 'Multi-tenancy cleanup task';
 $string['tenancy_activate'] = 'Activate multi-tenancy';
@@ -102,10 +105,10 @@ $string['tenant_archived'] = 'Archived';
 $string['tenant_category'] = 'Tenant category';
 $string['tenant_categoryidnumber'] = 'Tenant category ID number';
 $string['tenant_categoryname'] = 'Tenant category name';
-$string['tenant_create'] = 'Add tenant';
 $string['tenant_cohort'] = 'Tenant cohort';
 $string['tenant_cohortidnumber'] = 'Tenant cohort ID number';
 $string['tenant_cohortname'] = 'Tenant cohort name';
+$string['tenant_create'] = 'Add tenant';
 $string['tenant_delete'] = 'Delete tenant';
 $string['tenant_delete_info'] = 'During tenant deletion:
 
@@ -119,8 +122,6 @@ $string['tenant_idnumber'] = 'Tenant ID';
 $string['tenant_loginshow'] = 'Show tenant on login page';
 $string['tenant_loginurl'] = 'Tenant login URL';
 $string['tenant_managers'] = 'Tenant managers';
-$string['member_managers_info'] = 'Tenant managers are not automatically visible in tenants. They should be added to
-the associated users cohort if they are expected to participate in the tenant.';
 $string['tenant_member'] = 'Tenant member';
 $string['tenant_memberlimit'] = 'Tenant members limit';
 $string['tenant_name'] = 'Tenant name';
