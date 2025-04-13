@@ -60,7 +60,7 @@ Multi-tenancy makes it possible to handle a variety of use cases, such as:
 ## Known Limitations
 
 - Only the latest Moodle™ 4.5.x releases to be supported in 2025.
-- Supported databases: PostgreSQL, MySQL, or MariaDB
+- Supported databases: PostgreSQL and MariaDB (MySQL Server is not recommended, but it may work)
 - Tenant-specific appearance settings may not display correctly in the Moodle Mobile App.
 
 ---

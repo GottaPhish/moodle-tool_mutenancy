@@ -460,14 +460,27 @@ final class tenant {
         }
 
         // Invalidate block contexts in user contexts.
-        $sql = "UPDATE {context}
-                   SET depth=0,path=null,tenantid=null
-                 WHERE {context}.contextlevel = :blocklevel AND {context}.tenantid = :tenantid
-                       AND {context}.instanceid IN (
-                           SELECT bi.id
+        if ($DB instanceof \mysqli_native_moodle_database) {
+            // MySQL from Oracle is the worst choice, let's hack around its limitations here...
+            $sql = /** @lang MySQL */
+                "UPDATE /*+ NO_MERGE(pbi) */ {context},
+                        (SELECT bi.id
                              FROM {block_instances} bi
                              JOIN {context} uc ON uc.id = bi.parentcontextid
-                            WHERE uc.contextlevel = :userlevel)";
+                            WHERE uc.contextlevel = :userlevel) AS pbi
+                    SET depth=0,path=null,tenantid=null
+                  WHERE {context}.contextlevel = :blocklevel AND {context}.tenantid = :tenantid
+                        AND {context}.instanceid = pbi.id";
+        } else {
+            $sql = "UPDATE {context}
+                       SET depth=0,path=null,tenantid=null
+                     WHERE {context}.contextlevel = :blocklevel AND {context}.tenantid = :tenantid
+                           AND {context}.instanceid IN (
+                               SELECT bi.id
+                                 FROM {block_instances} bi
+                                 JOIN {context} uc ON uc.id = bi.parentcontextid
+                                WHERE uc.contextlevel = :userlevel)";
+        }
         $params = [
             'tenantid' => $tenant->id,
             'blocklevel' => CONTEXT_BLOCK,
