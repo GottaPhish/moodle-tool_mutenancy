@@ -462,15 +462,18 @@ final class tenant {
         // Invalidate block contexts in user contexts.
         if ($DB instanceof \mysqli_native_moodle_database) {
             // MySQL from Oracle is the worst choice, let's hack around its limitations here...
+            // phpcs:disable moodle.Commenting.ValidTags.Invalid
+            // phpcs:ignore moodle.Commenting.InlineComment.DocBlock
             $sql = /** @lang MySQL */
                 "UPDATE /*+ NO_MERGE(pbi) */ {context},
                         (SELECT bi.id
-                             FROM {block_instances} bi
-                             JOIN {context} uc ON uc.id = bi.parentcontextid
-                            WHERE uc.contextlevel = :userlevel) AS pbi
+                           FROM {block_instances} bi
+                           JOIN {context} uc ON uc.id = bi.parentcontextid
+                          WHERE uc.contextlevel = :userlevel) AS pbi
                     SET depth=0,path=null,tenantid=null
                   WHERE {context}.contextlevel = :blocklevel AND {context}.tenantid = :tenantid
                         AND {context}.instanceid = pbi.id";
+            // phpcs:enable moodle.Commenting.ValidTags.Invalid
         } else {
             $sql = "UPDATE {context}
                        SET depth=0,path=null,tenantid=null
