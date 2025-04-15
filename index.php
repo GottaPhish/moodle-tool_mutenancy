@@ -41,7 +41,6 @@ $syscontext = context_system::instance();
 $tenantcount = $DB->count_records('tool_mutenancy_tenant', []);
 
 $PAGE->set_heading(get_string('tenants', 'tool_mutenancy'));
-$PAGE->set_secondary_navigation(false);
 
 if (!tenancy::is_active()) {
     echo $OUTPUT->header();
@@ -52,6 +51,8 @@ if (!tenancy::is_active()) {
     echo $OUTPUT->footer();
     die;
 }
+
+$PAGE->set_secondary_navigation(false);
 
 if (has_capability('tool/mutenancy:admin', $syscontext)) {
     $tenantlimit = get_config('tool_mutenancy', 'tenantlimit');
