@@ -110,11 +110,12 @@ $string['tenancy_deactivate_info'] = 'Tenant manager role will be deleted during
 $string['tenant'] = 'Tenant';
 $string['tenant_actions'] = 'Actions';
 $string['tenant_archive'] = 'Archive tenant';
-$string['tenant_archive_info'] = 'Archiving tenant
+$string['tenant_archive_info'] = 'Archiving tenant:
 
-* prevents tenant members from logging in and stops all outgoing emails and notifications.
-* hides tenant category
-* archiving is a required step before tenant can be deleted';
+* prevents tenant members from logging in and stops all outgoing emails and notifications,
+* hides tenant category.
+
+Archiving is a required step before tenant can be deleted.';
 $string['tenant_archived'] = 'Archived';
 $string['tenant_category'] = 'Tenant category';
 $string['tenant_categoryidnumber'] = 'Tenant category ID number';
@@ -141,6 +142,7 @@ $string['tenant_memberlimit'] = 'Tenant members limit';
 $string['tenant_name'] = 'Tenant name';
 $string['tenant_restore'] = 'Restore archived tenant';
 $string['tenant_restore_info'] = 'Restoring of tenant should revert most changes done during tenant archiving.
+
 It is however recommended to verify all tenant settings and category visibility afterwards.';
 $string['tenant_sitefullname'] = 'Tenant site name';
 $string['tenant_siteshortname'] = 'Tenant site short name';
