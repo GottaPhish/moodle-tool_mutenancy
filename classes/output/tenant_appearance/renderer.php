@@ -36,9 +36,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         $canconfig = has_capability('tool/mutenancy:configappearance', $tenantcontext);
 
         $result = '<h2>' . get_string('logossettings', 'core_admin') . '</h2>';
-        $result .= '<dl class="row">';
 
-        $result .= '<dt class="col-3">' . get_string('logo', 'admin') . '</dt><dd class="col-9">';
+        $details = [];
+
         if (config::is_overridden($tenant->id, 'core_admin', 'logo')) {
             $logo = \tool_mutenancy\local\appearance::get_logo_url(100, 64, $tenant->id);
             $isdefault = false;
@@ -54,10 +54,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $logo = get_string('config_default_value', 'tool_mutenancy', $logo);
         }
-        $result .= $logo;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('logo', 'admin'), 'value' => $logo];
 
-        $result .= '<dt class="col-3">' . get_string('logocompact', 'admin') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'core_admin', 'logocompact')) {
             $logocompact = \tool_mutenancy\local\appearance::get_compact_logo_url(100, 64, $tenant->id);
             $isdefault = false;
@@ -73,10 +71,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $logocompact = get_string('config_default_value', 'tool_mutenancy', $logocompact);
         }
-        $result .= $logocompact;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('logocompact', 'admin'), 'value' => $logocompact];
 
-        $result .= '<dt class="col-3">' . get_string('favicon', 'admin') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'core_admin', 'favicon')) {
             $favicon = \tool_mutenancy\local\appearance::get_favicon_url($tenant->id);
             $isdefault = false;
@@ -91,9 +87,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $favicon = get_string('config_default_value', 'tool_mutenancy', $favicon);
         }
-        $result .= $favicon;
-        $result .= '</dd>';
-        $result .= '</dl>';
+        $details[] = ['property' => get_string('favicon', 'admin'), 'value' => $favicon];
+
+        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
 
         $buttons = [];
         if ($canconfig) {
@@ -106,9 +102,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
 
         $result .= '<br />';
         $result .= '<h2>' . get_string('pluginname', 'theme_boost') . '</h2>';
-        $result .= '<dl class="row">';
 
-        $result .= '<dt class="col-3">' . get_string('preset', 'theme_boost') . '</dt><dd class="col-9">';
+        $details = [];
+
         if (config::is_overridden($tenant->id, 'theme_boost', 'preset')) {
             $preset = config::get($tenant->id, 'theme_boost', 'preset');
             $isdefault = false;
@@ -122,10 +118,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $preset = get_string('config_default_value', 'tool_mutenancy', $preset);
         }
-        $result .= $preset;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('preset', 'theme_boost'), 'value' => $preset];
 
-        $result .= '<dt class="col-3">' . get_string('backgroundimage', 'theme_boost') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'theme_boost', 'backgroundimage')) {
             $backgroundimage = \tool_mutenancy\local\appearance::get_boost_setting_image_url('backgroundimage', $tenant->id);
             $isdefault = false;
@@ -141,10 +135,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $backgroundimage = get_string('config_default_value', 'tool_mutenancy', $backgroundimage);
         }
-        $result .= $backgroundimage;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('backgroundimage', 'theme_boost'), 'value' => $backgroundimage];
 
-        $result .= '<dt class="col-3">' . get_string('loginbackgroundimage', 'theme_boost') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'theme_boost', 'loginbackgroundimage')) {
             $loginbackgroundimage = \tool_mutenancy\local\appearance::get_boost_setting_image_url('loginbackgroundimage', $tenant->id);
             $isdefault = false;
@@ -160,10 +152,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $loginbackgroundimage = get_string('config_default_value', 'tool_mutenancy', $loginbackgroundimage);
         }
-        $result .= $loginbackgroundimage;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('loginbackgroundimage', 'theme_boost'), 'value' => $loginbackgroundimage];
 
-        $result .= '<dt class="col-3">' . get_string('brandcolor', 'theme_boost') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'theme_boost', 'brandcolor')) {
             $color = config::get($tenant->id, 'theme_boost', 'brandcolor');
             $isdefault = false;
@@ -179,10 +169,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $color = get_string('config_default_value', 'tool_mutenancy', $color);
         }
-        $result .= $color;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('brandcolor', 'theme_boost'), 'value' => $color];
 
-        $result .= '<dt class="col-3">' . get_string('rawscsspre', 'theme_boost') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'theme_boost', 'scsspre')) {
             $scsspre = config::get($tenant->id, 'theme_boost', 'scsspre');
             $isdefault = false;
@@ -198,10 +186,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $scsspre = get_string('config_default_value', 'tool_mutenancy', $scsspre);
         }
-        $result .= $scsspre;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('rawscsspre', 'theme_boost'), 'value' => $scsspre];
 
-        $result .= '<dt class="col-3">' . get_string('rawscss', 'theme_boost') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'theme_boost', 'scss')) {
             $scss = config::get($tenant->id, 'theme_boost', 'scss');
             $isdefault = false;
@@ -217,10 +203,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $scss = get_string('config_default_value', 'tool_mutenancy', $scss);
         }
-        $result .= $scss;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('rawscss', 'theme_boost'), 'value' => $scss];
 
-        $result .= '</dl>';
+        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
 
         $buttons = [];
         if ($canconfig) {

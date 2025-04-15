@@ -40,26 +40,22 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             1 => get_string('yes'),
         ];
 
-        $result .= '<dl class="row">';
-        $result .= '<dt class="col-3">' . get_string('tenant_name', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . format_string($tenant->name) . '</dd>';
-        $result .= '<dt class="col-3">' . get_string('tenant_idnumber', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . s($tenant->idnumber) . '</dd>';
+        $details = [];
+
+        $details[] = ['property' => get_string('tenant_name', 'tool_mutenancy'), 'value' => format_string($tenant->name)];
+        $details[] = ['property' => get_string('tenant_idnumber', 'tool_mutenancy'), 'value' => s($tenant->idnumber)];
 
         if (!$tenant->archived) {
             $loginurl = new \tool_mutenancy\output\loginurl($tenant->id);
             $loginurl = $this->render($loginurl);
-            $result .= '<dt class="col-3">' . get_string('tenant_loginurl', 'tool_mutenancy') . '</dt><dd class="col-9">'
-                . $loginurl . '</dd>';
-            $result .= '<dt class="col-3">' . get_string('tenant_loginshow', 'tool_mutenancy') . '</dt><dd class="col-9">'
-                . $yesno[$tenant->loginshow] . '</dd>';
+            $details[] = ['property' => get_string('tenant_loginurl', 'tool_mutenancy'), 'value' => $loginurl];
+            $details[] = ['property' => get_string('tenant_loginshow', 'tool_mutenancy'), 'value' => $yesno[$tenant->loginshow]];
         }
 
         if ($tenant->memberlimit) {
             $count = user::count_members($tenant->id);
             $count = "$count / $tenant->memberlimit";
-            $result .= '<dt class="col-3">' . get_string('tenant_memberlimit', 'tool_mutenancy') . '</dt><dd class="col-9">'
-                . $count . '</dd>';
+            $details[] = ['property' => get_string('tenant_memberlimit', 'tool_mutenancy'), 'value' => $count];
         }
 
         $context = \context_coursecat::instance($tenant->categoryid, IGNORE_MISSING);
@@ -77,8 +73,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         } else {
             $name = get_string('error');
         }
-        $result .= '<dt class="col-3">' . get_string('tenant_category', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . $name . '</dd>';
+        $details[] = ['property' => get_string('tenant_category', 'tool_mutenancy'), 'value' => $name];
 
         $cohort = $DB->get_record('cohort', ['id' => $tenant->cohortid]);
         if ($cohort) {
@@ -94,8 +89,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         } else {
             $name = get_string('error');
         }
-        $result .= '<dt class="col-3">' . get_string('tenant_cohort', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . $name . '</dd>';
+        $details[] = ['property' => get_string('tenant_cohort', 'tool_mutenancy'), 'value' => $name];
 
         if ($tenant->assoccohortid) {
             $cohort = $DB->get_record('cohort', ['id' => $tenant->assoccohortid]);
@@ -112,20 +106,16 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             } else {
                 $name = get_string('error');
             }
-            $result .= '<dt class="col-3">' . get_string('associate_cohort', 'tool_mutenancy') . '</dt><dd class="col-9">'
-                . $name . '</dd>';
+            $details[] = ['property' => get_string('associate_cohort', 'tool_mutenancy'), 'value' => $name];
         }
 
-        $result .= '<dt class="col-3">' . get_string('tenant_sitefullname', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . format_string($tenant->sitefullname ?? $tenant->name) . '</dd>';
-        $result .= '<dt class="col-3">' . get_string('tenant_siteshortname', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . format_string($tenant->siteshortname ?? $tenant->idnumber) . '</dd>';
+        $details[] = ['property' => get_string('tenant_sitefullname', 'tool_mutenancy'), 'value' => format_string($tenant->sitefullname ?? $tenant->name)];
+        $details[] = ['property' => get_string('tenant_siteshortname', 'tool_mutenancy'), 'value' => format_string($tenant->siteshortname ?? $tenant->idnumber)];
 
         $count = user::count_users($tenant->id);
         $url = new \moodle_url('/admin/tool/mutenancy/tenant_users.php', ['id' => $tenant->id]);
         $count = \html_writer::link($url, $count);
-        $result .= '<dt class="col-3">' . get_string('tenant_users', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . $count . '</dd>';
+        $details[] = ['property' => get_string('tenant_users', 'tool_mutenancy'), 'value' => $count];
 
         $managers = \tool_mutenancy\local\manager::get_manager_users($tenant->id);
         foreach ($managers as $uid => $fullname) {
@@ -144,8 +134,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             $action->set_dialog_size('');
             $action = $this->render($action);
         }
-        $result .= '<dt class="col-3">' . get_string('tenant_managers', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . $managers . $action . '</dd>';
+        $details[] = ['property' => get_string('tenant_managers', 'tool_mutenancy'), 'value' => $managers . $action];
 
         $action = '';
         if (has_capability('tool/mutenancy:admin', $context)) {
@@ -161,9 +150,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             $action = $this->render($action);
         }
 
-        $result .= '<dt class="col-3">' . get_string('tenant_archived', 'tool_mutenancy') . '</dt><dd class="col-9">'
-            . $yesno[$tenant->archived] . $action . '</dd>';
-        $result .= '</dl>';
+        $details[] = ['property' => get_string('tenant_archived', 'tool_mutenancy'), 'value' => $yesno[$tenant->archived] . $action];
+
+        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
 
         return $result;
     }

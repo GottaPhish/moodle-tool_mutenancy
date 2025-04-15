@@ -35,9 +35,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         $canconfig = has_capability('tool/mutenancy:configauth', $tenantcontext);
 
         $result = '';
-        $result .= '<dl class="row">';
 
-        $result .= '<dt class="col-3">' . get_string('selfregistration', 'core_auth') . '</dt><dd class="col-9">';
+        $details = [];
+
         if (config::is_overridden($tenant->id, 'core', 'registerauth')) {
             $auth = config::get($tenant->id, 'core', 'registerauth');
             $isdefault = false;
@@ -56,10 +56,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'registerauth')) {
             $auth .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $result .= $auth;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('selfregistration', 'core_auth'), 'value' => $auth];
 
-        $result .= '<dt class="col-3">' . get_string('showloginform', 'core_auth') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'core', 'showloginform')) {
             $showloginform = config::get($tenant->id, 'core', 'showloginform');
             $isdefault = false;
@@ -74,10 +72,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'showloginform')) {
             $showloginform .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $result .= $showloginform;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('showloginform', 'core_auth'), 'value' => $showloginform];
 
-        $result .= '<dt class="col-3">' . get_string('allowemailaddresses', 'core_admin') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'core', 'allowemailaddresses')) {
             $allowemailaddresses = config::get($tenant->id, 'core', 'allowemailaddresses');
             $isdefault = false;
@@ -92,10 +88,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'allowemailaddresses')) {
             $allowemailaddresses .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $result .= $allowemailaddresses;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('allowemailaddresses', 'core_admin'), 'value' => $allowemailaddresses];
 
-        $result .= '<dt class="col-3">' . get_string('denyemailaddresses', 'core_admin') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'core', 'denyemailaddresses')) {
             $denyemailaddresses = config::get($tenant->id, 'core', 'denyemailaddresses');
             $isdefault = false;
@@ -110,10 +104,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'denyemailaddresses')) {
             $denyemailaddresses .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $result .= $denyemailaddresses;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('denyemailaddresses', 'core_admin'), 'value' => $denyemailaddresses];
 
-        $result .= '<dt class="col-3">' . get_string('instructions', 'core_auth') . '</dt><dd class="col-9">';
         if (config::is_overridden($tenant->id, 'core', 'auth_instructions')) {
             $instructions = config::get($tenant->id, 'core', 'auth_instructions');
             $isdefault = false;
@@ -128,10 +120,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'auth_instructions')) {
             $instructions .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $result .= $instructions;
-        $result .= '</dd>';
+        $details[] = ['property' => get_string('instructions', 'core_auth'), 'value' => $instructions];
 
-        $result .= '</dl>';
+        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
 
         $buttons = [];
         if ($canconfig) {
