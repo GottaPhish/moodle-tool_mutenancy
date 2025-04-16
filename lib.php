@@ -47,9 +47,10 @@ function tool_mutenancy_extend_navigation_category_settings($navigation, $course
         return;
     }
 
+    // NOTE: catnav is added to unbreak explicit breadcrums.
     $settingsnode = navigation_node::create(
         get_string('tenant', 'tool_mutenancy'),
-        new moodle_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenantcontext->instanceid]),
+        new moodle_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenantcontext->instanceid, 'catnav' => 1]),
         navigation_node::TYPE_CUSTOM,
         null,
         'tool_mutenancy_tenant'
