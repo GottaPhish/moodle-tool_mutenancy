@@ -17,6 +17,7 @@
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
 use tool_mutenancy\local\tenancy;
+use tool_mulib\output\header_actions;
 
 /**
  * Tenant details.
@@ -53,27 +54,27 @@ $PAGE->set_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenant->id]);
 /** @var \tool_mutenancy\output\tenant\renderer $output */
 $output = $PAGE->get_renderer('tool_mutenancy', 'tenant');
 
-$actionmenu = new tool_mulib\output\dropdown(get_string('tenant_actions', 'tool_mutenancy'));
+$actions = new header_actions(get_string('tenant_actions', 'tool_mutenancy'));
 if (get_assignable_roles($context, ROLENAME_ORIGINAL, false)) {
-    $actionmenu->add_item(
+    $actions->get_dropdown()->add_item(
         get_string('assignroles', 'role'),
         new moodle_url('/admin/roles/assign.php', ['contextid' => $context->id])
     );
 }
 if (has_capability('moodle/role:review', $context) || get_overridable_roles($context)) {
-    $actionmenu->add_item(
+    $actions->get_dropdown()->add_item(
         get_string('permissions', 'role'),
         new moodle_url('/admin/roles/permissions.php', ['contextid' => $context->id])
     );
 }
 if (has_any_capability(['moodle/role:assign', 'moodle/role:safeoverride', 'moodle/role:override'], $context)) {
-    $actionmenu->add_item(
+    $actions->get_dropdown()->add_item(
         get_string('checkpermissions', 'role'),
         new moodle_url('/admin/roles/check.php', ['contextid' => $context->id])
     );
 }
-if ($actionmenu->has_items()) {
-    $PAGE->add_header_action($output->render($actionmenu));
+if ($actions->has_items()) {
+    $PAGE->add_header_action($output->render($actions));
 }
 
 $output->setup_page($tenant);
