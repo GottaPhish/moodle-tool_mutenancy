@@ -224,7 +224,7 @@ final class form_tenant_assoccohortid_test extends \advanced_testcase {
         $this->assertSame(null, form_tenant_assoccohortid::validate_cohortid($cohort2->id, $tenant1->id));
         $this->assertSame('Error', form_tenant_assoccohortid::validate_cohortid($cohort3->id, $tenant1->id));
         $this->assertSame('Error', form_tenant_assoccohortid::validate_cohortid($cohort4->id, $tenant1->id));
-        $this->assertSame('Error', form_tenant_assoccohortid::validate_cohortid($cohort1->id, $tenant2->id));
+        $this->assertSame(null, form_tenant_assoccohortid::validate_cohortid($cohort1->id, $tenant2->id)); // Tenant access not checked.
 
         $this->setUser($admin);
         $this->assertSame(null, form_tenant_assoccohortid::validate_cohortid($cohort1->id, $tenant1->id));

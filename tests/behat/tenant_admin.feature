@@ -242,16 +242,23 @@ Feature: Tenant administration
       | student3 | cohort2 |
 
     And I log in as "tadmin"
-    And I navigate to "Tenants" in site administration
-    And I follow "Tenant 1"
+    And I am on the "ten1" "tool_mutenancy > Tenant" page
 
     When I press "Update tenant"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Associated users cohort   | Cohort 1       |
     And I press dialog form button "Update tenant"
     And I should see "Cohort 1" in the "Associated users cohort" definition list item
-    And I should see "2" in the "Users" definition list item
+    Then I should see "2" in the "Users" definition list item
 
+    When I press "Update tenant"
+    And I set the following fields in the ".modal-dialog" "css_element" to these values:
+      | Associated users cohort   | Cohort 2       |
+    And I press dialog form button "Update tenant"
+    Then I should see "Cohort 2" in the "Associated users cohort" definition list item
+    And I should see "3" in the "Users" definition list item
+
+    And I am on the "ten2" "tool_mutenancy > Tenant" page
     When I press "Update tenant"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Associated users cohort   | Cohort 2       |

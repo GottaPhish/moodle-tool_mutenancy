@@ -110,7 +110,7 @@ final class tenant_update extends \tool_mulib\local\dialog_form {
         }
 
         if ($data['assoccohortid']) {
-            $error = form_tenant_assoccohortid::validate_cohortid($data['assoccohortid'], 0);
+            $error = form_tenant_assoccohortid::validate_cohortid($data['assoccohortid'], $tenant->id);
             if ($error !== null) {
                 $errors['assoccohortid'] = $error;
             }
