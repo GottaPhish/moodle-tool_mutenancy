@@ -53,7 +53,7 @@ $PAGE->set_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenant->id]);
 /** @var \tool_mutenancy\output\tenant\renderer $output */
 $output = $PAGE->get_renderer('tool_mutenancy', 'tenant');
 
-$actionmenu = new tool_mulib\output\action_menu\dropdown(get_string('tenant_actions', 'tool_mutenancy'));
+$actionmenu = new tool_mulib\output\dropdown(get_string('tenant_actions', 'tool_mutenancy'));
 if (get_assignable_roles($context, ROLENAME_ORIGINAL, false)) {
     $actionmenu->add_item(
         get_string('assignroles', 'role'),
