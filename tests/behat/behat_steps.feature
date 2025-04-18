@@ -32,9 +32,9 @@ Feature: Multi-tenancy behat step tests
     And I log in as "tviewer"
     When I am on the "tool_mutenancy > Tenants" page
     Then the following should exist in the "reportbuilder-table" table:
-      | Tenant name | Tenant ID | Category name | Users | Archived | Tenant login URL    |
-      | Tenant 1    | TEN1      | Tenant 1      | 0     | No       | /login/?tenant=TEN1 |
-      | Tenant 2    | TEN2      | Tenant 2      | 0     | No       | /login/?tenant=TEN2 |
+      | Tenant name | Tenant ID | Tenant category | Users | Archived | Tenant login URL    |
+      | Tenant 1    | TEN1      | Tenant 1        | 0     | No       | /login/?tenant=TEN1 |
+      | Tenant 2    | TEN2      | Tenant 2        | 0     | No       | /login/?tenant=TEN2 |
 
   Scenario: tool_mutenancy behat step: I am on the Tenant details page
     Given the multi-tenancy is activated

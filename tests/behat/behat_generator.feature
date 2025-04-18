@@ -11,9 +11,9 @@ Feature: Multi-tenancy generator tests
     And I log in as "admin"
     And I navigate to "Tenants" in site administration
     And the following should exist in the "reportbuilder-table" table:
-      | Tenant name | Tenant ID | Category name | Users | Archived | Tenant login URL    |
-      | Tenant 1    | ten1      | Tenant 1      | 0     | No       | /login/?tenant=ten1 |
-      | Tenant 2    | TEN2      | Tenant 2      | 0     | No       | /login/?tenant=TEN2 |
+      | Tenant name | Tenant ID | Tenant category | Users | Archived | Tenant login URL    |
+      | Tenant 1    | ten1      | Tenant 1        | 0     | No       | /login/?tenant=ten1 |
+      | Tenant 2    | TEN2      | Tenant 2        | 0     | No       | /login/?tenant=TEN2 |
 
     When the following "cohorts" exist:
       | name     | idnumber  |

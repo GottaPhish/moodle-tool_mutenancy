@@ -74,7 +74,7 @@ final class tenants extends system_report {
         $this->add_columns_from_entities($columns);
 
         $this->get_column('course_category:namewithlink')
-            ->set_title(new \lang_string('categoryname'))
+            ->set_title(new \lang_string('tenant_category', 'tool_mutenancy'))
             ->set_callback(static function($ignored, \stdClass $category): string {
                 if (empty($category->id)) {
                     return '';
