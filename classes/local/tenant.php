@@ -430,7 +430,7 @@ final class tenant {
             $category->update(['id' => $tenant->categoryid, 'visible' => 1]);
         }
 
-        \tool_mutenancy\event\tenant_archived::create_from_tenant($tenant)->trigger();
+        \tool_mutenancy\event\tenant_restored::create_from_tenant($tenant)->trigger();
 
         $trans->allow_commit();
 

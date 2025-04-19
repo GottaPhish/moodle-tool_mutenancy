@@ -45,12 +45,13 @@ final class tenant_restored_test extends \advanced_testcase {
         $data = (object)[
             'name' => 'Some tenant 1',
             'idnumber' => 't1',
+            'archived' => '1',
         ];
         $tenant = tenant::create($data);
         $tenantcontext = \context_tenant::instance($tenant->id);
 
         $sink = $this->redirectEvents();
-        $tenant = tenant::archive($tenant->id);
+        $tenant = tenant::restore($tenant->id);
         $events = $sink->get_events();
         $sink->close();
 
