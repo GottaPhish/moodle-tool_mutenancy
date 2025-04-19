@@ -190,14 +190,14 @@ final class tenant {
 
         \tool_mutenancy\event\tenant_created::create_from_tenant($tenant)->trigger();
 
-        if ($record->assoccohortid) {
-            user::sync($tenant->id, null);
-        }
-
         $trans->allow_commit();
 
         accesslib_clear_all_caches(true);
         \cache_helper::purge_by_event('changesincoursecat');
+
+        if ($record->assoccohortid) {
+            user::sync($tenant->id, null);
+        }
 
         return $tenant;
     }
@@ -344,10 +344,6 @@ final class tenant {
 
         \tool_mutenancy\event\tenant_updated::create_from_tenant($tenant)->trigger();
 
-        if ($oldtenant->assoccohortid != $tenant->assoccohortid) {
-            user::sync($tenant->id, null);
-        }
-
         $trans->allow_commit();
 
         $cache = \cache::make('tool_mutenancy', 'tenant');
@@ -355,6 +351,10 @@ final class tenant {
         $cache->delete($tenant->idnumber);
         if ($oldtenant->idnumber !== $tenant->idnumber) {
             $cache->delete($oldtenant->idnumber);
+        }
+
+        if ($oldtenant->assoccohortid != $tenant->assoccohortid) {
+            user::sync($tenant->id, null);
         }
 
         return $tenant;
