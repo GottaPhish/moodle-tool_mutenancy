@@ -188,6 +188,8 @@ final class tenant {
         $DB->execute($sql, $params);
         $categorycontext->mark_dirty();
 
+        \tool_mutenancy\event\tenant_created::create_from_tenant($tenant)->trigger();
+
         if ($record->assoccohortid) {
             user::sync($tenant->id, null);
         }
@@ -340,6 +342,8 @@ final class tenant {
         $DB->update_record('tool_mutenancy_tenant', $record);
         $tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $record->id], '*', MUST_EXIST);
 
+        \tool_mutenancy\event\tenant_updated::create_from_tenant($tenant)->trigger();
+
         if ($oldtenant->assoccohortid != $tenant->assoccohortid) {
             user::sync($tenant->id, null);
         }
@@ -386,11 +390,13 @@ final class tenant {
         // Disable signup!
         config::override($tenant->id, 'registerauth', '', 'core');
 
+        \tool_mutenancy\event\tenant_archived::create_from_tenant($tenant)->trigger();
+
+        $trans->allow_commit();
+
         $cache = \cache::make('tool_mutenancy', 'tenant');
         $cache->delete($tenant->id);
         $cache->delete($tenant->idnumber);
-
-        $trans->allow_commit();
 
         return $DB->get_record('tool_mutenancy_tenant', ['id' => $tenant->id], '*', MUST_EXIST);
     }
@@ -424,11 +430,13 @@ final class tenant {
             $category->update(['id' => $tenant->categoryid, 'visible' => 1]);
         }
 
+        \tool_mutenancy\event\tenant_archived::create_from_tenant($tenant)->trigger();
+
+        $trans->allow_commit();
+
         $cache = \cache::make('tool_mutenancy', 'tenant');
         $cache->delete($tenant->id);
         $cache->delete($tenant->idnumber);
-
-        $trans->allow_commit();
 
         return $DB->get_record('tool_mutenancy_tenant', ['id' => $tenant->id], '*', MUST_EXIST);
     }
@@ -454,6 +462,7 @@ final class tenant {
         $trans = $DB->start_delegated_transaction();
 
         $syscontext = \context_system::instance();
+        /** @var \context_tenant $tenantcontext */
         $tenantcontext = \context_tenant::instance($tenant->id);
         role_unassign_all(['contextid' => $tenantcontext->id]);
 
@@ -538,6 +547,8 @@ final class tenant {
         $DB->delete_records('tool_mutenancy_tenant', ['id' => $tenant->id]);
 
         $tenantcontext->delete();
+
+        \tool_mutenancy\event\tenant_deleted::create_from_tenant($tenant, $tenantcontext)->trigger();
 
         $trans->allow_commit();
 

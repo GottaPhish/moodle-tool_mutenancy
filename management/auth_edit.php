@@ -111,6 +111,8 @@ if ($data = $form->get_data()) {
         }
     }
 
+    \tool_mutenancy\event\auth_updated::create_from_tenant($tenant)->trigger();
+
     $form->redirect_submitted($returnurl);
 }
 

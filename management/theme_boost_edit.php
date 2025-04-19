@@ -149,6 +149,8 @@ if ($data = $form->get_data()) {
         theme_reset_all_caches();
     }
 
+    \tool_mutenancy\event\appearance_updated::create_from_tenant($tenant)->trigger();
+
     $form->redirect_submitted($returnurl);
 }
 
