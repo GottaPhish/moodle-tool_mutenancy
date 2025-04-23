@@ -97,7 +97,13 @@ final class users extends system_report {
      * @return bool
      */
     protected function can_view(): bool {
-        return true;
+        if ($this->get_context()->contextlevel != CONTEXT_TENANT) {
+            return false;
+        }
+        if (isguestuser() || !isloggedin()) {
+            return false;
+        }
+        return has_capability('tool/mutenancy:view', $this->get_context());
     }
 
     /**

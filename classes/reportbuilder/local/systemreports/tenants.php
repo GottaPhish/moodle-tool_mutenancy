@@ -55,6 +55,12 @@ final class tenants extends system_report {
 
     #[\Override]
     protected function can_view(): bool {
+        if ($this->get_context()->contextlevel != CONTEXT_SYSTEM) {
+            return false;
+        }
+        if (isguestuser() || !isloggedin()) {
+            return false;
+        }
         return has_capability('tool/mutenancy:view', \context_system::instance());
     }
 
