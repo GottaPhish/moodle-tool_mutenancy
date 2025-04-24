@@ -31,12 +31,7 @@
  * @return environment_results updated results object
  */
 function tool_mutenancy_environment_corepatch(environment_results $result): environment_results {
-    $getrelease = function() {
-        $plugin = new stdClass();
-        require(__DIR__ . '/version.php');
-        return $plugin->release;
-    };
-    $release = $getrelease();
+    $release = 'mutenancy-4.5.4-01';
 
     $result->setInfo("Core Multi-tenancy patch ($release is required)");
 
@@ -48,7 +43,7 @@ function tool_mutenancy_environment_corepatch(environment_results $result): envi
 
     $patchinfo = require($patchfile);
 
-    if ($patchinfo['release'] !== $getrelease()) {
+    if ($patchinfo['release'] !== $release) {
         $result->setStatus(false);
         return $result;
     }
