@@ -1,5 +1,7 @@
 # Multi-tenancy Plugin for Moodle™
 
+![Moodle Plugin CI](https://github.com/mutms/moodle-tool_mutenancy/actions/workflows/moodle-ci.yml/badge.svg)
+
 Multi-tenancy refers to the ability to create isolated entities, known as tenants, within a single instance of an LMS
 (Learning Management System). Each tenant operates independently, managing its own users, roles, appearance, courses,
 and settings. This feature is particularly beneficial for organizations that require multiple self-contained business
