@@ -10,7 +10,7 @@ units or client organizations within a single LMS installation.
 The standard, free Moodle™ distribution does not support multi-tenancy. This functionality is exclusively available
 through Moodle Workplace, provided by Moodle HQ and a limited number of certified partners.
 
-**Multi-Tenancy** for Moodle™ is a plugin (with a core patch) that introduces multi-tenancy functionality to standard
+**Multi-Tenancy** for Moodle™ is a plugin and required core patch that introduce multi-tenancy functionality to standard
 Moodle™ installations. The source code is fully open and free, governed by the terms of the GPL 3.0 license, without
 restrictions on commercial use or distribution.
 
