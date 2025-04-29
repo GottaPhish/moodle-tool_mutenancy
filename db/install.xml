@@ -22,7 +22,7 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="categoryid" TYPE="foreign-unique" FIELDS="categoryid" REFTABLE="coourse_categories" REFFIELDS="id"/>
+        <KEY NAME="categoryid" TYPE="foreign-unique" FIELDS="categoryid" REFTABLE="course_categories" REFFIELDS="id"/>
         <KEY NAME="cohortid" TYPE="foreign-unique" FIELDS="cohortid" REFTABLE="cohort" REFFIELDS="id"/>
         <KEY NAME="assoccohortid" TYPE="foreign" FIELDS="assoccohortid" REFTABLE="cohort" REFFIELDS="id"/>
       </KEYS>
