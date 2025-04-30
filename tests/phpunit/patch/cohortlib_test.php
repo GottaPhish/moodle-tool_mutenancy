@@ -23,7 +23,7 @@ namespace tool_mutenancy\phpunit\patch;
 /**
  * Multi-tenancy tests for cohort/lib.php modifications.
  *
- * @group       muTMS
+ * @group       MuTMS
  * @package     tool_mutenancy
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

@@ -26,7 +26,7 @@ use tool_mutenancy\local\config;
 /**
  * Multi-tenancy appearance tests.
  *
- * @group       muTMS
+ * @group       MuTMS
  * @package     tool_mutenancy
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

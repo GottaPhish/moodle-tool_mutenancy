@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @muTMS
+@tool @tool_mutenancy @MuTMS
 Feature: Tenant administration
   Background:
     Given unnecessary Admin bookmarks block gets deleted

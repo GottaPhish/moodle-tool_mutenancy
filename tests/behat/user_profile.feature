@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @muTMS
+@tool @tool_mutenancy @MuTMS
 Feature: Multi-tenancy features of user profile page
   Background:
     Given unnecessary Admin bookmarks block gets deleted

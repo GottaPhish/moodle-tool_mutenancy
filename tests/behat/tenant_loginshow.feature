@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @muTMS
+@tool @tool_mutenancy @MuTMS
 Feature: Tenant authentication setting loginshow
   Background:
     Given unnecessary Admin bookmarks block gets deleted

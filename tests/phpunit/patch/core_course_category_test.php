@@ -24,7 +24,7 @@ use tool_mutenancy\local\tenancy;
 /**
  * Multi-tenancy upstream patch test.
  *
- * @group       muTMS
+ * @group       MuTMS
  * @package     tool_mutenancy
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

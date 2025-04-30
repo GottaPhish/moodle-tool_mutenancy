@@ -25,7 +25,7 @@ use tool_mutenancy\external\form_user_allocate_tenantid;
 /**
  * Multi-tenancy external function tests.
  *
- * @group       muTMS
+ * @group       MuTMS
  * @package     tool_mutenancy
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
