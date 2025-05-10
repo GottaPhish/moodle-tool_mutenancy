@@ -68,8 +68,10 @@ final class manager {
         unset($defaults['moodle/user:delete']);
 
         // Add extra capabilities here if necessary.
+        $hook = new \tool_mutenancy\hook\tenant_manager_capabilities($defaults);
+        \core\di::get(\core\hook\manager::class)->dispatch($hook);
 
-        return $defaults;
+        return $hook->get_capabilities();
     }
 
     /**
