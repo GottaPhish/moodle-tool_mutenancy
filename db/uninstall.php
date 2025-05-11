@@ -40,6 +40,8 @@ function xmldb_tool_mutenancy_uninstall() {
         tenancy::deactivate();
     }
 
+    $DB->set_field('capabilities', 'contextlevel', CONTEXT_SYSTEM, ['contextlevel' => 12]);
+
     $table = new xmldb_table('context');
     $index = new xmldb_index('tenantid', XMLDB_INDEX_NOTUNIQUE, ['tenantid']);
     if ($dbman->index_exists($table, $index)) {

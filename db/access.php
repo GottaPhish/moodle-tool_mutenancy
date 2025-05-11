@@ -65,7 +65,7 @@ $capabilities = [
     // Create new user account for tenant member.
     'tool/mutenancy:membercreate' => [
         'captype' => 'write',
-        'contextlevel' => CONTEXT_TENANT | RISK_PERSONAL,
+        'contextlevel' => CONTEXT_TENANT,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],

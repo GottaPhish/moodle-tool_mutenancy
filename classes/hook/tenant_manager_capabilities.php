@@ -41,7 +41,8 @@ class tenant_manager_capabilities {
     }
 
     /**
-     * Add extra tenant capability.
+     * Add extra tenant manager capability.
+     *
      * @param string $capability
      * @param int $permission
      * @return void
@@ -51,7 +52,18 @@ class tenant_manager_capabilities {
     }
 
     /**
-     * Returns tenant manager capabilities.
+     * Remove extra tenant manager capability.
+     *
+     * @param string $capability
+     * @param int $permission
+     * @return void
+     */
+    public function remove_capability(string $capability): void {
+        unset($this->capabilities[$capability]);
+    }
+
+    /**
+     * Returns expected tenant manager capabilities.
      * @return string[]
      */
     public function get_capabilities(): array {
