@@ -55,7 +55,6 @@ class tenant_manager_capabilities {
      * Remove extra tenant manager capability.
      *
      * @param string $capability
-     * @param int $permission
      * @return void
      */
     public function remove_capability(string $capability): void {
