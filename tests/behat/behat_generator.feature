@@ -9,7 +9,7 @@ Feature: Multi-tenancy generator tests
       | Tenant 1 | ten1     |
       | Tenant 2 | TEN2     |
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     And the following should exist in the "reportbuilder-table" table:
       | Tenant name | Tenant ID | Tenant category | Users | Archived | Tenant login URL    |
       | Tenant 1    | ten1      | Tenant 1        | 0     | No       | /login/?tenant=ten1 |
@@ -22,7 +22,7 @@ Feature: Multi-tenancy generator tests
       | name     | idnumber | loginshow | memberlimit | assoccohort | sitefullname     | siteshortname |
       | Tenant 3 | ten3     | 1         | 11          | cohortid3   | Tent Site full 3 | TSS3          |
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     And I follow "Tenant 3"
     Then I should see "Tenant 3" in the "Tenant name" definition list item
     And I should see "ten3" in the "Tenant ID" definition list item
@@ -47,7 +47,7 @@ Feature: Multi-tenancy generator tests
       | student1 | Student   | 1        | student1@example.com | ten1   |
       | student2 | Student   | 2        | student2@example.com | TEN2   |
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     And I follow "Tenant 1"
     And I click on "Users" "link" in the ".secondary-navigation" "css_element"
     Then the following should exist in the "reportbuilder-table" table:
@@ -69,7 +69,7 @@ Feature: Multi-tenancy generator tests
       | ten1   | manager0 |
       | ten1   | manager1 |
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     And I follow "Tenant 1"
     Then I should see "Global Manager" in the "Tenant managers" definition list item
     And I should see "Tenant 1 Manager" in the "Tenant managers" definition list item

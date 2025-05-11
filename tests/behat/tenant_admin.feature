@@ -31,7 +31,7 @@ Feature: Tenant administration
   Scenario: System admin may activate multi-tenancy
     Given I skip tests if multi-tenancy is activated
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     When I press "Activate multi-tenancy"
     And I should see "New roles for Tenant managers and Tenant users will be created"
     And I press dialog form button "Activate multi-tenancy"
@@ -42,7 +42,7 @@ Feature: Tenant administration
   Scenario: System admin may deactivate multi-tenancy
     Given the multi-tenancy is activated
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     When I press "De-activate multi-tenancy"
     And I should see "Tenant manager role will be deleted"
     And I press dialog form button "De-activate multi-tenancy"
@@ -53,7 +53,7 @@ Feature: Tenant administration
     Given the multi-tenancy is activated
     And I log in as "tadmin"
 
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     When I press "Add tenant"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Tenant name  | Tenant 1 |
@@ -70,7 +70,7 @@ Feature: Tenant administration
     And I should see "0" in the "Users" definition list item
     And I should see "No" in the "Archived" definition list item
 
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     When I press "Add tenant"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Tenant name               | Tenant 2      |
@@ -205,7 +205,7 @@ Feature: Tenant administration
       | manager1  | First     | Manager   | manager1@example.com | ten1   |
       | manager2  | Second    | Manager   | manager2@example.com | ten2   |
     And I log in as "tadmin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     And I follow "Tenant 1"
 
     When I click on "Tenant managers" "link"

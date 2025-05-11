@@ -31,9 +31,11 @@ defined('MOODLE_INTERNAL') || die();
 // phpcs:ignore moodle.Commenting.InlineComment.TypeHintingMatch
 /** @var admin_root $ADMIN */
 
+$ADMIN->add('root', new admin_category('tool_mutenancy', new lang_string('pluginname', 'tool_mutenancy')), 'payment');
+
 if (tenancy::is_active()) {
     $ADMIN->add(
-        'root',
+        'tool_mutenancy',
         new admin_externalpage('tool_mutenancy_tenants',
             new lang_string('tenants', 'tool_mutenancy'),
             new moodle_url('/admin/tool/mutenancy/index.php'),
@@ -41,7 +43,7 @@ if (tenancy::is_active()) {
     );
 } else {
     $ADMIN->add(
-        'root',
+        'tool_mutenancy',
         new admin_externalpage('tool_mutenancy_tenants',
             new lang_string('tenants', 'tool_mutenancy'),
             new moodle_url('/admin/tool/mutenancy/index.php'),
@@ -62,4 +64,4 @@ $settings->add(new admin_setting_configtext(
     4
 ));
 
-$ADMIN->add('root', $settings, 'tool_mutenancy_tenants');
+$ADMIN->add('tool_mutenancy', $settings, 'tool_mutenancy_tenants');

@@ -11,7 +11,7 @@ Feature: Tenant roles
     Then I should not see "Tenant manager"
     And I should not see "Tenant user"
 
-    When I navigate to "Tenants" in site administration
+    When I navigate to "Multi-tenancy > Tenants" in site administration
     And I press "Activate multi-tenancy"
     And I press dialog form button "Activate multi-tenancy"
     And I navigate to "Users > Permissions > Define roles" in site administration

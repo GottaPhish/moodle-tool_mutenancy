@@ -19,7 +19,7 @@ Feature: Multi-tenancy behat step tests
   Scenario: tool_mutenancy behat step: the multi-tenancy is activated
     When the multi-tenancy is activated
     And I log in as "admin"
-    And I navigate to "Tenants" in site administration
+    And I navigate to "Multi-tenancy > Tenants" in site administration
     Then I should see "De-activate multi-tenancy"
     And I should see "Nothing to display"
 
