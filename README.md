@@ -14,6 +14,12 @@ through Moodle Workplace, provided by Moodle HQ and a limited number of certifie
 Moodle™ installations. The source code is fully open and free, governed by the terms of the GPL 3.0 license, without
 restrictions on commercial use or distribution.
 
+Note that the current code is still under development and is not suitable for production use.
+If you require a stable version for a production environment or commercial support,
+please consider [Moodle Workplace™](https://moodle.com/solutions/workplace-learning/).
+
+MuTMS project is not associated with Moodle HQ in any way.
+
 ## Documentation
 
 See [online documentation](https://github.com/mutms/moodle-tool_mutenancy/wiki) for more information.
