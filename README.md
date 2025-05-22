@@ -11,9 +11,9 @@ The standard, free Moodle™ LMS distribution does not include support for multi
 available through [Moodle Workplace™](https://moodle.com/solutions/workplace-learning/), provided by Moodle HQ and
 a limited number of certified partners and solution providers, as a closed source commercial product.
 
-**Multi-tenancy plugin** for Moodle™ LMS is an unofficial plugin and required core patch that introduce limited multi-tenancy
-functionality to standard Moodle™ LMS installations. The source code is fully open and free, governed by the terms of
-the GPL 3.0 license, without restrictions on commercial use or distribution.
+**Multi-tenancy plugin** for Moodle™ LMS is an unofficial plugin that, together with a required core patch, introduces
+limited multi-tenancy functionality to standard Moodle™ LMS installations. The source code is fully open and free,
+governed by the terms of the GPL 3.0 license, with no restrictions on commercial use or distribution.
 
 Note that the current code is still under development and is not suitable for production use.
 If you require a stable version for a production environment or commercial support,
