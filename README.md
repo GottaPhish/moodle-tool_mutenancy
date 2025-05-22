@@ -17,6 +17,7 @@ restrictions on commercial use or distribution.
 Note that the current code is still under development and is not suitable for production use.
 If you require a stable version for a production environment or commercial support,
 please consider [Moodle Workplace™](https://moodle.com/solutions/workplace-learning/).
+This plugin is not suitable for existing customers of Open LMS due to the lack of upgrade path.
 
 MuTMS project is not associated with Moodle HQ in any way.
 
