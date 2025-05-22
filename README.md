@@ -19,7 +19,7 @@ If you require a stable version for a production environment or commercial suppo
 please consider [Moodle Workplace™](https://moodle.com/solutions/workplace-learning/).
 This plugin is not suitable for existing customers of Open LMS due to the lack of upgrade path.
 
-MuTMS project is not associated with Moodle HQ in any way.
+MuTMS project is not associated with Open LMS or Moodle HQ in any way.
 
 ## Documentation
 
