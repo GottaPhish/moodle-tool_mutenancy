@@ -148,14 +148,11 @@ function tool_mutenancy_myprofile_navigation(\core_user\output\myprofile\tree $t
  * @return string
  */
 function tool_mutenancy_render_navbar_output(renderer_base $renderer): string {
-    global $PAGE;
-
     if (!tenancy::can_switch()) {
         return '';
     }
 
-    $backurl = $PAGE->url->out_as_local_url(false);
-    $url = new moodle_url('/admin/tool/mutenancy/tenant_switch.php', ['backurl' => $backurl]);
+    $url = new moodle_url('/admin/tool/mutenancy/tenant_switch.php');
     $icon = new \tool_mulib\output\dialog_form\icon($url,
         get_string('tenant_switch', 'tool_mutenancy'), 'switch', 'tool_mutenancy');
     $icon->set_dialog_size('');
