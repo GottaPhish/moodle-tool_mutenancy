@@ -131,7 +131,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (has_capability('tool/mutenancy:admin', $context)) {
             $url = new \moodle_url('/admin/tool/mutenancy/management/tenant_managers.php', ['id' => $tenant->id]);
             $action = new \tool_mulib\output\dialog_form\icon($url, get_string('tenant_managers', 'tool_mutenancy'), 'i/users');
-            $action->set_dialog_size('');
+            $action->set_dialog_size('sm');
             $action = $this->render($action);
         }
         $details[] = ['property' => get_string('tenant_managers', 'tool_mutenancy'), 'value' => $managers . $action];
@@ -141,11 +141,11 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             if ($tenant->archived) {
                 $url = new \moodle_url('/admin/tool/mutenancy/management/tenant_restore.php', ['id' => $tenant->id]);
                 $action = new \tool_mulib\output\dialog_form\icon($url, get_string('tenant_restore', 'tool_mutenancy'), 't/edit');
-                $action->set_dialog_size('');
+                $action->set_dialog_size('sm');
             } else if ($USER->tenantid != $tenant->id) {
                 $url = new \moodle_url('/admin/tool/mutenancy/management/tenant_archive.php', ['id' => $tenant->id]);
                 $action = new \tool_mulib\output\dialog_form\icon($url, get_string('tenant_archive', 'tool_mutenancy'), 'i/settings');
-                $action->set_dialog_size('');
+                $action->set_dialog_size('sm');
             }
             $action = $this->render($action);
         }

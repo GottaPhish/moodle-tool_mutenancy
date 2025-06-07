@@ -155,7 +155,7 @@ function tool_mutenancy_render_navbar_output(renderer_base $renderer): string {
     $url = new moodle_url('/admin/tool/mutenancy/tenant_switch.php');
     $icon = new \tool_mulib\output\dialog_form\icon($url,
         get_string('tenant_switch', 'tool_mutenancy'), 'switch', 'tool_mutenancy');
-    $icon->set_dialog_size('');
+    $icon->set_dialog_size('sm');
     $icon->set_class('nav-link icon-no-margin'); // Use the same styling as notification.
 
     return $renderer->render($icon);
