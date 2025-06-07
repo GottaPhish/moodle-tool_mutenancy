@@ -37,7 +37,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
 
         $result = '<h2>' . get_string('logossettings', 'core_admin') . '</h2>';
 
-        $details = [];
+        $details = new \tool_mulib\output\entity_details();
 
         if (config::is_overridden($tenant->id, 'core_admin', 'logo')) {
             $logo = \tool_mutenancy\local\appearance::get_logo_url(100, 64, $tenant->id);
@@ -54,7 +54,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $logo = get_string('config_default_value', 'tool_mutenancy', $logo);
         }
-        $details[] = ['property' => get_string('logo', 'admin'), 'value' => $logo];
+        $details->add(get_string('logo', 'admin'), $logo);
 
         if (config::is_overridden($tenant->id, 'core_admin', 'logocompact')) {
             $logocompact = \tool_mutenancy\local\appearance::get_compact_logo_url(100, 64, $tenant->id);
@@ -71,7 +71,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $logocompact = get_string('config_default_value', 'tool_mutenancy', $logocompact);
         }
-        $details[] = ['property' => get_string('logocompact', 'admin'), 'value' => $logocompact];
+        $details->add(get_string('logocompact', 'admin'), $logocompact);
 
         if (config::is_overridden($tenant->id, 'core_admin', 'favicon')) {
             $favicon = \tool_mutenancy\local\appearance::get_favicon_url($tenant->id);
@@ -87,9 +87,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $favicon = get_string('config_default_value', 'tool_mutenancy', $favicon);
         }
-        $details[] = ['property' => get_string('favicon', 'admin'), 'value' => $favicon];
+        $details->add(get_string('favicon', 'admin'), $favicon);
 
-        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
+        $result .= $this->output->render($details);
 
         $buttons = [];
         if ($canconfig) {
@@ -103,7 +103,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         $result .= '<br />';
         $result .= '<h2>' . get_string('pluginname', 'theme_boost') . '</h2>';
 
-        $details = [];
+        $details = new \tool_mulib\output\entity_details();
 
         if (config::is_overridden($tenant->id, 'theme_boost', 'preset')) {
             $preset = config::get($tenant->id, 'theme_boost', 'preset');
@@ -118,7 +118,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $preset = get_string('config_default_value', 'tool_mutenancy', $preset);
         }
-        $details[] = ['property' => get_string('preset', 'theme_boost'), 'value' => $preset];
+        $details->add(get_string('preset', 'theme_boost'), $preset);
 
         if (config::is_overridden($tenant->id, 'theme_boost', 'backgroundimage')) {
             $backgroundimage = \tool_mutenancy\local\appearance::get_boost_setting_image_url('backgroundimage', $tenant->id);
@@ -135,7 +135,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $backgroundimage = get_string('config_default_value', 'tool_mutenancy', $backgroundimage);
         }
-        $details[] = ['property' => get_string('backgroundimage', 'theme_boost'), 'value' => $backgroundimage];
+        $details->add(get_string('backgroundimage', 'theme_boost'), $backgroundimage);
 
         if (config::is_overridden($tenant->id, 'theme_boost', 'loginbackgroundimage')) {
             $loginbackgroundimage = \tool_mutenancy\local\appearance::get_boost_setting_image_url('loginbackgroundimage', $tenant->id);
@@ -152,7 +152,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $loginbackgroundimage = get_string('config_default_value', 'tool_mutenancy', $loginbackgroundimage);
         }
-        $details[] = ['property' => get_string('loginbackgroundimage', 'theme_boost'), 'value' => $loginbackgroundimage];
+        $details->add(get_string('loginbackgroundimage', 'theme_boost'), $loginbackgroundimage);
 
         if (config::is_overridden($tenant->id, 'theme_boost', 'brandcolor')) {
             $color = config::get($tenant->id, 'theme_boost', 'brandcolor');
@@ -169,7 +169,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $color = get_string('config_default_value', 'tool_mutenancy', $color);
         }
-        $details[] = ['property' => get_string('brandcolor', 'theme_boost'), 'value' => $color];
+        $details->add(get_string('brandcolor', 'theme_boost'), $color);
 
         if (config::is_overridden($tenant->id, 'theme_boost', 'scsspre')) {
             $scsspre = config::get($tenant->id, 'theme_boost', 'scsspre');
@@ -186,7 +186,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $scsspre = get_string('config_default_value', 'tool_mutenancy', $scsspre);
         }
-        $details[] = ['property' => get_string('rawscsspre', 'theme_boost'), 'value' => $scsspre];
+        $details->add(get_string('rawscsspre', 'theme_boost'), $scsspre);
 
         if (config::is_overridden($tenant->id, 'theme_boost', 'scss')) {
             $scss = config::get($tenant->id, 'theme_boost', 'scss');
@@ -203,9 +203,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if ($isdefault) {
             $scss = get_string('config_default_value', 'tool_mutenancy', $scss);
         }
-        $details[] = ['property' => get_string('rawscss', 'theme_boost'), 'value' => $scss];
+        $details->add(get_string('rawscss', 'theme_boost'), $scss);
 
-        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
+        $result .= $this->output->render($details);
 
         $buttons = [];
         if ($canconfig) {

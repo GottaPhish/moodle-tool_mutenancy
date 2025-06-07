@@ -36,7 +36,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
 
         $result = '';
 
-        $details = [];
+        $details = new \tool_mulib\output\entity_details();
 
         if (config::is_overridden($tenant->id, 'core', 'registerauth')) {
             $auth = config::get($tenant->id, 'core', 'registerauth');
@@ -56,7 +56,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'registerauth')) {
             $auth .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $details[] = ['property' => get_string('selfregistration', 'core_auth'), 'value' => $auth];
+        $details->add(get_string('selfregistration', 'core_auth'), $auth);
 
         if (config::is_overridden($tenant->id, 'core', 'showloginform')) {
             $showloginform = config::get($tenant->id, 'core', 'showloginform');
@@ -72,7 +72,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'showloginform')) {
             $showloginform .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $details[] = ['property' => get_string('showloginform', 'core_auth'), 'value' => $showloginform];
+        $details->add(get_string('showloginform', 'core_auth'), $showloginform);
 
         if (config::is_overridden($tenant->id, 'core', 'allowemailaddresses')) {
             $allowemailaddresses = config::get($tenant->id, 'core', 'allowemailaddresses');
@@ -88,7 +88,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'allowemailaddresses')) {
             $allowemailaddresses .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $details[] = ['property' => get_string('allowemailaddresses', 'core_admin'), 'value' => $allowemailaddresses];
+        $details->add(get_string('allowemailaddresses', 'core_admin'), $allowemailaddresses);
 
         if (config::is_overridden($tenant->id, 'core', 'denyemailaddresses')) {
             $denyemailaddresses = config::get($tenant->id, 'core', 'denyemailaddresses');
@@ -104,7 +104,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'denyemailaddresses')) {
             $denyemailaddresses .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $details[] = ['property' => get_string('denyemailaddresses', 'core_admin'), 'value' => $denyemailaddresses];
+        $details->add(get_string('denyemailaddresses', 'core_admin'), $denyemailaddresses);
 
         if (config::is_overridden($tenant->id, 'core', 'auth_instructions')) {
             $instructions = config::get($tenant->id, 'core', 'auth_instructions');
@@ -120,9 +120,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         if (config::is_value_forced('core', 'auth_instructions')) {
             $instructions .= ' ' . \html_writer::span(get_string('configoverride', 'admin'), 'alert-info');
         }
-        $details[] = ['property' => get_string('instructions', 'core_auth'), 'value' => $instructions];
+        $details->add(get_string('instructions', 'core_auth'), $instructions);
 
-        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
+        $result .= $this->output->render($details);
 
         $buttons = [];
         if ($canconfig) {

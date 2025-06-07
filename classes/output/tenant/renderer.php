@@ -40,22 +40,22 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             1 => get_string('yes'),
         ];
 
-        $details = [];
+        $details = new \tool_mulib\output\entity_details();
 
-        $details[] = ['property' => get_string('tenant_name', 'tool_mutenancy'), 'value' => format_string($tenant->name)];
-        $details[] = ['property' => get_string('tenant_idnumber', 'tool_mutenancy'), 'value' => s($tenant->idnumber)];
+        $details->add(get_string('tenant_name', 'tool_mutenancy'), format_string($tenant->name));
+        $details->add(get_string('tenant_idnumber', 'tool_mutenancy'), s($tenant->idnumber));
 
         if (!$tenant->archived) {
             $loginurl = new \tool_mutenancy\output\loginurl($tenant->id);
             $loginurl = $this->render($loginurl);
-            $details[] = ['property' => get_string('tenant_loginurl', 'tool_mutenancy'), 'value' => $loginurl];
-            $details[] = ['property' => get_string('tenant_loginshow', 'tool_mutenancy'), 'value' => $yesno[$tenant->loginshow]];
+            $details->add(get_string('tenant_loginurl', 'tool_mutenancy'), $loginurl);
+            $details->add(get_string('tenant_loginshow', 'tool_mutenancy'), $yesno[$tenant->loginshow]);
         }
 
         if ($tenant->memberlimit) {
             $count = user::count_members($tenant->id);
             $count = "$count / $tenant->memberlimit";
-            $details[] = ['property' => get_string('tenant_memberlimit', 'tool_mutenancy'), 'value' => $count];
+            $details->add(get_string('tenant_memberlimit', 'tool_mutenancy'), $count);
         }
 
         $context = \context_coursecat::instance($tenant->categoryid, IGNORE_MISSING);
@@ -73,7 +73,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         } else {
             $name = get_string('error');
         }
-        $details[] = ['property' => get_string('tenant_category', 'tool_mutenancy'), 'value' => $name];
+        $details->add(get_string('tenant_category', 'tool_mutenancy'), $name);
 
         $cohort = $DB->get_record('cohort', ['id' => $tenant->cohortid]);
         if ($cohort) {
@@ -89,7 +89,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         } else {
             $name = get_string('error');
         }
-        $details[] = ['property' => get_string('tenant_cohort', 'tool_mutenancy'), 'value' => $name];
+        $details->add(get_string('tenant_cohort', 'tool_mutenancy'), $name);
 
         if ($tenant->assoccohortid) {
             $cohort = $DB->get_record('cohort', ['id' => $tenant->assoccohortid]);
@@ -106,16 +106,16 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             } else {
                 $name = get_string('error');
             }
-            $details[] = ['property' => get_string('associate_cohort', 'tool_mutenancy'), 'value' => $name];
+            $details->add(get_string('associate_cohort', 'tool_mutenancy'), $name);
         }
 
-        $details[] = ['property' => get_string('tenant_sitefullname', 'tool_mutenancy'), 'value' => format_string($tenant->sitefullname ?? $tenant->name)];
-        $details[] = ['property' => get_string('tenant_siteshortname', 'tool_mutenancy'), 'value' => format_string($tenant->siteshortname ?? $tenant->idnumber)];
+        $details->add(get_string('tenant_sitefullname', 'tool_mutenancy'), format_string($tenant->sitefullname ?? $tenant->name));
+        $details->add(get_string('tenant_siteshortname', 'tool_mutenancy'), format_string($tenant->siteshortname ?? $tenant->idnumber));
 
         $count = user::count_users($tenant->id);
         $url = new \moodle_url('/admin/tool/mutenancy/tenant_users.php', ['id' => $tenant->id]);
         $count = \html_writer::link($url, $count);
-        $details[] = ['property' => get_string('tenant_users', 'tool_mutenancy'), 'value' => $count];
+        $details->add(get_string('tenant_users', 'tool_mutenancy'), $count);
 
         $managers = \tool_mutenancy\local\manager::get_manager_users($tenant->id);
         foreach ($managers as $uid => $fullname) {
@@ -134,7 +134,7 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             $action->set_dialog_size('sm');
             $action = $this->render($action);
         }
-        $details[] = ['property' => get_string('tenant_managers', 'tool_mutenancy'), 'value' => $managers . $action];
+        $details->add(get_string('tenant_managers', 'tool_mutenancy'), $managers . $action);
 
         $action = '';
         if (has_capability('tool/mutenancy:admin', $context)) {
@@ -150,9 +150,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
             $action = $this->render($action);
         }
 
-        $details[] = ['property' => get_string('tenant_archived', 'tool_mutenancy'), 'value' => $yesno[$tenant->archived] . $action];
+        $details->add(get_string('tenant_archived', 'tool_mutenancy'), $yesno[$tenant->archived] . $action);
 
-        $result .= $this->output->render_from_template('tool_mulib/entity_details', ['details' => $details]);
+        $result .= $this->output->render($details);
 
         return $result;
     }
