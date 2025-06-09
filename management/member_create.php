@@ -52,7 +52,7 @@ $tenantid = required_param('tenantid', PARAM_INT);
 require_login();
 
 if (!tenancy::is_active()) {
-    redirect('/');
+    redirect(new moodle_url('/'));
 }
 
 $tenantcontext = context_tenant::instance($tenantid);

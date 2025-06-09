@@ -40,14 +40,14 @@ require(__DIR__.'/../../../config.php');
 require_login();
 
 if (!tenancy::is_active()) {
-    redirect('/');
+    redirect(new moodle_url('/'));
 }
 
 $context = context_system::instance();
 require_capability('tool/mutenancy:switch', $context);
 
 if (!tenancy::can_switch()) {
-    redirect('/');
+    redirect(new moodle_url('/'));
 }
 
 $PAGE->set_url('/admin/tool/mutenancy/tenant_switch.php');

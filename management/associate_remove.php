@@ -45,7 +45,7 @@ $userid = required_param('id', PARAM_INT);
 require_login();
 
 if (!tenancy::is_active()) {
-    redirect('/');
+    redirect(new moodle_url('/'));
 }
 
 $tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $tenantid], '*', MUST_EXIST);
