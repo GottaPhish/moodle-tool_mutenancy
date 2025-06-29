@@ -140,11 +140,11 @@ final class users extends system_report {
                 ->add_callback(static function(string $fullname, \stdClass $row): string {
                     if ($row->suspended) {
                         $fullname .= ' ' . \html_writer::tag('span', get_string('suspended', 'moodle'),
-                                ['class' => 'badge badge-secondary ms-1']);
+                                ['class' => 'badge bg-secondary ms-1']);
                     }
                     if (!$row->confirmed) {
                         $fullname .= ' ' . \html_writer::tag('span', get_string('confirmationpending', 'admin'),
-                                ['class' => 'badge badge-danger ms-1']);
+                                ['class' => 'badge bg-danger ms-1']);
                     }
                     return $fullname;
                 });
