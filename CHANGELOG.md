@@ -1,15 +1,7 @@
 # Changelog
 
-## mu-4.5.5-02
+## mu-5.0.1-01
 
 Release date: 30/06/2025
 
-* New plugin versioning.
-
-## mu-4.5.5-01
-
-Release date: 09/06/2025
-
-* Improved docs and added acknowledgements. 
-* Standardised admin settings.
-* Added hooks for plugins to add manager capabilities.
+* Added support for Moodle 5.0

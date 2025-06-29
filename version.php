@@ -28,13 +28,13 @@ defined('MOODLE_INTERNAL') || die();
 
 /** @var stdClass $plugin */
 $plugin->component = 'tool_mutenancy';
-$plugin->version = 2025063045;
-$plugin->requires  = 2024100703;
+$plugin->version = 2025063050;
+$plugin->requires = 2025041401;
 $plugin->maturity = MATURITY_ALPHA;
-$plugin->supported = [405, 405];
-$plugin->incompatible = 500;
-$plugin->release = 'mu-4.5.5-02';
+$plugin->supported = [500, 500];
+// $plugin->incompatible = 501;
+$plugin->release = 'mu-5.0.1-01';
 
 $plugin->dependencies = [
-    'tool_mulib' => 2025063045,
+    'tool_mulib' => 2025063050,
 ];
