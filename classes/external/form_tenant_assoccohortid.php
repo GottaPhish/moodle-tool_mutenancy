@@ -61,7 +61,9 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
         global $DB;
 
         ['query' => $query, 'tenantid' => $tenantid] = self::validate_parameters(
-            self::execute_parameters(), ['query' => $query, 'tenantid' => $tenantid]);
+            self::execute_parameters(),
+            ['query' => $query, 'tenantid' => $tenantid]
+        );
 
         if ($tenantid) {
             $context = \context_tenant::instance($tenantid);
@@ -71,7 +73,7 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
         self::validate_context($context);
         require_capability('tool/mutenancy:admin', $context);
 
-        list($searchsql, $params) = self::get_cohort_search_query($query, 'ch');
+        [$searchsql, $params] = self::get_cohort_search_query($query, 'ch');
         if ($tenantid) {
             $params['tenantid'] = $tenantid;
             $ortenantid = "OR c.tenantid = :tenantid";

@@ -36,11 +36,7 @@ use tool_mutenancy\local\manager;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements
-    \core_privacy\local\metadata\provider,
-    \core_privacy\local\request\plugin\provider,
-    \core_privacy\local\request\core_userlist_provider {
-
+class provider implements \core_privacy\local\request\core_userlist_provider, \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\provider {
     /**
      * Returns data about this plugin.
      *
@@ -110,7 +106,7 @@ class provider implements
             return;
         }
 
-        list($select, $params) = $DB->get_in_or_equal($tenantids, SQL_PARAMS_NAMED);
+        [$select, $params] = $DB->get_in_or_equal($tenantids, SQL_PARAMS_NAMED);
         $sql = "SELECT t.*
                   FROM {tool_mutenancy_tenant} t
                   JOIN {tool_mutenancy_manager} tm ON tm.tenantid = t.id

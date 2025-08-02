@@ -64,8 +64,10 @@ final class users extends system_report {
             {$entityuseralias}.mnethostid, {$entityuseralias}.auth," . implode(', ', $fullnamefields));
 
         $paramguest = database::generate_param_name();
-        $this->add_base_condition_sql("{$entityuseralias}.deleted <> 1 AND {$entityuseralias}.id <> :{$paramguest}",
-            [$paramguest => $CFG->siteguest]);
+        $this->add_base_condition_sql(
+            "{$entityuseralias}.deleted <> 1 AND {$entityuseralias}.id <> :{$paramguest}",
+            [$paramguest => $CFG->siteguest]
+        );
 
         if ($this->tenant->assoccohortid) {
             $this->add_base_condition_sql("{$entityuseralias}.id IN (
@@ -131,20 +133,25 @@ final class users extends system_report {
                     return format_time(time() - $row->lastaccess);
                 }
                 return get_string('never');
-            })
-        );
+            }));
 
         if ($column = $this->get_column('user:fullnamewithpicturelink')) {
             $column
                 ->add_fields("{$entityuseralias}.suspended, {$entityuseralias}.confirmed")
-                ->add_callback(static function(string $fullname, \stdClass $row): string {
+                ->add_callback(static function (string $fullname, \stdClass $row): string {
                     if ($row->suspended) {
-                        $fullname .= ' ' . \html_writer::tag('span', get_string('suspended', 'moodle'),
-                                ['class' => 'badge badge-secondary ms-1']);
+                        $fullname .= ' ' . \html_writer::tag(
+                            'span',
+                            get_string('suspended', 'moodle'),
+                            ['class' => 'badge badge-secondary ms-1']
+                        );
                     }
                     if (!$row->confirmed) {
-                        $fullname .= ' ' . \html_writer::tag('span', get_string('confirmationpending', 'admin'),
-                                ['class' => 'badge badge-danger ms-1']);
+                        $fullname .= ' ' . \html_writer::tag(
+                            'span',
+                            get_string('confirmationpending', 'admin'),
+                            ['class' => 'badge badge-danger ms-1']
+                        );
                     }
                     return $fullname;
                 });
@@ -217,7 +224,7 @@ final class users extends system_report {
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('edit', 'moodle'), 't/edit');
         $link->set_dialog_size('xl');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row): bool {
+            ->add_callback(static function (\stdclass $row): bool {
                 global $USER;
                 if (!$row->tenantid) {
                     return false;
@@ -236,14 +243,13 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:memberupdate', \context_user::instance($row->id));
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_suspend.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('suspenduser', 'admin'), 't/show');
         $link->set_dialog_size('sm');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row): bool {
+            ->add_callback(static function (\stdclass $row): bool {
                 global $USER;
                 if (!$row->tenantid) {
                     return false;
@@ -255,14 +261,13 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:memberupdate', \context_user::instance($row->id));
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_unsuspend.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('unsuspenduser', 'admin'), 't/hide');
         $link->set_dialog_size('sm');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row) use ($tenant): bool {
+            ->add_callback(static function (\stdclass $row) use ($tenant): bool {
                 if (!$row->tenantid) {
                     return false;
                 }
@@ -270,14 +275,13 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:memberupdate', \context_user::instance($row->id));
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_unlock.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('unlockaccount', 'admin'), 't/unlock');
         $link->set_dialog_size('sm');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row) use ($tenant): bool {
+            ->add_callback(static function (\stdclass $row) use ($tenant): bool {
                 if (!$row->tenantid) {
                     return false;
                 }
@@ -286,14 +290,13 @@ final class users extends system_report {
                 }
                 return has_capability('tool/mutenancy:memberupdate', \context_user::instance($row->id))
                     && login_is_lockedout($row);
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_delete.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('delete', 'core'), 't/delete');
         $link->set_dialog_size('sm');
         $this->add_action($link->create_report_action(['class' => 'text-danger'])
-            ->add_callback(static function(\stdclass $row): bool {
+            ->add_callback(static function (\stdclass $row): bool {
                 global $USER;
                 if (!$row->tenantid) {
                     return false;
@@ -302,15 +305,14 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:memberdelete', \context_user::instance($row->id));
-            })
-        );
+            }));
 
         $this->add_action_divider();
 
         $url = new moodle_url('/admin/tool/mutenancy/management/associate_remove.php', ['id' => ':id', 'tenantid' => $this->tenant->id]);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('associate_remove', 'tool_mutenancy'), 'e/cancel');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row) use ($cohort): bool {
+            ->add_callback(static function (\stdclass $row) use ($cohort): bool {
                 global $DB;
                 if ($row->tenantid) {
                     return false;
@@ -327,13 +329,12 @@ final class users extends system_report {
                     return false;
                 }
                 return true;
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/user_allocate.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('user_allocate', 'tool_mutenancy'), 'i/switch');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row) use ($contextsystem): bool {
+            ->add_callback(static function (\stdclass $row) use ($contextsystem): bool {
                 global $USER;
                 if (is_siteadmin($row->id)) {
                     return false;
@@ -342,14 +343,13 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:allocate', $contextsystem);
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_confirm.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('confirmaccount', 'core'), 't/check');
         $link->set_dialog_size('sm');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row): bool {
+            ->add_callback(static function (\stdclass $row): bool {
                 if (!$row->tenantid) {
                     return false;
                 }
@@ -357,14 +357,13 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:memberupdate', \context_user::instance($row->id));
-            })
-        );
+            }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_resend.php', ['id' => ':id']);
         $link = new \tool_mulib\output\dialog_form\link($url, get_string('resendemail', 'core'), 't/email');
         $link->set_dialog_size('sm');
         $this->add_action($link->create_report_action()
-            ->add_callback(static function(\stdclass $row) use ($tenant): bool {
+            ->add_callback(static function (\stdclass $row) use ($tenant): bool {
                 if (!$row->tenantid) {
                     return false;
                 }
@@ -375,8 +374,7 @@ final class users extends system_report {
                     return false;
                 }
                 return has_capability('tool/mutenancy:memberupdate', \context_user::instance($row->id));
-            })
-        );
+            }));
     }
 
     /**

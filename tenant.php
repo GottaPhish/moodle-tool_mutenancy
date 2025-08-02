@@ -16,9 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-use tool_mulib\output\header_actions;
-
 /**
  * Tenant details.
  *
@@ -26,6 +23,9 @@ use tool_mulib\output\header_actions;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+use tool_mutenancy\local\tenancy;
+use tool_mulib\output\header_actions;
 
 /** @var stdClass $CFG */
 /** @var core_renderer $OUTPUT */
@@ -88,7 +88,8 @@ $buttons = [];
 if (has_capability('tool/mutenancy:admin', $context)) {
     $membercount = $DB->record_exists('user', ['tenantid' => $tenant->id, 'deleted' => 0]);
 
-    if ($tenant->archived && $USER->tenantid != $tenant->id
+    if (
+        $tenant->archived && $USER->tenantid != $tenant->id
         && (!$membercount || has_capability('tool/mutenancy:allocate', context_system::instance()))
     ) {
         $url = new moodle_url('/admin/tool/mutenancy/management/tenant_delete.php', ['id' => $tenant->id]);

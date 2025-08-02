@@ -32,7 +32,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
         $context = \context_tenant::instance($tenant->id);
         $report = \core_reportbuilder\system_report_factory::create(
             \tool_mutenancy\reportbuilder\local\systemreports\users::class,
-            $context);
+            $context
+        );
         return $report->output();
     }
 }

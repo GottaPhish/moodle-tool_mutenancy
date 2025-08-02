@@ -116,9 +116,13 @@ function tool_mutenancy_myprofile_navigation(\core_user\output\myprofile\tree $t
         }
     }
     $tree->add_node(new core_user\output\myprofile\node(
-        'contact', 'tenant', get_string('tenant_member', 'tool_mutenancy'),
-        null, null, $name . $allocate)
-    );
+        'contact',
+        'tenant',
+        get_string('tenant_member', 'tool_mutenancy'),
+        null,
+        null,
+        $name . $allocate
+    ));
 
     if (!$user->tenantid) {
         $tenants = \tool_mutenancy\local\user::get_associated_tenants($user->id);
@@ -134,9 +138,13 @@ function tool_mutenancy_myprofile_navigation(\core_user\output\myprofile\tree $t
                 $list[] = $name;
             }
             $tree->add_node(new core_user\output\myprofile\node(
-                    'contact', 'associatedtenants', get_string('user_tenants', 'tool_mutenancy'),
-                    null, null, implode(', ', $list))
-            );
+                'contact',
+                'associatedtenants',
+                get_string('user_tenants', 'tool_mutenancy'),
+                null,
+                null,
+                implode(', ', $list)
+            ));
         }
     }
 }
@@ -153,8 +161,12 @@ function tool_mutenancy_render_navbar_output(renderer_base $renderer): string {
     }
 
     $url = new moodle_url('/admin/tool/mutenancy/tenant_switch.php');
-    $icon = new \tool_mulib\output\dialog_form\icon($url,
-        get_string('tenant_switch', 'tool_mutenancy'), 'switch', 'tool_mutenancy');
+    $icon = new \tool_mulib\output\dialog_form\icon(
+        $url,
+        get_string('tenant_switch', 'tool_mutenancy'),
+        'switch',
+        'tool_mutenancy'
+    );
     $icon->set_dialog_size('sm');
     $icon->set_class('nav-link icon-no-margin'); // Use the same styling as notification.
 

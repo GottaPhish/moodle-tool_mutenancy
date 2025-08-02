@@ -82,7 +82,8 @@ final class tenant {
 
         if (!empty($data->assoccohortid)) {
             $cohort = $DB->get_record('cohort', ['id' => $data->assoccohortid], '*', MUST_EXIST);
-            if ($cohort->component === 'tool_mutenancy'
+            if (
+                $cohort->component === 'tool_mutenancy'
                 || $DB->record_exists('tool_mutenancy_tenant', ['cohortid' => $data->assoccohortid])
             ) {
                 throw new \core\exception\invalid_parameter_exception('tenant cohort cannot be used in assoccohortid');
@@ -256,7 +257,8 @@ final class tenant {
         if (property_exists($data, 'assoccohortid')) {
             if (!empty($data->assoccohortid)) {
                 $cohort = $DB->get_record('cohort', ['id' => $data->assoccohortid], '*', MUST_EXIST);
-                if ($cohort->component === 'tool_mutenancy'
+                if (
+                    $cohort->component === 'tool_mutenancy'
                     || $DB->record_exists('tool_mutenancy_tenant', ['cohortid' => $data->assoccohortid])
                 ) {
                     throw new \core\exception\invalid_parameter_exception('tenant cohort cannot be used in assoccohortid');

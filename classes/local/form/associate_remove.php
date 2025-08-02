@@ -43,7 +43,9 @@ final class associate_remove extends \tool_mulib\local\dialog_form {
 
         $tenants = $DB->get_records_menu('tool_mutenancy_tenant', ['assoccohortid' => $cohort->id], 'name ASC', 'id, name');
         $tenants = array_map('format_string', $tenants);
-        $mform->addElement('static', 'tenants',
+        $mform->addElement(
+            'static',
+            'tenants',
             (count($tenants) > 1) ? get_string('tenants', 'tool_mutenancy') : get_string('tenant', 'tool_mutenancy'),
             implode(', ', $tenants)
         );

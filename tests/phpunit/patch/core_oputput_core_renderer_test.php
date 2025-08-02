@@ -59,7 +59,8 @@ final class core_oputput_core_renderer_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/theme/image.php/boost/theme/$themerev/favicon",
-            $result->out(false));
+            $result->out(false)
+        );
 
         set_config('favicon', '/default.jpg', 'core_admin');
 
@@ -67,7 +68,8 @@ final class core_oputput_core_renderer_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/favicon/64x64/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         /** @var \tool_mutenancy_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('tool_mutenancy');
@@ -83,7 +85,8 @@ final class core_oputput_core_renderer_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/favicon/64x64/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         tenancy::switch($tenant2->id);
 
@@ -91,13 +94,15 @@ final class core_oputput_core_renderer_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/favicon/64x64/$themerev/myfavicon.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         config::override($tenant2->id, 'favicon', '', 'core_admin');
         $result = $renderer->favicon();
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/theme/image.php/boost/theme/$themerev/favicon",
-            $result->out(false));
+            $result->out(false)
+        );
     }
 }

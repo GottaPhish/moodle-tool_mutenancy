@@ -104,11 +104,14 @@ final class moodlelib_test extends \advanced_testcase {
         $tenant2 = $generator->create_tenant();
 
         $course0 = $this->getDataGenerator()->create_course(
-            ['category' => $category0->id, 'enrol_guest_status_0' => 0, 'enrol_guest_password_0' => '']);
+            ['category' => $category0->id, 'enrol_guest_status_0' => 0, 'enrol_guest_password_0' => '']
+        );
         $course1 = $this->getDataGenerator()->create_course(
-            ['category' => $tenant1->categoryid, 'enrol_guest_status_0' => 0, 'enrol_guest_password_0' => '']);
+            ['category' => $tenant1->categoryid, 'enrol_guest_status_0' => 0, 'enrol_guest_password_0' => '']
+        );
         $course2 = $this->getDataGenerator()->create_course(
-            ['category' => $tenant2->categoryid, 'enrol_guest_status_0' => 0, 'enrol_guest_password_0' => '']);
+            ['category' => $tenant2->categoryid, 'enrol_guest_status_0' => 0, 'enrol_guest_password_0' => '']
+        );
 
         $admin = get_admin();
         $guest = guest_user();
@@ -323,27 +326,33 @@ final class moodlelib_test extends \advanced_testcase {
 
         $this->assertSame(
             false,
-            email_is_not_allowed('user@example.net'));
+            email_is_not_allowed('user@example.net')
+        );
         $this->assertSame(
             'This email cannot be used. Allowed email domains are: example.net.',
-            email_is_not_allowed('user@example.org'));
+            email_is_not_allowed('user@example.org')
+        );
 
         tenancy::force_current_tenantid($tenant1->id);
         $this->assertSame(
             false,
-            email_is_not_allowed('user@example.net'));
+            email_is_not_allowed('user@example.net')
+        );
         $this->assertSame(
             'This email cannot be used. Allowed email domains are: example.net.',
-            email_is_not_allowed('user@example.org'));
+            email_is_not_allowed('user@example.org')
+        );
         tenancy::unforce_current_tenantid();
 
         tenancy::force_current_tenantid($tenant2->id);
         $this->assertSame(
             'This email cannot be used. Allowed email domains are: example.org.',
-            email_is_not_allowed('user@example.net'));
+            email_is_not_allowed('user@example.net')
+        );
         $this->assertSame(
             false,
-            email_is_not_allowed('user@example.org'));
+            email_is_not_allowed('user@example.org')
+        );
         tenancy::unforce_current_tenantid();
     }
 }

@@ -33,7 +33,6 @@ use core_reportbuilder\local\filters\boolean_select;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class tenant extends base {
-
     #[\Override]
     protected function get_default_tables(): array {
         return [
@@ -81,7 +80,7 @@ final class tenant extends base {
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tenantalias}.id, {$tenantalias}.name")
             ->set_is_sortable(true)
-            ->set_callback(static function(?string $value, \stdClass $row): string {
+            ->set_callback(static function (?string $value, \stdClass $row): string {
                 if (!$row->id) {
                     return '';
                 }
@@ -103,7 +102,7 @@ final class tenant extends base {
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tenantalias}.idnumber")
             ->set_is_sortable(true)
-            ->set_callback(static function(?string $value, \stdClass $row): string {
+            ->set_callback(static function (?string $value, \stdClass $row): string {
                 return s($row->idnumber);
             });
 
@@ -116,7 +115,7 @@ final class tenant extends base {
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tenantalias}.sitefullname")
             ->set_is_sortable(true)
-            ->set_callback(static function(?string $value, \stdClass $row): string {
+            ->set_callback(static function (?string $value, \stdClass $row): string {
                 return s($row->sitefullname);
             });
 
@@ -129,7 +128,7 @@ final class tenant extends base {
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tenantalias}.siteshortname")
             ->set_is_sortable(true)
-            ->set_callback(static function(?string $value, \stdClass $row): string {
+            ->set_callback(static function (?string $value, \stdClass $row): string {
                 return s($row->siteshortname);
             });
 
@@ -158,7 +157,7 @@ final class tenant extends base {
             ->add_field("{$tenantalias}.memberlimit")
             ->set_is_sortable(true)
             ->set_disabled_aggregation_all()
-            ->set_callback(static function(?int $value, \stdClass $row): string {
+            ->set_callback(static function (?int $value, \stdClass $row): string {
                 if (!$row->memberlimit) {
                     return '';
                 }
@@ -178,12 +177,11 @@ final class tenant extends base {
                        LEFT JOIN {cohort_members} cm ON cm.cohortid = {$tenantalias}.assoccohortid AND cm.userid = tuser.id
                            WHERE (tuser.deleted = 0 AND tuser.tenantid IS NULL AND cm.id IS NOT NULL)
                                  OR (tuser.deleted = 0 AND tuser.tenantid = {$tenantalias}.id)
-                         )"
-                , 'usercount')
+                         )", 'usercount')
             ->add_field("{$tenantalias}.id")
             ->set_is_sortable(true)
             ->set_disabled_aggregation_all()
-            ->set_callback(static function(?int $value, \stdClass $row): string {
+            ->set_callback(static function (?int $value, \stdClass $row): string {
                 $count = $row->usercount;
                 $context = \context_tenant::instance($row->id);
                 if (has_capability('tool/mutenancy:view', $context)) {
@@ -202,7 +200,7 @@ final class tenant extends base {
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tenantalias}.idnumber, {$tenantalias}.archived, {$tenantalias}.id")
             ->set_is_sortable(false)
-            ->set_callback(static function(?string $value, \stdClass $row): string {
+            ->set_callback(static function (?string $value, \stdClass $row): string {
                 // NOTE: things go wrong when reportbuilder downloads colum that uses templates...
                 global $OUTPUT, $SCRIPT;
                 if ($row->archived || $row->idnumber === null) {

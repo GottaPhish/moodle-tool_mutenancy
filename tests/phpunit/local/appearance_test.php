@@ -89,7 +89,8 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/logo/100x50/$themerev/mylogo.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         set_config('logo', '/default.jpg', 'core_admin');
 
@@ -97,19 +98,22 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/logo/100x50/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_logo_url(100, 50, $tenant1->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/logo/100x50/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_logo_url(100, 50, $tenant2->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/logo/100x50/$themerev/mylogo.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         config::override($tenant2->id, 'logo', '', 'core_admin');
         $result = appearance::get_logo_url(100, 50, $tenant2->id);
@@ -143,7 +147,8 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/logocompact/100x50/$themerev/mylogocompact.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         set_config('logocompact', '/default.jpg', 'core_admin');
 
@@ -151,19 +156,22 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/logocompact/100x50/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_compact_logo_url(100, 50, $tenant1->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/logocompact/100x50/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_compact_logo_url(100, 50, $tenant2->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/logocompact/100x50/$themerev/mylogocompact.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         config::override($tenant2->id, 'logocompact', '', 'core_admin');
         $result = appearance::get_compact_logo_url(100, 50, $tenant2->id);
@@ -197,7 +205,8 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/favicon/64x64/$themerev/myfavicon.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         set_config('favicon', '/default.jpg', 'core_admin');
 
@@ -205,19 +214,22 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/favicon/64x64/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_favicon_url($tenant1->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/core_admin/favicon/64x64/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_favicon_url($tenant2->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/core_admin/favicon/64x64/$themerev/myfavicon.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         config::override($tenant2->id, 'favicon', '', 'core_admin');
         $result = appearance::get_favicon_url($tenant2->id);
@@ -251,7 +263,8 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/theme_boost/logo/$themerev/mylogo.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         set_config('logo', '/default.jpg', 'theme_boost');
 
@@ -259,19 +272,22 @@ final class appearance_test extends \advanced_testcase {
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/theme_boost/logo/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_boost_setting_image_url('logo', $tenant1->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$syscontext->id/theme_boost/logo/$themerev/default.jpg",
-            $result->out(false));
+            $result->out(false)
+        );
 
         $result = appearance::get_boost_setting_image_url('logo', $tenant2->id);
         $this->assertInstanceOf(\moodle_url::class, $result);
         $this->assertSame(
             "https://www.example.com/moodle/pluginfile.php/$tenantcontext2->id/theme_boost/logo/$themerev/mylogo.gif",
-            $result->out(false));
+            $result->out(false)
+        );
 
         config::override($tenant2->id, 'logo', '', 'theme_boost');
         $result = appearance::get_boost_setting_image_url('logo', $tenant2->id);

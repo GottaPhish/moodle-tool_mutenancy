@@ -85,28 +85,46 @@ final class config_test extends \advanced_testcase {
         $tenant2 = $generator->create_tenant();
 
         config::override($tenant1->id, 'xyz', '123', 'moodle');
-        $record = $DB->get_record('tool_mutenancy_config',
-            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz'], '*', MUST_EXIST);
+        $record = $DB->get_record(
+            'tool_mutenancy_config',
+            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz'],
+            '*',
+            MUST_EXIST
+        );
         $this->assertSame('123', $record->value);
 
         config::override($tenant1->id, 'xyz', 'abc', 'core');
-        $record = $DB->get_record('tool_mutenancy_config',
-            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz'], '*', MUST_EXIST);
+        $record = $DB->get_record(
+            'tool_mutenancy_config',
+            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz'],
+            '*',
+            MUST_EXIST
+        );
         $this->assertSame('abc', $record->value);
 
         config::override($tenant1->id, 'xyz', false, '');
-        $record = $DB->get_record('tool_mutenancy_config',
-            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz'], '*', MUST_EXIST);
+        $record = $DB->get_record(
+            'tool_mutenancy_config',
+            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz'],
+            '*',
+            MUST_EXIST
+        );
         $this->assertSame('0', $record->value);
 
         config::override($tenant1->id, 'xyz', null, 'core');
-        $record = $DB->get_record('tool_mutenancy_config',
-            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz']);
+        $record = $DB->get_record(
+            'tool_mutenancy_config',
+            ['tenantid' => $tenant1->id, 'plugin' => 'core', 'name' => 'xyz']
+        );
         $this->assertSame(false, $record);
 
         config::override($tenant1->id, 'xyz', '123', 'tool_mutenancy');
-        $record = $DB->get_record('tool_mutenancy_config',
-            ['tenantid' => $tenant1->id, 'plugin' => 'tool_mutenancy', 'name' => 'xyz'], '*', MUST_EXIST);
+        $record = $DB->get_record(
+            'tool_mutenancy_config',
+            ['tenantid' => $tenant1->id, 'plugin' => 'tool_mutenancy', 'name' => 'xyz'],
+            '*',
+            MUST_EXIST
+        );
         $this->assertSame('123', $record->value);
     }
 

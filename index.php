@@ -16,8 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-
 /**
  * List of all tenants.
  *
@@ -25,6 +23,8 @@ use tool_mutenancy\local\tenancy;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+use tool_mutenancy\local\tenancy;
 
 /** @var stdClass $CFG */
 /** @var core_renderer $OUTPUT */
@@ -69,7 +69,8 @@ echo $OUTPUT->header();
 
 $report = \core_reportbuilder\system_report_factory::create(
     \tool_mutenancy\reportbuilder\local\systemreports\tenants::class,
-    context_system::instance());
+    context_system::instance()
+);
 echo $report->output();
 
 $buttons = [];
