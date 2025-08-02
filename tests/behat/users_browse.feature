@@ -110,7 +110,7 @@ Feature: Multi-tenancy features of browse users page
     And I click on "Allocate user" "link" in the "Nulty Student" "table_row"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Tenant | Tenant 1 |
-    And I press dialog form button "Allocate user"
+    And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then the following should exist in the "reportbuilder-table" table:
       | First name     | Email address        | Tenant   |
       | Nulty Student  | student0@example.com | Tenant 1 |
@@ -119,7 +119,7 @@ Feature: Multi-tenancy features of browse users page
     And I click on "Allocate user" "link" in the "Nulty Student" "table_row"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Tenant | Tenant 2 |
-    And I press dialog form button "Allocate user"
+    And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then the following should exist in the "reportbuilder-table" table:
       | First name     | Email address        | Tenant   |
       | Nulty Student  | student0@example.com | Tenant 2 |
@@ -127,5 +127,5 @@ Feature: Multi-tenancy features of browse users page
     When I click on "Actions" "link" in the "Nulty Student" "table_row"
     And I click on "Allocate user" "link" in the "Nulty Student" "table_row"
     And I click on "Tenant 2" "text" in the ".modal-dialog" "css_element"
-    And I press dialog form button "Allocate user"
+    And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then I should not see "Tenant" in the "Nulty Student" "table_row"

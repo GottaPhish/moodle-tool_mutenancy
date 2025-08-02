@@ -27,7 +27,7 @@ Feature: Tenant authentication setting instructions
     And I set the following fields to these values:
       | auth_instructions_override | 1                   |
       | auth_instructions[text]    | Welcome to Tenant 1 |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "Welcome to Tenant 1" in the "Instructions" definition list item
     And I log out
 
@@ -38,7 +38,7 @@ Feature: Tenant authentication setting instructions
     And I set the following fields to these values:
       | auth_instructions_override | 1                   |
       | auth_instructions[text]    |                     |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "Empty" in the "Instructions" definition list item
     And I log out
 

@@ -34,15 +34,15 @@ Feature: Tenant appearance logos
     And I press "Edit logos"
     And I set the field "logo_override" to "1"
     And I upload "admin/tool/mutenancy/tests/fixtures/logo_red.png" file to "Logo" filemanager
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I press "Edit logos"
     And I set the field "logocompact_override" to "1"
     And I upload "admin/tool/mutenancy/tests/fixtures/logo_green.png" file to "Compact logo" filemanager
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I press "Edit logos"
     And I set the field "favicon_override" to "1"
     And I upload "admin/tool/mutenancy/tests/fixtures/logo_blue.png" file to "Favicon" filemanager
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should not see "Default" in the "Logo" definition list item
     And I should not see "Default" in the "Compact logo" definition list item
     And I should not see "Default" in the "Favicon" definition list item
@@ -52,7 +52,7 @@ Feature: Tenant appearance logos
     And I set the field "logo_override" to "1"
     And I set the field "logocompact_override" to "1"
     And I set the field "favicon_override" to "1"
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should see "None" in the "Logo" definition list item
     And I should see "None" in the "Compact logo" definition list item
     And I should not see "Default" in the "Logo" definition list item
@@ -123,19 +123,19 @@ Feature: Tenant appearance logos
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 1         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see Green logo in navbar and Blue favicon"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 2         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see not see logo in navbar and favicon is standard hat"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 3         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see Yellow logo in navbar and Cyan favicon"
 
     And I log out

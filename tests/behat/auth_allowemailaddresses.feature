@@ -18,7 +18,7 @@ Feature: Tenant authentication setting allowemailaddresses
     And I set the following fields to these values:
       | allowemailaddresses_override   | 1                   |
       | allowemailaddresses            | yyy.example.com     |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "yyy.example.com" in the "Allowed email domains" definition list item
     And I am on the "TEN3" "tool_mutenancy > Tenant authentication" page
     And I should see "Default value (xxx.example.com)" in the "Allowed email domains" definition list item
@@ -26,7 +26,7 @@ Feature: Tenant authentication setting allowemailaddresses
     And I set the following fields to these values:
       | allowemailaddresses_override   | 1                   |
       | allowemailaddresses            |                     |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "Empty" in the "Allowed email domains" definition list item
     And I log out
 
@@ -207,7 +207,7 @@ Feature: Tenant authentication setting allowemailaddresses
     And I click on "Edit" "link" in the "Prvni Student" "table_row"
     When I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Email address | student1@zzz.example.com |
-    And I press dialog form button "Update account"
+    And I click on "Update account" "button" in the ".modal-dialog" "css_element"
     Then the following should exist in the "reportbuilder-table" table:
       | First name    | Email address            | Tenant member |
       | Prvni Student | student1@zzz.example.com | Yes           |

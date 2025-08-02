@@ -36,13 +36,13 @@ Feature: Tenant Boost theme settings
     And I set the field "preset" to "plain.scss"
     And I set the field "backgroundimage_override" to "1"
     And I upload "admin/tool/mutenancy/tests/fixtures/logo_red.png" file to "Background image" filemanager
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I press "Edit Boost"
     And I set the field "loginbackgroundimage_override" to "1"
     And I upload "admin/tool/mutenancy/tests/fixtures/logo_green.png" file to "Login page background image" filemanager
     And I set the field "brandcolor_override" to "1"
     And I set the field "brandcolor" to "blue"
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should see "plain.scss" in the "Theme preset" definition list item
     And I should not see "Default" in the "Theme preset" definition list item
     And I should see "blue" in the "Brand colour" definition list item
@@ -56,7 +56,7 @@ Feature: Tenant Boost theme settings
     And I set the field "backgroundimage_override" to "1"
     And I set the field "loginbackgroundimage_override" to "1"
     And I set the field "brandcolor_override" to "1"
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should see "default.scss" in the "Theme preset" definition list item
     And I should not see "Default" in the "Theme preset" definition list item
     And I should see "None" in the "Background image" definition list item
@@ -129,19 +129,19 @@ Feature: Tenant Boost theme settings
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 1         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see Red background, Blue brand colour and plain preset"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 2         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see no background, no brand colour and standard preset"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 3         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see Magenta background, Cyan brand colour and plain preset"
 
     And I log out
@@ -168,7 +168,7 @@ Feature: Tenant Boost theme settings
     And I set the field "Raw initial SCSS" to "$body-color: pink;"
     And I set the field "scss_override" to "1"
     And I set the field "Raw SCSS" to "body {background-color: red}"
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should see "$body-color: pink;" in the "Raw initial SCSS" definition list item
     And I should not see "Default" in the "Raw initial SCSS" definition list item
     And I should see "body {background-color: red}" in the "Raw SCSS" definition list item
@@ -178,7 +178,7 @@ Feature: Tenant Boost theme settings
     And I press "Edit Boost"
     And I set the field "scsspre_override" to "1"
     And I set the field "scss_override" to "1"
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should see "None" in the "Raw initial SCSS" definition list item
     And I should not see "Default" in the "Raw initial SCSS" definition list item
     And I should see "None" in the "Raw SCSS" definition list item
@@ -217,17 +217,17 @@ Feature: Tenant Boost theme settings
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 1         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see Red background and Pink text"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 2         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see no background, and normal text"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 3         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I perform a visual check "I should see Green background and Orange text"
