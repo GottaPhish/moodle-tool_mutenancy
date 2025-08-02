@@ -49,7 +49,11 @@ final class tenant_update extends \tool_mulib\local\dialog_form {
         $mform->setType('memberlimit', PARAM_INT);
 
         form_tenant_assoccohortid::add_form_element(
-            $mform, ['tenantid' => $tenant->id], 'assoccohortid', get_string('associate_cohort', 'tool_mutenancy'));
+            $mform,
+            ['tenantid' => $tenant->id],
+            'assoccohortid',
+            get_string('associate_cohort', 'tool_mutenancy')
+        );
         $mform->setType('assoccohortid', PARAM_INT);
 
         $mform->addElement('text', 'sitefullname', get_string('tenant_sitefullname', 'tool_mutenancy'), ['size' => 40, 'maxlength' => 255]);

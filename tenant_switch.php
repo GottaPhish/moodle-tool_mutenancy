@@ -16,9 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-use tool_mutenancy\local\tenant;
-
 /**
  * Switch tenant.
  *
@@ -26,6 +23,9 @@ use tool_mutenancy\local\tenant;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+use tool_mutenancy\local\tenancy;
+use tool_mutenancy\local\tenant;
 
 /** @var moodle_database $DB */
 /** @var moodle_page $PAGE */

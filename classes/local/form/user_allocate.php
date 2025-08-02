@@ -37,7 +37,11 @@ final class user_allocate extends \tool_mulib\local\dialog_form {
         $mform->addElement('html', $info);
 
         form_user_allocate_tenantid::add_form_element(
-            $mform, ['tenantid' => (int)$user->tenantid], 'tenantid', get_string('tenant', 'tool_mutenancy'));
+            $mform,
+            ['tenantid' => (int)$user->tenantid],
+            'tenantid',
+            get_string('tenant', 'tool_mutenancy')
+        );
         $mform->setType('tenantid', PARAM_INT);
         if ($user->tenantid) {
             $mform->setDefault('tenantid', $user->tenantid);

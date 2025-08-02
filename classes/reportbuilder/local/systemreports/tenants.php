@@ -30,7 +30,6 @@ use core_reportbuilder\system_report;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class tenants extends system_report {
-
     #[\Override]
     protected function initialise(): void {
         $tenantentity = new tenant();
@@ -45,7 +44,8 @@ final class tenants extends system_report {
         $categoryalias = $categoryentity->get_table_alias('course_categories');
 
         $this->add_entity($categoryentity->add_join(
-            "JOIN {course_categories} {$categoryalias} ON {$categoryalias}.id = {$tenantalias}.categoryid"));
+            "JOIN {course_categories} {$categoryalias} ON {$categoryalias}.id = {$tenantalias}.categoryid"
+        ));
 
         $this->add_columns();
         $this->add_filters();
@@ -81,7 +81,7 @@ final class tenants extends system_report {
 
         $this->get_column('course_category:namewithlink')
             ->set_title(new \lang_string('tenant_category', 'tool_mutenancy'))
-            ->set_callback(static function($ignored, \stdClass $category): string {
+            ->set_callback(static function ($ignored, \stdClass $category): string {
                 if (empty($category->id)) {
                     return '';
                 }

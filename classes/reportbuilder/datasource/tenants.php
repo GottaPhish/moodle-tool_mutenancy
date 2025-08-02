@@ -28,7 +28,6 @@ use core_reportbuilder\datasource;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tenants extends datasource {
-
     /**
      * Return user-friendly name of the datasource
      *

@@ -380,7 +380,7 @@ final class manager {
     public static function get_manager_users(int $tenantid): array {
         global $DB;
 
-        list($sortsql, $params) = users_order_by_sql('u');
+        [$sortsql, $params] = users_order_by_sql('u');
         $params['tenantid'] = $tenantid;
 
         $sql = "SELECT u.*

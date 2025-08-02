@@ -25,7 +25,7 @@ namespace tool_mutenancy\output;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class loginurl implements \renderable, \core\output\named_templatable {
+final class loginurl implements \core\output\named_templatable, \renderable {
     /** @var int */
     protected $tenantid;
 

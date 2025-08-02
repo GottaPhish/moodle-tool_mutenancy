@@ -16,8 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-
 /**
  * Tenant appearance settings.
  *
@@ -26,12 +24,14 @@ use tool_mutenancy\local\tenancy;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+
 /** @var stdClass $CFG */
 /** @var core_renderer $OUTPUT */
 /** @var moodle_database $DB */
 /** @var moodle_page $PAGE */
 
-require(__DIR__.'/../../../config.php');
+require(__DIR__ . '/../../../config.php');
 require_once("$CFG->libdir/adminlib.php");
 
 $tenantid = required_param('id', PARAM_INT);

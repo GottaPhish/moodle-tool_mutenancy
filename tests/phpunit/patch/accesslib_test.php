@@ -84,7 +84,8 @@ final class accesslib_test extends \advanced_testcase {
         $userrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
         assign_capability($capability, CAP_ALLOW, $userrole->id, $syscontext->id);
         $guestrole = $DB->get_record('role', ['shortname' => 'guest'], '*', MUST_EXIST);
-        assign_capability($capability, CAP_ALLOW, $guestrole->id, $syscontext->id);;
+        assign_capability($capability, CAP_ALLOW, $guestrole->id, $syscontext->id);
+        ;
 
         $admin = get_admin();
         $admincontext = \context_user::instance($admin->id);
@@ -402,7 +403,8 @@ final class accesslib_test extends \advanced_testcase {
         $userrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
         assign_capability($capability, CAP_ALLOW, $userrole->id, $syscontext->id);
         $guestrole = $DB->get_record('role', ['shortname' => 'guest'], '*', MUST_EXIST);
-        assign_capability($capability, CAP_ALLOW, $guestrole->id, $syscontext->id);;
+        assign_capability($capability, CAP_ALLOW, $guestrole->id, $syscontext->id);
+        ;
 
         $admin = get_admin();
         $admincontext = \context_user::instance($admin->id);
@@ -460,6 +462,7 @@ final class accesslib_test extends \advanced_testcase {
         $this->assertSame('', $role->description);
         $this->assertStringContainsString(
             'Tenant manager role gets assigned to all tenant mangers automatically',
-            role_get_description($role));
+            role_get_description($role)
+        );
     }
 }

@@ -61,9 +61,13 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'preset_override', get_string('config_default_value', 'tool_mutenancy', $defaultstr));
         $group[] = $mform->createElement('select', 'preset', get_string('preset', 'theme_boost'), $choices);
-        $mform->addGroup($group, 'preset_group',
+        $mform->addGroup(
+            $group,
+            'preset_group',
             '<div>' . get_string('preset', 'theme_boost') . '<div class="small text-muted">theme_boost | preset</div></div>',
-            '<div style="width: 100%"/>', false);
+            '<div style="width: 100%"/>',
+            false
+        );
         if (config::is_overridden($tenant->id, 'theme_boost', 'preset')) {
             $mform->setDefault('preset_override', '1');
             $mform->setDefault('preset', config::get($tenant->id, 'theme_boost', 'preset'));
@@ -76,11 +80,20 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
 
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'backgroundimage_override', get_string('config_override', 'tool_mutenancy'));
-        $mform->addGroup($group, 'backgroundimage_group',
+        $mform->addGroup(
+            $group,
+            'backgroundimage_group',
             '<div>' . get_string('backgroundimage', 'theme_boost') . '<div class="small text-muted">theme_boost | backgroundimage</div></div>',
-            ' ', false);
-        $mform->addElement('filemanager', 'backgroundimage', '<span class="accesshide">'.get_string('backgroundimage', 'theme_boost').'</span>',
-            null, self::get_logo_options());
+            ' ',
+            false
+        );
+        $mform->addElement(
+            'filemanager',
+            'backgroundimage',
+            '<span class="accesshide">' . get_string('backgroundimage', 'theme_boost') . '</span>',
+            null,
+            self::get_logo_options()
+        );
         if (config::is_overridden($tenant->id, 'theme_boost', 'backgroundimage')) {
             $mform->setDefault('backgroundimage_override', '1');
         } else {
@@ -92,11 +105,20 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
 
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'loginbackgroundimage_override', get_string('config_override', 'tool_mutenancy'));
-        $mform->addGroup($group, 'loginbackgroundimage_group',
+        $mform->addGroup(
+            $group,
+            'loginbackgroundimage_group',
             '<div>' . get_string('loginbackgroundimage', 'theme_boost') . '<div class="small text-muted">theme_boost | loginbackgroundimage</div></div>',
-            ' ', false);
-        $mform->addElement('filemanager', 'loginbackgroundimage', '<span class="accesshide">'.get_string('loginbackgroundimage', 'theme_boost').'</span>',
-            null, self::get_logo_options());
+            ' ',
+            false
+        );
+        $mform->addElement(
+            'filemanager',
+            'loginbackgroundimage',
+            '<span class="accesshide">' . get_string('loginbackgroundimage', 'theme_boost') . '</span>',
+            null,
+            self::get_logo_options()
+        );
         if (config::is_overridden($tenant->id, 'theme_boost', 'loginbackgroundimage')) {
             $mform->setDefault('loginbackgroundimage_override', '1');
         } else {
@@ -115,9 +137,13 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'brandcolor_override', get_string('config_default_value', 'tool_mutenancy', $defaultstr));
         $group[] = $mform->createElement('text', 'brandcolor', get_string('brandcolor', 'theme_boost'), ['size' => 10]);
-        $mform->addGroup($group, 'brandcolor_group',
+        $mform->addGroup(
+            $group,
+            'brandcolor_group',
             '<div>' . get_string('brandcolor', 'theme_boost') . '<div class="small text-muted">theme_boost | brandcolor</div></div>',
-            '<div style="width: 100%"/>', false);
+            '<div style="width: 100%"/>',
+            false
+        );
         if (config::is_overridden($tenant->id, 'theme_boost', 'brandcolor')) {
             $mform->setDefault('brandcolor_override', '1');
             $mform->setDefault('brandcolor', config::get($tenant->id, 'theme_boost', 'brandcolor'));
@@ -132,10 +158,14 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
         if (has_capability('moodle/site:config', $syscontext)) {
             $group = [];
             $group[] = $mform->createElement('advcheckbox', 'scsspre_override', get_string('config_override', 'tool_mutenancy'));
-            $mform->addGroup($group, 'scsspre_group',
+            $mform->addGroup(
+                $group,
+                'scsspre_group',
                 '<div>' . get_string('rawscsspre', 'theme_boost') . '<div class="small text-muted">theme_boost | scsspre</div></div>',
-                '<div style="width: 100%"/>', false);
-            $mform->addElement('textarea', 'scsspre', '<span class="accesshide">'.get_string('rawscsspre', 'theme_boost').'</span>', ['rows' => 6]);
+                '<div style="width: 100%"/>',
+                false
+            );
+            $mform->addElement('textarea', 'scsspre', '<span class="accesshide">' . get_string('rawscsspre', 'theme_boost') . '</span>', ['rows' => 6]);
             if (config::is_overridden($tenant->id, 'theme_boost', 'scsspre')) {
                 $mform->setDefault('scsspre_override', '1');
                 $mform->setDefault('scsspre', config::get($tenant->id, 'theme_boost', 'scsspre'));
@@ -149,10 +179,14 @@ final class theme_boost_edit extends \tool_mulib\local\dialog_form {
 
             $group = [];
             $group[] = $mform->createElement('advcheckbox', 'scss_override', get_string('config_default', 'tool_mutenancy'));
-            $mform->addGroup($group, 'scss_group',
+            $mform->addGroup(
+                $group,
+                'scss_group',
                 '<div>' . get_string('rawscss', 'theme_boost') . '<div class="small text-muted">theme_boost | scss</div></div>',
-                '<div style="width: 100%"/>', false);
-            $mform->addElement('textarea', 'scss', '<span class="accesshide">'.get_string('rawscss', 'theme_boost').'</span>', ['rows' => 6]);
+                '<div style="width: 100%"/>',
+                false
+            );
+            $mform->addElement('textarea', 'scss', '<span class="accesshide">' . get_string('rawscss', 'theme_boost') . '</span>', ['rows' => 6]);
             if (config::is_overridden($tenant->id, 'theme_boost', 'scss')) {
                 $mform->setDefault('scss_override', '1');
                 $mform->setDefault('scss', config::get($tenant->id, 'theme_boost', 'scss'));

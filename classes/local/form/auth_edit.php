@@ -55,10 +55,14 @@ final class auth_edit extends \tool_mulib\local\dialog_form {
             }
             $group = [];
             $group[] = $mform->createElement('advcheckbox', 'registerauth_override', get_string('config_override_value', 'tool_mutenancy', $defaultstr));
-            $group[] = $mform->createElement('select', 'registerauth',  get_string('selfregistration', 'core_auth'), $options);
-            $mform->addGroup($group, 'registerauth_group',
-                '<div>' .get_string('selfregistration', 'core_auth') . '<div class="small text-muted">registerauth</div></div>',
-                '<div style="width: 100%"/>', false);
+            $group[] = $mform->createElement('select', 'registerauth', get_string('selfregistration', 'core_auth'), $options);
+            $mform->addGroup(
+                $group,
+                'registerauth_group',
+                '<div>' . get_string('selfregistration', 'core_auth') . '<div class="small text-muted">registerauth</div></div>',
+                '<div style="width: 100%"/>',
+                false
+            );
             if (config::is_overridden($tenant->id, 'core', 'registerauth')) {
                 $mform->setDefault('registerauth_override', '1');
                 $mform->setDefault('registerauth', config::get($tenant->id, 'core', 'registerauth'));
@@ -97,9 +101,13 @@ final class auth_edit extends \tool_mulib\local\dialog_form {
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'showloginform_override', get_string('config_override_value', 'tool_mutenancy', $defaultstr));
         $group[] = $mform->createElement('select', 'showloginform', get_string('showloginform', 'core_auth'), $options);
-        $mform->addGroup($group, 'showloginform_group',
-            '<div>' .get_string('showloginform', 'core_auth') . '<div class="small text-muted">showloginform</div></div>',
-            '<div style="width: 100%"/>', false);
+        $mform->addGroup(
+            $group,
+            'showloginform_group',
+            '<div>' . get_string('showloginform', 'core_auth') . '<div class="small text-muted">showloginform</div></div>',
+            '<div style="width: 100%"/>',
+            false
+        );
         if (config::is_overridden($tenant->id, 'core', 'showloginform')) {
             $mform->setDefault('showloginform_override', '1');
             $mform->setDefault('showloginform', config::get($tenant->id, 'core', 'showloginform'));
@@ -119,9 +127,13 @@ final class auth_edit extends \tool_mulib\local\dialog_form {
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'allowemailaddresses_override', get_string('config_override_value', 'tool_mutenancy', $defaultstr));
         $group[] = $mform->createElement('text', 'allowemailaddresses', get_string('allowemailaddresses', 'core_admin'), ['size' => 60], PARAM_NOTAGS);
-        $mform->addGroup($group, 'allowemailaddresses_group',
-            '<div>' .get_string('allowemailaddresses', 'core_admin') . '<div class="small text-muted">allowemailaddresses</div></div>',
-            '<div style="width: 100%"/>', false);
+        $mform->addGroup(
+            $group,
+            'allowemailaddresses_group',
+            '<div>' . get_string('allowemailaddresses', 'core_admin') . '<div class="small text-muted">allowemailaddresses</div></div>',
+            '<div style="width: 100%"/>',
+            false
+        );
         $mform->setType('allowemailaddresses', PARAM_NOTAGS);
         if (config::is_overridden($tenant->id, 'core', 'allowemailaddresses')) {
             $mform->setDefault('allowemailaddresses_override', '1');
@@ -142,9 +154,13 @@ final class auth_edit extends \tool_mulib\local\dialog_form {
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'denyemailaddresses_override', get_string('config_override_value', 'tool_mutenancy', $defaultstr));
         $group[] = $mform->createElement('text', 'denyemailaddresses', get_string('denyemailaddresses', 'core_admin'), ['size' => 60]);
-        $mform->addGroup($group, 'denyemailaddresses_group',
-            '<div>' .get_string('denyemailaddresses', 'core_admin') . '<div class="small text-muted">denyemailaddresses</div></div>',
-            '<div style="width: 100%"/>', false);
+        $mform->addGroup(
+            $group,
+            'denyemailaddresses_group',
+            '<div>' . get_string('denyemailaddresses', 'core_admin') . '<div class="small text-muted">denyemailaddresses</div></div>',
+            '<div style="width: 100%"/>',
+            false
+        );
         $mform->setType('denyemailaddresses', PARAM_NOTAGS);
         if (config::is_overridden($tenant->id, 'core', 'denyemailaddresses')) {
             $mform->setDefault('denyemailaddresses_override', '1');
@@ -165,9 +181,13 @@ final class auth_edit extends \tool_mulib\local\dialog_form {
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'auth_instructions_override', get_string('config_override_value', 'tool_mutenancy', $defaultstr));
         $group[] = $mform->createElement('editor', 'auth_instructions', get_string('instructions', 'core_auth'), ['rows' => 6, 'autosave' => false]);
-        $mform->addGroup($group, 'auth_instructions_group',
-            '<div>' .get_string('instructions', 'core_auth') . '<div class="small text-muted">auth_instructions</div></div>',
-            '<div style="width: 100%"/>', false);
+        $mform->addGroup(
+            $group,
+            'auth_instructions_group',
+            '<div>' . get_string('instructions', 'core_auth') . '<div class="small text-muted">auth_instructions</div></div>',
+            '<div style="width: 100%"/>',
+            false
+        );
         if (config::is_overridden($tenant->id, 'core', 'auth_instructions')) {
             $mform->setDefault('auth_instructions_override', '1');
             $mform->setDefault('auth_instructions', ['text' => config::get($tenant->id, 'core', 'auth_instructions'), 'format' => FORMAT_HTML]);

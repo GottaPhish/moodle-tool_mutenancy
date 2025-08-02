@@ -39,7 +39,11 @@ final class tenant_managers extends \tool_mulib\local\dialog_form {
         $mform->addElement('html', $info);
 
         form_tenant_managers_userids::add_form_element(
-            $mform, ['tenantid' => $tenant->id], 'userids', get_string('tenant_managers', 'tool_mutenancy'));
+            $mform,
+            ['tenantid' => $tenant->id],
+            'userids',
+            get_string('tenant_managers', 'tool_mutenancy')
+        );
         $mform->setDefault('userids', $userids);
 
         $mform->addElement('hidden', 'id');

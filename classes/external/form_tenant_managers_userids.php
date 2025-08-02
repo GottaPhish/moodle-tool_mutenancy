@@ -73,8 +73,8 @@ final class form_tenant_managers_userids extends \tool_mulib\external\form_autoc
         $fields = \core_user\fields::for_name()->with_identity($context, false);
         $extrafields = $fields->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
 
-        list($searchsql, $searchparams) = users_search_sql($query, 'u', true, $extrafields);
-        list($sortsql, $sortparams) = users_order_by_sql('u', $query, $context);
+        [$searchsql, $searchparams] = users_search_sql($query, 'u', true, $extrafields);
+        [$sortsql, $sortparams] = users_order_by_sql('u', $query, $context);
         $params = array_merge($searchparams, $sortparams);
         $params['tenantid'] = $tenant->id;
 
@@ -97,7 +97,7 @@ final class form_tenant_managers_userids extends \tool_mulib\external\form_autoc
      * @return callable
      */
     public static function get_label_callback(array $arguments): callable {
-        return function($value) use ($arguments): string {
+        return function ($value) use ($arguments): string {
             global $DB;
 
             $record = $DB->get_record('user', ['id' => $value]);

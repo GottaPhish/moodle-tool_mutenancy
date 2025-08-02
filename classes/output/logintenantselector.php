@@ -27,7 +27,7 @@ use stdClass;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class logintenantselector implements \renderable, \core\output\named_templatable {
+final class logintenantselector implements \core\output\named_templatable, \renderable {
     /** @var \action_menu|null  */
     protected $menu = null;
 
@@ -57,7 +57,9 @@ final class logintenantselector implements \renderable, \core\output\named_templ
             $this->menu->add(
                 new \action_menu_link_secondary(
                     new \moodle_url('/login/', ['tenant' => 0]),
-                    null, format_string($site->fullname))
+                    null,
+                    format_string($site->fullname)
+                )
             );
         }
 
@@ -65,7 +67,9 @@ final class logintenantselector implements \renderable, \core\output\named_templ
             $this->menu->add(
                 new \action_menu_link_secondary(
                     new \moodle_url('/login/', ['tenant' => $tenant->idnumber]),
-                    null, format_string($tenant->sitefullname ?? $tenant->name))
+                    null,
+                    format_string($tenant->sitefullname ?? $tenant->name)
+                )
             );
         }
     }

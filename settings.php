@@ -36,24 +36,30 @@ $ADMIN->add('root', new admin_category('tool_mutenancy', new lang_string('plugin
 if (tenancy::is_active()) {
     $ADMIN->add(
         'tool_mutenancy',
-        new admin_externalpage('tool_mutenancy_tenants',
+        new admin_externalpage(
+            'tool_mutenancy_tenants',
             new lang_string('tenants', 'tool_mutenancy'),
             new moodle_url('/admin/tool/mutenancy/index.php'),
-            'tool/mutenancy:view')
+            'tool/mutenancy:view'
+        )
     );
 } else {
     $ADMIN->add(
         'tool_mutenancy',
-        new admin_externalpage('tool_mutenancy_tenants',
+        new admin_externalpage(
+            'tool_mutenancy_tenants',
             new lang_string('tenants', 'tool_mutenancy'),
             new moodle_url('/admin/tool/mutenancy/index.php'),
-            'moodle/site:config')
+            'moodle/site:config'
+        )
     );
 }
 
-$settings = new admin_settingpage('tool_mutenancy_settings',
+$settings = new admin_settingpage(
+    'tool_mutenancy_settings',
     new lang_string('settings', 'tool_mutenancy'),
-    'moodle/site:config');
+    'moodle/site:config'
+);
 
 $settings->add(new admin_setting_configtext(
     'tool_mutenancy/tenantlimit',

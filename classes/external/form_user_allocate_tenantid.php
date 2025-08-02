@@ -71,7 +71,7 @@ final class form_user_allocate_tenantid extends \tool_mulib\external\form_autoco
         self::validate_context($syscontext);
         require_capability('tool/mutenancy:allocate', $syscontext);
 
-        list($searchsql, $params) = self::get_tenant_search_query($query, 't');
+        [$searchsql, $params] = self::get_tenant_search_query($query, 't');
         $params['tenantid'] = $tenantid;
 
         $sql = "SELECT t.id, t.name
@@ -106,7 +106,7 @@ final class form_user_allocate_tenantid extends \tool_mulib\external\form_autoco
      * @return callable
      */
     public static function get_label_callback(array $arguments): callable {
-        return function($value) use ($arguments): string {
+        return function ($value) use ($arguments): string {
             global $DB;
 
             $tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $value]);

@@ -41,10 +41,14 @@ final class logos_edit extends \tool_mulib\local\dialog_form {
 
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'logo_override', get_string('config_override', 'tool_mutenancy'));
-        $mform->addGroup($group, 'logo_group',
+        $mform->addGroup(
+            $group,
+            'logo_group',
             '<div>' . get_string('logo', 'core_admin') . '<div class="small text-muted">core_admin | logo</div></div>',
-            ' ', false);
-        $mform->addElement('filemanager', 'logo', '<span class="accesshide">'.get_string('logo', 'core_admin').'</span>', null, self::get_logo_options());
+            ' ',
+            false
+        );
+        $mform->addElement('filemanager', 'logo', '<span class="accesshide">' . get_string('logo', 'core_admin') . '</span>', null, self::get_logo_options());
         if (config::is_overridden($tenant->id, 'core_admin', 'logo')) {
             $mform->setDefault('logo_override', '1');
         } else {
@@ -56,10 +60,14 @@ final class logos_edit extends \tool_mulib\local\dialog_form {
 
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'logocompact_override', get_string('config_override', 'tool_mutenancy'));
-        $mform->addGroup($group, 'logocompact_group',
+        $mform->addGroup(
+            $group,
+            'logocompact_group',
             '<div>' . get_string('logocompact', 'core_admin') . '<div class="small text-muted">core_admin | logocompact</div></div>',
-            ' ', false);
-        $mform->addElement('filemanager', 'logocompact', '<span class="accesshide">'.get_string('logocompact', 'core_admin').'</span>', null, self::get_logo_options());
+            ' ',
+            false
+        );
+        $mform->addElement('filemanager', 'logocompact', '<span class="accesshide">' . get_string('logocompact', 'core_admin') . '</span>', null, self::get_logo_options());
         if (config::is_overridden($tenant->id, 'core_admin', 'logocompact')) {
             $mform->setDefault('logocompact_override', '1');
         } else {
@@ -71,10 +79,14 @@ final class logos_edit extends \tool_mulib\local\dialog_form {
 
         $group = [];
         $group[] = $mform->createElement('advcheckbox', 'favicon_override', get_string('config_override', 'tool_mutenancy'));
-        $mform->addGroup($group, 'favicon_group',
+        $mform->addGroup(
+            $group,
+            'favicon_group',
             '<div>' . get_string('favicon', 'core_admin') . '<div class="small text-muted">core_admin | favicon</div></div>',
-            ' ', false);
-        $mform->addElement('filemanager', 'favicon', '<span class="accesshide">'.get_string('favicon', 'core_admin').'</span>', null, self::get_favicon_options());
+            ' ',
+            false
+        );
+        $mform->addElement('filemanager', 'favicon', '<span class="accesshide">' . get_string('favicon', 'core_admin') . '</span>', null, self::get_favicon_options());
         if (config::is_overridden($tenant->id, 'core_admin', 'favicon')) {
             $mform->setDefault('favicon_override', '1');
         } else {

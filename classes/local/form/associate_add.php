@@ -41,7 +41,9 @@ final class associate_add extends \tool_mulib\local\dialog_form {
 
         $tenants = $DB->get_records_menu('tool_mutenancy_tenant', ['assoccohortid' => $cohort->id], 'name ASC', 'id, name');
         $tenants = array_map('format_string', $tenants);
-        $mform->addElement('static', 'tenants',
+        $mform->addElement(
+            'static',
+            'tenants',
             (count($tenants) > 1) ? get_string('tenants', 'tool_mutenancy') : get_string('tenant', 'tool_mutenancy'),
             implode(', ', $tenants)
         );
@@ -49,7 +51,11 @@ final class associate_add extends \tool_mulib\local\dialog_form {
         $mform->addElement('static', 'cohortname', get_string('associate_cohort', 'tool_mutenancy'), format_string($cohort->name));
 
         form_associate_add_userids::add_form_element(
-            $mform, ['tenantid' => $tenant->id], 'userids', get_string('users'));
+            $mform,
+            ['tenantid' => $tenant->id],
+            'userids',
+            get_string('users')
+        );
         $mform->addRule('userids', get_string('required'), 'required', null, 'client');
 
         $mform->addElement('hidden', 'tenantid');

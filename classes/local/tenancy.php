@@ -365,9 +365,15 @@ final class tenancy {
         if (PHPUNIT_TEST) {
             $_COOKIE[$cname] = $cookie;
         } else {
-            setcookie($cname, $cookie, time() + (30 * DAYSECS),
-                $CFG->sessioncookiepath, $CFG->sessioncookiedomain,
-                is_moodle_cookie_secure(), true);
+            setcookie(
+                $cname,
+                $cookie,
+                time() + (30 * DAYSECS),
+                $CFG->sessioncookiepath,
+                $CFG->sessioncookiedomain,
+                is_moodle_cookie_secure(),
+                true
+            );
         }
     }
 

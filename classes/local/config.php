@@ -41,7 +41,6 @@ final class config {
                 return false;
             }
             return array_key_exists($name, $CFG->config_php_settings);
-
         } else {
             if (empty($CFG->forced_plugin_settings[$plugin])) {
                 return false;
@@ -155,8 +154,12 @@ final class config {
             return $result;
         }
 
-        $result = $DB->get_records_menu('tool_mutenancy_config',
-            ['tenantid' => $tenantid, 'plugin' => $plugin], 'name ASC', 'name, value');
+        $result = $DB->get_records_menu(
+            'tool_mutenancy_config',
+            ['tenantid' => $tenantid, 'plugin' => $plugin],
+            'name ASC',
+            'name, value'
+        );
         $cache->set($key, $result);
 
         return $result;
