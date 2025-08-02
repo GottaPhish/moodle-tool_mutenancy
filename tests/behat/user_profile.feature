@@ -90,16 +90,16 @@ Feature: Multi-tenancy features of user profile page
     When I click on "Allocate user" "link"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Tenant | Tenant 1 |
-    And I press dialog form button "Allocate user"
+    And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then I should see "Tenant 1" in the "Tenant member" definition list item
 
     When I click on "Allocate user" "link"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Tenant | Tenant 2 |
-    And I press dialog form button "Allocate user"
+    And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then I should see "Tenant 2" in the "Tenant member" definition list item
 
     When I click on "Allocate user" "link"
     And I click on "Tenant 2" "text" in the ".modal-dialog" "css_element"
-    And I press dialog form button "Allocate user"
+    And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then I should see "No" in the "Tenant member" definition list item

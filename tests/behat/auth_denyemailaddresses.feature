@@ -18,7 +18,7 @@ Feature: Tenant authentication setting denyemailaddresses
     And I set the following fields to these values:
       | denyemailaddresses_override   | 1                   |
       | denyemailaddresses            | yyy.example.com     |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "yyy.example.com" in the "Denied email domains" definition list item
     And I am on the "TEN3" "tool_mutenancy > Tenant authentication" page
     And I should see "Default value (zzz.example.com)" in the "Denied email domains" definition list item
@@ -26,7 +26,7 @@ Feature: Tenant authentication setting denyemailaddresses
     And I set the following fields to these values:
       | denyemailaddresses_override   | 1                   |
       | denyemailaddresses            |                     |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "Empty" in the "Denied email domains" definition list item
     And I log out
 
@@ -207,7 +207,7 @@ Feature: Tenant authentication setting denyemailaddresses
     And I click on "Edit" "link" in the "Prvni Student" "table_row"
     When I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Email address | student1@zzz.example.com |
-    And I press dialog form button "Update account"
+    And I click on "Update account" "button" in the ".modal-dialog" "css_element"
     Then the following should exist in the "reportbuilder-table" table:
       | First name    | Email address            | Tenant member |
       | Prvni Student | student1@zzz.example.com | Yes           |

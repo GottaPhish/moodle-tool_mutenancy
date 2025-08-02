@@ -17,7 +17,7 @@ Feature: Tenant authentication setting showloginform
     And I set the following fields to these values:
       | showloginform_override   | 1 |
       | showloginform            | 0 |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "No" in the "Display manual login form" definition list item
     And I am on the "TEN3" "tool_mutenancy > Tenant authentication" page
     And I should see "Default value (Yes)" in the "Display manual login form" definition list item
@@ -25,7 +25,7 @@ Feature: Tenant authentication setting showloginform
     And I set the following fields to these values:
       | showloginform_override   | 1 |
       | showloginform            | 1 |
-    And I press dialog form button "Update"
+    And I click on "Update" "button" in the ".modal-dialog" "css_element"
     And I should see "Yes" in the "Display manual login form" definition list item
     And I log out
 

@@ -20,25 +20,25 @@ Feature: Tenant switching
     And I should see "Acceptance test site" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     And I should see "Change required" in the ".modal-dialog" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 1         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS1" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     And I should see "Change required" in the ".modal-dialog" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 2         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS2" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | No tenant        |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Acceptance test site" in the ".navbar" "css_element"
 
   @javascript
@@ -66,19 +66,19 @@ Feature: Tenant switching
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 1         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS1" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 2         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS2" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | No tenant        |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Acceptance test site" in the ".navbar" "css_element"
 
   @javascript
@@ -102,23 +102,23 @@ Feature: Tenant switching
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 1         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS1" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 2         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS2" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | Tenant 3         |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "TSS3" in the ".navbar" "css_element"
 
     When I click on "Switch tenant" "link" in the ".navbar" "css_element"
     And I set the following fields to these values:
       | Tenant      | No tenant        |
-    And I press dialog form button "Switch tenant"
+    And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Acceptance test site" in the ".navbar" "css_element"
