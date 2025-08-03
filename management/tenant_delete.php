@@ -16,9 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-use tool_mutenancy\local\tenant;
-
 /**
  * Delete tenant.
  *
@@ -27,6 +24,9 @@ use tool_mutenancy\local\tenant;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+use tool_mutenancy\local\tenant;
+
 /** @var moodle_database $DB */
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
@@ -34,7 +34,7 @@ use tool_mutenancy\local\tenant;
 
 define('AJAX_SCRIPT', true);
 
-require(__DIR__.'/../../../../config.php');
+require(__DIR__ . '/../../../../config.php');
 
 $tenantid = required_param('id', PARAM_INT);
 

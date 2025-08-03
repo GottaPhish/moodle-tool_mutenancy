@@ -16,9 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-use tool_mutenancy\local\config;
-
 /**
  * Update tenant logos overrides.
  *
@@ -27,6 +24,9 @@ use tool_mutenancy\local\config;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+use tool_mutenancy\local\config;
+
 /** @var moodle_database $DB */
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
@@ -34,8 +34,8 @@ use tool_mutenancy\local\config;
 
 define('AJAX_SCRIPT', true);
 
-require(__DIR__.'/../../../../config.php');
-require_once($CFG->libdir.'/filelib.php');
+require(__DIR__ . '/../../../../config.php');
+require_once($CFG->libdir . '/filelib.php');
 
 $tenantid = required_param('id', PARAM_INT);
 
@@ -126,7 +126,8 @@ if ($data = $form->get_data()) {
         }
     }
 
-    if (config::is_overridden($tenant->id, 'core_admin', 'logo')
+    if (
+        config::is_overridden($tenant->id, 'core_admin', 'logo')
         || config::is_overridden($tenant->id, 'logocompact', 'core_admin')
         || config::is_overridden($tenant->id, 'favicon', 'core_admin')
     ) {

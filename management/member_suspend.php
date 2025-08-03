@@ -16,8 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-
 /**
  * Suspend tenant member account.
  *
@@ -28,6 +26,8 @@ use tool_mutenancy\local\tenancy;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
 /** @var moodle_database $DB */
@@ -36,7 +36,7 @@ use tool_mutenancy\local\tenancy;
 
 define('AJAX_SCRIPT', true);
 
-require(__DIR__.'/../../../../config.php');
+require(__DIR__ . '/../../../../config.php');
 
 $userid = required_param('id', PARAM_INT);
 
@@ -54,7 +54,8 @@ $PAGE->set_context($personalcontext);
 
 $user = $DB->get_record('user', ['id' => $userid]);
 
-if (!$user || $user->deleted || !$user->tenantid || isguestuser($user)
+if (
+    !$user || $user->deleted || !$user->tenantid || isguestuser($user)
     || is_siteadmin($user) || $USER->id == $user->id || $user->mnethostid != $CFG->mnet_localhost_id
 ) {
     throw new moodle_exception('invaliduserid');
