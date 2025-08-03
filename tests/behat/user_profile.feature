@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Multi-tenancy features of user profile page
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -24,7 +24,6 @@ Feature: Multi-tenancy features of user profile page
       | TEN1   | manager1 |
       | TEN2   | manager2 |
 
-  @javascript
   Scenario: Admin may see tenant membership and tenant association on user profile page
     Given I log in as "admin"
 
@@ -44,7 +43,6 @@ Feature: Multi-tenancy features of user profile page
     Then I should see "Tenant 1" in the "Tenant member" definition list item
     And I should not see "Associated with tenants"
 
-  @javascript
   Scenario: Tenant manager may see tenant membership and tenant association on user profile page
     Given  I log in as "manager1"
 
@@ -66,7 +64,6 @@ Feature: Multi-tenancy features of user profile page
     When I am on the profile page of user "student2"
     Then I should see "The details of this user are not available to you"
 
-  @javascript
   Scenario: Tenant admin may allocate tenant members on profile page
     Given the following "roles" exist:
       | name            | shortname |

@@ -221,8 +221,8 @@ final class users extends system_report {
         $cohort = $this->cohort;
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_update.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('edit', 'moodle'), 't/edit');
-        $link->set_dialog_size('xl');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('edit', 'moodle'), 't/edit');
+        $link->set_form_size('xl');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row): bool {
                 global $USER;
@@ -246,8 +246,8 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_suspend.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('suspenduser', 'admin'), 't/show');
-        $link->set_dialog_size('sm');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('suspenduser', 'admin'), 't/show');
+        $link->set_form_size('sm');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row): bool {
                 global $USER;
@@ -264,8 +264,8 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_unsuspend.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('unsuspenduser', 'admin'), 't/hide');
-        $link->set_dialog_size('sm');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('unsuspenduser', 'admin'), 't/hide');
+        $link->set_form_size('sm');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row) use ($tenant): bool {
                 if (!$row->tenantid) {
@@ -278,8 +278,8 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_unlock.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('unlockaccount', 'admin'), 't/unlock');
-        $link->set_dialog_size('sm');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('unlockaccount', 'admin'), 't/unlock');
+        $link->set_form_size('sm');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row) use ($tenant): bool {
                 if (!$row->tenantid) {
@@ -293,8 +293,8 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_delete.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('delete', 'core'), 't/delete');
-        $link->set_dialog_size('sm');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('delete', 'core'), 't/delete');
+        $link->set_form_size('sm');
         $this->add_action($link->create_report_action(['class' => 'text-danger'])
             ->add_callback(static function (\stdclass $row): bool {
                 global $USER;
@@ -310,7 +310,7 @@ final class users extends system_report {
         $this->add_action_divider();
 
         $url = new moodle_url('/admin/tool/mutenancy/management/associate_remove.php', ['id' => ':id', 'tenantid' => $this->tenant->id]);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('associate_remove', 'tool_mutenancy'), 'e/cancel');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('associate_remove', 'tool_mutenancy'), 'e/cancel');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row) use ($cohort): bool {
                 global $DB;
@@ -332,7 +332,7 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/user_allocate.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('user_allocate', 'tool_mutenancy'), 'i/switch');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('user_allocate', 'tool_mutenancy'), 'i/switch');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row) use ($contextsystem): bool {
                 global $USER;
@@ -346,8 +346,8 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_confirm.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('confirmaccount', 'core'), 't/check');
-        $link->set_dialog_size('sm');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('confirmaccount', 'core'), 't/check');
+        $link->set_form_size('sm');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row): bool {
                 if (!$row->tenantid) {
@@ -360,8 +360,8 @@ final class users extends system_report {
             }));
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_resend.php', ['id' => ':id']);
-        $link = new \tool_mulib\output\dialog_form\link($url, get_string('resendemail', 'core'), 't/email');
-        $link->set_dialog_size('sm');
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('resendemail', 'core'), 't/email');
+        $link->set_form_size('sm');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row) use ($tenant): bool {
                 if (!$row->tenantid) {

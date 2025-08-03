@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant Boost theme settings
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -24,7 +24,7 @@ Feature: Tenant Boost theme settings
     And I press "Clear theme caches"
     And I log out
 
-  @javascript @_file_upload @_visual_check
+  @_file_upload @_visual_check
   Scenario: Tenant managers may override safe Boost theme settings for tenants
     Given I log in as "manager"
 
@@ -158,7 +158,7 @@ Feature: Tenant Boost theme settings
     When I am on the "TEN3" "tool_mutenancy > Tenant login" page
     Then I perform a visual check "I should see Yellow background"
 
-  @javascript @_file_upload @_visual_check
+  @_file_upload @_visual_check
   Scenario: Admins may override unsafe Boost theme settings for tenants
     Given I log in as "admin"
 

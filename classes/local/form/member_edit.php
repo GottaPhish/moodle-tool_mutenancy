@@ -33,7 +33,7 @@ use webservice;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class member_edit extends \tool_mulib\local\dialog_form {
+final class member_edit extends \tool_mulib\local\ajax_form {
     #[\Override]
     public function definition() {
         global $CFG;
@@ -144,7 +144,7 @@ final class member_edit extends \tool_mulib\local\dialog_form {
             $mform->removeElement('imagealt');
             $mform->removeElement('moodle_picture');
         } else {
-            $mform->setExpanded('moodle_picture', false); // Do not expand anything to fit dialog_form.
+            $mform->setExpanded('moodle_picture', false); // Do not expand anything to fit ajax form.
         }
 
         // Next the customisable profile fields.

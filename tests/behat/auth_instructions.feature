@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant authentication setting instructions
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -18,7 +18,6 @@ Feature: Tenant authentication setting instructions
     And the following config values are set as admin:
       | auth_instructions | Welcome to main site |
 
-  @javascript
   Scenario: Tenant managers may configure tenant login instructions
     Given I log in as "manager1"
     And I am on the "TEN1" "tool_mutenancy > Tenant authentication" page

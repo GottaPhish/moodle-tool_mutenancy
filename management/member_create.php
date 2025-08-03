@@ -33,10 +33,8 @@ use tool_mutenancy\local\tenancy;
 /** @var moodle_database $DB */
 /** @var stdClass $USER */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
 require_once($CFG->libdir.'/gdlib.php');
 require_once($CFG->libdir.'/adminlib.php');
@@ -94,7 +92,7 @@ $userform = new \tool_mutenancy\local\form\member_edit(null, [
 ]);
 
 if ($userform->is_cancelled()) {
-    redirect($returnurl);
+    $userform->ajax_form_cancelled($returnurl);
 } else if ($usernew = $userform->get_data()) {
     unset($usernew->id);
     $usernew->auth = 'manual';
@@ -150,13 +148,7 @@ if ($userform->is_cancelled()) {
     // Trigger create event, after all fields are stored.
     \core\event\user_created::create_from_userid($user->id)->trigger();
 
-    $userform->redirect_submitted($returnurl);
+    $userform->ajax_form_submitted($returnurl);
 }
 
-$PAGE->set_heading(get_string('member_create', 'tool_mutenancy'));
-
-echo $OUTPUT->header();
-
-echo $userform->render();
-
-echo $OUTPUT->footer();
+$userform->ajax_form_render(get_string('member_create', 'tool_mutenancy'));

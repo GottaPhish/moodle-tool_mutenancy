@@ -26,7 +26,7 @@ namespace tool_mutenancy\local\form;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class member_suspend extends \tool_mulib\local\dialog_form {
+final class member_suspend extends \tool_mulib\local\ajax_form {
     #[\Override]
     protected function definition(): void {
         $mform = $this->_form;

@@ -28,7 +28,7 @@ use tool_mutenancy\external\form_associate_remove_userids;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class associate_remove extends \tool_mulib\local\dialog_form {
+final class associate_remove extends \tool_mulib\local\ajax_form {
     #[\Override]
     protected function definition(): void {
         global $DB;

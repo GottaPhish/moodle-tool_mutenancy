@@ -31,10 +31,8 @@ use tool_mutenancy\local\tenancy;
 /** @var core_renderer $OUTPUT */
 /** @var stdClass $USER */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
 
 $userid = required_param('id', PARAM_INT);
@@ -67,7 +65,7 @@ if ($form->is_cancelled()) {
     } else {
         $returnurl = new moodle_url('/admin/tool/user.php');
     }
-    redirect($returnurl);
+    $form->ajax_form_cancelled($returnurl);
 }
 
 if ($data = $form->get_data()) {
@@ -78,12 +76,7 @@ if ($data = $form->get_data()) {
     } else {
         $returnurl = new moodle_url('/admin/tool/user.php');
     }
-    $form->redirect_submitted($returnurl);
+    $form->ajax_form_submitted($returnurl);
 }
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('user_allocate', 'tool_mutenancy'));
-
-echo $form->render();
-
-echo $OUTPUT->footer();
+$form->ajax_form_render(get_string('user_allocate', 'tool_mutenancy'));

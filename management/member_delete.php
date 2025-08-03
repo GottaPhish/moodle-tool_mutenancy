@@ -34,10 +34,8 @@ use tool_mutenancy\local\tenancy;
 /** @var stdClass $USER */
 /** @var stdClass $CFG */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
 
 $userid = required_param('id', PARAM_INT);
@@ -71,17 +69,12 @@ if ($user->deleted) {
 $form = new \tool_mutenancy\local\form\member_delete(null, ['user' => $user]);
 
 if ($form->is_cancelled()) {
-    redirect($returnurl);
+    $form->ajax_form_cancelled($returnurl);
 }
 
 if ($data = $form->get_data()) {
     \tool_mutenancy\local\member::delete($user->id);
-    $form->redirect_submitted($returnurl);
+    $form->ajax_form_submitted($returnurl);
 }
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('delete', 'core'));
-
-echo $form->render();
-
-echo $OUTPUT->footer();
+$form->ajax_form_render(get_string('delete', 'core'));
