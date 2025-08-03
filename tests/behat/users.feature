@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant members and associated users section
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -13,7 +13,6 @@ Feature: Tenant members and associated users section
       | tenant | user     |
       | TEN1   | manager1 |
 
-  @javascript
   Scenario: Tenant manager may add, update and delete tenant members
     Given I log in as "manager1"
     And I am on the "TEN1" "tool_mutenancy > Tenant users" page

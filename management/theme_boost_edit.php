@@ -33,11 +33,10 @@ use tool_mutenancy\local\config;
 /** @var core_renderer $OUTPUT */
 /** @var stdClass $CFG */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
+
 require_once($CFG->libdir.'/filelib.php');
 
 $tenantid = required_param('id', PARAM_INT);
@@ -73,7 +72,7 @@ file_prepare_draft_area($currentdata->loginbackgroundimage, $context->id, 'theme
 $form = new \tool_mutenancy\local\form\theme_boost_edit(null, ['currentdata' => $currentdata, 'tenant' => $tenant]);
 
 if ($form->is_cancelled()) {
-    redirect($returnurl);
+    $form->ajax_form_cancelled($returnurl);
 }
 
 if ($data = $form->get_data()) {
@@ -151,12 +150,7 @@ if ($data = $form->get_data()) {
 
     \tool_mutenancy\event\appearance_updated::create_from_tenant($tenant)->trigger();
 
-    $form->redirect_submitted($returnurl);
+    $form->ajax_form_submitted($returnurl);
 }
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('update'));
-
-echo $form->render();
-
-echo $OUTPUT->footer();
+$form->ajax_form_render(get_string('update'));

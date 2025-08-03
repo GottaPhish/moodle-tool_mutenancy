@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant authentication setting allowemailaddresses
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -30,7 +30,6 @@ Feature: Tenant authentication setting allowemailaddresses
     And I should see "Empty" in the "Allowed email domains" definition list item
     And I log out
 
-  @javascript
   Scenario: Users may self register with email from allowemailaddresses overridden for tenant
     When I am on the "0" "tool_mutenancy > Tenant login" page
     And I click on "Create new account" "link"
@@ -131,7 +130,6 @@ Feature: Tenant authentication setting allowemailaddresses
     And I should see "TSS3" in the ".navbar" "css_element"
     And I log out
 
-  @javascript
   Scenario: Users may change email to value from allowemailaddresses overridden for tenant
     Given the following "users" exist:
       | username | firstname | lastname | email                | tenant |
@@ -192,7 +190,6 @@ Feature: Tenant authentication setting allowemailaddresses
     And I confirm changed email for "student3"
     And I should see "was successfully updated to student3@zzz.example.com"
 
-  @javascript
   Scenario: Tenant managers may change emails ignoring allowemailaddresses
     Given the following "users" exist:
       | username | firstname | lastname | email                | tenant |

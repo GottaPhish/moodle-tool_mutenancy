@@ -33,10 +33,8 @@ use tool_mutenancy\local\tenancy;
 /** @var moodle_database $DB */
 /** @var stdClass $USER */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
 require_once($CFG->libdir.'/gdlib.php');
 require_once($CFG->libdir.'/filelib.php');
@@ -114,7 +112,7 @@ $userform = new \tool_mutenancy\local\form\member_edit(null, [
 $returnurl = new moodle_url('/admin/tool/mutenancy/tenant_users.php', ['id' => $user->tenantid]);
 
 if ($userform->is_cancelled()) {
-    redirect($returnurl);
+    $userform->ajax_form_cancelled($returnurl);
 } else if ($usernew = $userform->get_data()) {
     $user = $DB->get_record('user', ['id' => $user->id, 'deleted' => 0], '*', MUST_EXIST);
 
@@ -193,13 +191,9 @@ if ($userform->is_cancelled()) {
     // Trigger update event, after all fields are stored.
     \core\event\user_updated::create_from_userid($user->id)->trigger();
 
-    $userform->redirect_submitted($returnurl);
+    $userform->ajax_form_submitted($returnurl);
 }
 
 $PAGE->set_heading(fullname($user, true));
 
-echo $OUTPUT->header();
-
-echo $userform->render();
-
-echo $OUTPUT->footer();
+$userform->ajax_form_render(get_string('member_update', 'tool_mutenancy'));

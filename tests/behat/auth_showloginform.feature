@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant authentication setting showloginform
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -29,7 +29,6 @@ Feature: Tenant authentication setting showloginform
     And I should see "Yes" in the "Display manual login form" definition list item
     And I log out
 
-  @javascript
   Scenario: Users can see login form
     When I am on the "0" "tool_mutenancy > Tenant login" page
     Then I should see "Log in" in the "#loginbtn" "css_element"

@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant administration
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -27,7 +27,6 @@ Feature: Tenant administration
       | Cohort 1 | cohort1   |
       | Cohort 2 | cohort2   |
 
-  @javascript
   Scenario: System admin may activate multi-tenancy
     Given I skip tests if multi-tenancy is activated
     And I log in as "admin"
@@ -38,7 +37,6 @@ Feature: Tenant administration
     Then I should see "Nothing to display"
     And I should see "De-activate multi-tenancy"
 
-  @javascript
   Scenario: System admin may deactivate multi-tenancy
     Given the multi-tenancy is activated
     And I log in as "admin"
@@ -48,7 +46,6 @@ Feature: Tenant administration
     And I click on "De-activate multi-tenancy" "button" in the ".modal-dialog" "css_element"
     Then I should see "Activate multi-tenancy"
 
-  @javascript
   Scenario: Tenant admin may create, update and delete tenants
     Given the multi-tenancy is activated
     And I log in as "tadmin"
@@ -191,7 +188,6 @@ Feature: Tenant administration
     Then I should see "Tenant 1"
     And I should not see "Tenant 2"
 
-  @javascript
   Scenario: Tenant admin may assign tenant managers
     Given the multi-tenancy is activated
     And the following "tool_mutenancy > tenants" exist:
@@ -220,7 +216,6 @@ Feature: Tenant administration
     And I click on "Update" "button" in the ".modal-dialog" "css_element"
     Then I should see "First Manager" in the "Tenant managers" definition list item
 
-  @javascript
   Scenario: Tenant admin may set and change associated users cohort
     Given the multi-tenancy is activated
     And the following "tool_mutenancy > tenants" exist:

@@ -32,10 +32,8 @@ use tool_mutenancy\local\tenant;
 /** @var core_renderer $OUTPUT */
 /** @var stdClass $USER */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
 
 $tenantid = required_param('id', PARAM_INT);
@@ -67,7 +65,7 @@ if ($USER->tenantid == $tenant->id || !$tenant->archived) {
 $form = new \tool_mutenancy\local\form\tenant_delete(null, ['tenant' => $tenant]);
 
 if ($form->is_cancelled()) {
-    redirect($returnurl);
+    $form->ajax_form_cancelled($returnurl);
 }
 
 if ($data = $form->get_data()) {
@@ -78,12 +76,7 @@ if ($data = $form->get_data()) {
     } else {
         $returnurl = new moodle_url('/');
     }
-    $form->redirect_submitted($returnurl);
+    $form->ajax_form_submitted($returnurl);
 }
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('tenant_delete', 'tool_mutenancy'));
-
-echo $form->render();
-
-echo $OUTPUT->footer();
+$form->ajax_form_render(get_string('tenant_delete', 'tool_mutenancy'));

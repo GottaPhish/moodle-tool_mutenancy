@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Multi-tenancy features of browse users page
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -18,7 +18,6 @@ Feature: Multi-tenancy features of browse users page
       | student2 | Druhy     | Student  | student2@example.com | TEN2   |
       | student3 | Treti     | Student  | student3@example.com | TEN3   |
 
-  @javascript
   Scenario: Admin may filters users by tenants on browse users page
     Given I log in as "admin"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
@@ -77,7 +76,6 @@ Feature: Multi-tenancy features of browse users page
     Then I should see "Tenant 1" in the "Tenant name" definition list item
     And I should see "TEN1" in the "Tenant ID" definition list item
 
-  @javascript
   Scenario: Tenant admin may allocate tenant members on browse users page
     Given the following "roles" exist:
       | name            | shortname |

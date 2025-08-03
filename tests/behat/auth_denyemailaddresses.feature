@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant authentication setting denyemailaddresses
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -30,7 +30,6 @@ Feature: Tenant authentication setting denyemailaddresses
     And I should see "Empty" in the "Denied email domains" definition list item
     And I log out
 
-  @javascript
   Scenario: Users may not self register with email from denyemailaddresses overridden for tenant
     When I am on the "0" "tool_mutenancy > Tenant login" page
     And I click on "Create new account" "link"
@@ -131,7 +130,6 @@ Feature: Tenant authentication setting denyemailaddresses
     And I should see "TSS3" in the ".navbar" "css_element"
     And I log out
 
-  @javascript
   Scenario: Users may not change email to value from denyemailaddresses overridden for tenant
     Given the following "users" exist:
       | username | firstname | lastname | email                | tenant |
@@ -192,7 +190,6 @@ Feature: Tenant authentication setting denyemailaddresses
     And I confirm changed email for "student3"
     And I should see "was successfully updated to student3@zzz.example.com"
 
-  @javascript
   Scenario: Tenant managers may change emails ignoring denyemailaddresses
     Given the following "users" exist:
       | username | firstname | lastname | email                | tenant |

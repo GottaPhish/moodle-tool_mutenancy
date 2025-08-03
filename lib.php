@@ -111,7 +111,7 @@ function tool_mutenancy_myprofile_navigation(\core_user\output\myprofile\tree $t
         $tcount = $DB->count_records('tool_mutenancy_tenant', []);
         if ($tcount && has_capability('tool/mutenancy:allocate', $syscontext)) {
             $url = new moodle_url('/admin/tool/mutenancy/management/user_allocate.php', ['id' => $user->id]);
-            $link = new \tool_mulib\output\dialog_form\icon($url, get_string('user_allocate', 'tool_mutenancy'), 'i/switch');
+            $link = new \tool_mulib\output\ajax_form\icon($url, get_string('user_allocate', 'tool_mutenancy'), 'i/switch');
             $allocate = $OUTPUT->render($link);
         }
     }
@@ -161,14 +161,14 @@ function tool_mutenancy_render_navbar_output(renderer_base $renderer): string {
     }
 
     $url = new moodle_url('/admin/tool/mutenancy/tenant_switch.php');
-    $icon = new \tool_mulib\output\dialog_form\icon(
+    $icon = new \tool_mulib\output\ajax_form\icon(
         $url,
         get_string('tenant_switch', 'tool_mutenancy'),
         'switch',
         'tool_mutenancy'
     );
-    $icon->set_dialog_size('sm');
-    $icon->set_class('nav-link icon-no-margin'); // Use the same styling as notification.
+    $icon->set_form_size('sm');
+    $icon->set_classes(['nav-link', 'icon-no-margin']); // Use the same styling as notification.
 
     return $renderer->render($icon);
 }

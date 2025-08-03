@@ -27,7 +27,7 @@ use tool_mutenancy\external\form_user_allocate_tenantid;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class user_allocate extends \tool_mulib\local\dialog_form {
+final class user_allocate extends \tool_mulib\local\ajax_form {
     #[\Override]
     protected function definition(): void {
         $mform = $this->_form;

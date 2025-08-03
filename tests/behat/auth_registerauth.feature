@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant authentication setting registerauth
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -29,7 +29,6 @@ Feature: Tenant authentication setting registerauth
     And I should see "Email-based self-registration" in the "Self registration" definition list item
     And I log out
 
-  @javascript
   Scenario: Users may self register as tenant members
     When I am on the "0" "tool_mutenancy > Tenant login" page
     And I click on "Create new account" "link"

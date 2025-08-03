@@ -1,4 +1,4 @@
-@tool @tool_mutenancy @MuTMS
+@tool @tool_mutenancy @MuTMS @javascript
 Feature: Tenant switching
   Background:
     Given unnecessary Admin bookmarks block gets deleted
@@ -14,7 +14,6 @@ Feature: Tenant switching
       | Tenant 3 | TEN3     | Tent Site full 3 | TSS3          | 0        |             |
       | Tenant 4 | TEN4     | Tent Site full 4 | TSS4          | 1        | cohort4     |
 
-  @javascript
   Scenario: Admin may switch to any active tenant
     Given I log in as "admin"
     And I should see "Acceptance test site" in the ".navbar" "css_element"
@@ -41,7 +40,6 @@ Feature: Tenant switching
     And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Acceptance test site" in the ".navbar" "css_element"
 
-  @javascript
   Scenario: Tenant switcher may switch to associated tenants
     Given the following "roles" exist:
       | name            | shortname |
@@ -81,7 +79,6 @@ Feature: Tenant switching
     And I click on "Switch tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Acceptance test site" in the ".navbar" "css_element"
 
-  @javascript
   Scenario: Tenant viewer may switch to any active tenant
     Given the following "roles" exist:
       | name          | shortname |

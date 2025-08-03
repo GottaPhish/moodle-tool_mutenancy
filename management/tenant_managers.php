@@ -31,10 +31,8 @@ use tool_mutenancy\local\manager;
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
 
-// phpcs:ignoreFile moodle.Files.MoodleInternal.MoodleInternalGlobalState
-if (!empty($_SERVER['HTTP_X_MULIB_DIALOG_FORM_REQUEST'])) {
-    define('AJAX_SCRIPT', true);
-}
+define('AJAX_SCRIPT', true);
+
 require(__DIR__.'/../../../../config.php');
 
 $tenantid = required_param('id', PARAM_INT);
@@ -59,17 +57,12 @@ $managers = \tool_mutenancy\local\manager::get_manager_users($tenant->id);
 $form = new \tool_mutenancy\local\form\tenant_managers(null, ['tenant' => $tenant, 'userids' => array_keys($managers)]);
 
 if ($form->is_cancelled()) {
-    redirect($returnurl);
+    $form->ajax_form_cancelled($returnurl);
 }
 
 if ($data = $form->get_data()) {
     manager::set_userids($tenant->id, $data->userids);
-    $form->redirect_submitted($returnurl);
+    $form->ajax_form_submitted($returnurl);
 }
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('tenant_managers', 'tool_mutenancy'));
-
-echo $form->render();
-
-echo $OUTPUT->footer();
+$form->ajax_form_render(get_string('tenant_managers', 'tool_mutenancy'));
