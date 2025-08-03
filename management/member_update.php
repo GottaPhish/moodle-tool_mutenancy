@@ -16,8 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-
 /**
  * Update tenant member account.
  *
@@ -28,6 +26,8 @@ use tool_mutenancy\local\tenancy;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
 /** @var moodle_database $DB */
@@ -35,15 +35,15 @@ use tool_mutenancy\local\tenancy;
 
 define('AJAX_SCRIPT', true);
 
-require(__DIR__.'/../../../../config.php');
-require_once($CFG->libdir.'/gdlib.php');
-require_once($CFG->libdir.'/filelib.php');
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot.'/user/editlib.php');
-require_once($CFG->dirroot.'/user/profile/lib.php');
-require_once($CFG->dirroot.'/user/lib.php');
-require_once($CFG->dirroot.'/webservice/lib.php');
+require(__DIR__ . '/../../../../config.php');
+require_once($CFG->libdir . '/gdlib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/adminlib.php');
+require_once($CFG->dirroot . '/user/editlib.php');
+require_once($CFG->dirroot . '/user/profile/lib.php');
+require_once($CFG->dirroot . '/user/lib.php');
+require_once($CFG->dirroot . '/webservice/lib.php');
 
 $userid = required_param('id', PARAM_INT);
 
@@ -58,7 +58,8 @@ require_capability('tool/mutenancy:memberupdate', $personalcontext);
 
 $user = $DB->get_record('user', ['id' => $userid]);
 
-if (!$user || $user->deleted || !$user->tenantid || isguestuser($user)
+if (
+    !$user || $user->deleted || !$user->tenantid || isguestuser($user)
     || is_siteadmin($user) || $USER->id == $user->id || $user->mnethostid != $CFG->mnet_localhost_id
 ) {
     throw new moodle_exception('invaliduserid');
@@ -153,7 +154,7 @@ if ($userform->is_cancelled()) {
     }
 
     // Force logout if user just suspended.
-    if (isset($usernew->suspended) and $usernew->suspended and !$user->suspended) {
+    if (isset($usernew->suspended) && $usernew->suspended && !$user->suspended) {
         \core\session\manager::destroy_user_sessions($user->id);
     }
 

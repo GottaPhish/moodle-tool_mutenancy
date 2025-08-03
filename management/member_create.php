@@ -16,8 +16,6 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-use tool_mutenancy\local\tenancy;
-
 /**
  * Create tenant member account.
  *
@@ -28,6 +26,8 @@ use tool_mutenancy\local\tenancy;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_mutenancy\local\tenancy;
+
 /** @var moodle_page $PAGE */
 /** @var core_renderer $OUTPUT */
 /** @var moodle_database $DB */
@@ -35,15 +35,15 @@ use tool_mutenancy\local\tenancy;
 
 define('AJAX_SCRIPT', true);
 
-require(__DIR__.'/../../../../config.php');
-require_once($CFG->libdir.'/gdlib.php');
-require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->libdir.'/filelib.php');
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->dirroot.'/user/editlib.php');
-require_once($CFG->dirroot.'/user/profile/lib.php');
-require_once($CFG->dirroot.'/user/lib.php');
-require_once($CFG->dirroot.'/webservice/lib.php');
+require(__DIR__ . '/../../../../config.php');
+require_once($CFG->libdir . '/gdlib.php');
+require_once($CFG->libdir . '/adminlib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->dirroot . '/user/editlib.php');
+require_once($CFG->dirroot . '/user/profile/lib.php');
+require_once($CFG->dirroot . '/user/lib.php');
+require_once($CFG->dirroot . '/webservice/lib.php');
 
 $tenantid = required_param('tenantid', PARAM_INT);
 
@@ -109,7 +109,7 @@ if ($userform->is_cancelled()) {
 
     $usernew = file_postupdate_standard_editor($usernew, 'description', [], context_system::instance());
 
-    if ($createpassword or empty($usernew->newpassword)) {
+    if ($createpassword || empty($usernew->newpassword)) {
         $usernew->password = '';
         $createpassword = true;
     } else {
