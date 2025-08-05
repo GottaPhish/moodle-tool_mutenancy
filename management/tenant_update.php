@@ -75,4 +75,4 @@ if ($data = $form->get_data()) {
     $form->ajax_form_submitted($returnurl);
 }
 
-$form->ajax_form_render(get_string('tenant_update', 'tool_mutenancy'));
+$form->ajax_form_render();
