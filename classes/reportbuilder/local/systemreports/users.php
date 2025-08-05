@@ -222,6 +222,7 @@ final class users extends system_report {
 
         $url = new moodle_url('/admin/tool/mutenancy/management/member_update.php', ['id' => ':id']);
         $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('edit', 'moodle'), 't/edit');
+        $link->set_modal_title(get_string('member_update', 'tool_mutenancy'));
         $link->set_form_size('xl');
         $this->add_action($link->create_report_action()
             ->add_callback(static function (\stdclass $row): bool {
