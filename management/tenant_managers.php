@@ -54,7 +54,11 @@ $PAGE->set_context($context);
 $returnurl = new moodle_url('/admin/tool/mutenancy/tenant.php', ['id' => $tenant->id]);
 
 $managers = \tool_mutenancy\local\manager::get_manager_users($tenant->id);
-$form = new \tool_mutenancy\local\form\tenant_managers(null, ['tenant' => $tenant, 'userids' => array_keys($managers)]);
+$form = new \tool_mutenancy\local\form\tenant_managers(null, [
+    'tenant' => $tenant,
+    'userids' => array_keys($managers),
+    'context' => $context,
+]);
 
 if ($form->is_cancelled()) {
     $form->ajax_form_cancelled($returnurl);

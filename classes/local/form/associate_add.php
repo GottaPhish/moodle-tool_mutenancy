@@ -18,7 +18,7 @@
 
 namespace tool_mutenancy\local\form;
 
-use tool_mutenancy\external\form_associate_add_userids;
+use tool_mutenancy\external\form_autocomplete\associate_add_userids;
 
 /**
  * Associate users form.
@@ -34,6 +34,7 @@ final class associate_add extends \tool_mulib\local\ajax_form {
 
         $mform = $this->_form;
         $tenant = $this->_customdata['tenant'];
+        $context = $this->_customdata['context'];
         $cohort = $this->_customdata['cohort'];
 
         $info = '<div class="alert alert-info">' . markdown_to_html(get_string('associate_add_info', 'tool_mutenancy')) . '</div>';
@@ -50,11 +51,12 @@ final class associate_add extends \tool_mulib\local\ajax_form {
 
         $mform->addElement('static', 'cohortname', get_string('associate_cohort', 'tool_mutenancy'), format_string($cohort->name));
 
-        form_associate_add_userids::add_form_element(
+        associate_add_userids::add_element(
             $mform,
             ['tenantid' => $tenant->id],
             'userids',
-            get_string('users')
+            get_string('users'),
+            $context
         );
         $mform->addRule('userids', get_string('required'), 'required', null, 'client');
 
@@ -69,9 +71,10 @@ final class associate_add extends \tool_mulib\local\ajax_form {
     public function validation($data, $files): array {
         $errors = parent::validation($data, $files);
         $tenant = $this->_customdata['tenant'];
+        $context = $this->_customdata['context'];
 
         foreach ($data['userids'] as $userid) {
-            $error = form_associate_add_userids::validate_userid($userid, $tenant->id);
+            $error = associate_add_userids::validate_value($userid, ['tenantid' => $tenant->id], $context);
             if ($error !== null) {
                 $errors['userids'] = $error;
                 break;

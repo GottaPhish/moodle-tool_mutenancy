@@ -64,7 +64,7 @@ $PAGE->set_context($context);
 
 $returnurl = new moodle_url('/admin/tool/mutenancy/tenant_users.php', ['id' => $tenant->id]);
 
-$form = new \tool_mutenancy\local\form\associate_add(null, ['tenant' => $tenant, 'cohort' => $cohort]);
+$form = new \tool_mutenancy\local\form\associate_add(null, ['tenant' => $tenant, 'cohort' => $cohort, 'context' => $context]);
 
 if ($form->is_cancelled()) {
     $form->ajax_form_cancelled($returnurl);

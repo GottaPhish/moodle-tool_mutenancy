@@ -19,7 +19,7 @@
 
 namespace tool_mutenancy\local\form;
 
-use tool_mutenancy\external\form_user_allocate_tenantid;
+use tool_mutenancy\external\form_autocomplete\user_allocate_tenantid;
 /**
  * User allocation form.
  *
@@ -32,15 +32,17 @@ final class user_allocate extends \tool_mulib\local\ajax_form {
     protected function definition(): void {
         $mform = $this->_form;
         $user = $this->_customdata['user'];
+        $context = $this->_customdata['context'];
 
         $info = '<div class="alert alert-warning">' . markdown_to_html(get_string('user_allocate_info', 'tool_mutenancy')) . '</div>';
         $mform->addElement('html', $info);
 
-        form_user_allocate_tenantid::add_form_element(
+        user_allocate_tenantid::add_element(
             $mform,
-            ['tenantid' => (int)$user->tenantid],
+            ['userid' => $user->id],
             'tenantid',
-            get_string('tenant', 'tool_mutenancy')
+            get_string('tenant', 'tool_mutenancy'),
+            $context
         );
         $mform->setType('tenantid', PARAM_INT);
         if ($user->tenantid) {

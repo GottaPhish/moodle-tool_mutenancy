@@ -64,7 +64,7 @@ if ($cohort) {
     $tenant->cohortidnumber = $cohort->idnumber;
 }
 
-$form = new \tool_mutenancy\local\form\tenant_update(null, ['tenant' => $tenant]);
+$form = new \tool_mutenancy\local\form\tenant_update(null, ['tenant' => $tenant, 'context' => $context]);
 
 if ($form->is_cancelled()) {
     $form->ajax_form_cancelled($returnurl);
