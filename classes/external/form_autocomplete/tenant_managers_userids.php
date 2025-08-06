@@ -16,7 +16,7 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-namespace tool_mutenancy\external;
+namespace tool_mutenancy\external\form_autocomplete;
 
 use core_external\external_function_parameters;
 use core_external\external_value;
@@ -28,21 +28,13 @@ use core_external\external_value;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class form_tenant_managers_userids extends \tool_mulib\external\form_autocomplete_field {
-    /**
-     * True means returned field data is array, false means value is scalar.
-     *
-     * @return bool
-     */
-    public static function is_multi_select_field(): bool {
+final class tenant_managers_userids extends \tool_mulib\external\form_autocomplete\user {
+    #[\Override]
+    public static function get_multiple(): bool {
         return true;
     }
 
-    /**
-     * Describes the external function arguments.
-     *
-     * @return external_function_parameters
-     */
+    #[\Override]
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'query' => new external_value(PARAM_RAW, 'The search query', VALUE_REQUIRED),
@@ -58,11 +50,18 @@ final class form_tenant_managers_userids extends \tool_mulib\external\form_autoc
      * @return array
      */
     public static function execute(string $query, int $tenantid): array {
-        global $DB, $OUTPUT, $CFG;
+        global $DB;
 
-        $params = self::validate_parameters(self::execute_parameters(), ['query' => $query, 'tenantid' => $tenantid]);
-        $query = $params['query'];
-        $tenantid = $params['tenantid'];
+        [
+            'query' => $query,
+            'tenantid' => $tenantid,
+        ] = self::validate_parameters(
+            self::execute_parameters(),
+            [
+            'query' => $query,
+            'tenantid' => $tenantid,
+            ]
+        );
 
         $context = \context_tenant::instance($tenantid);
         self::validate_context($context);
@@ -85,44 +84,26 @@ final class form_tenant_managers_userids extends \tool_mulib\external\form_autoc
                        AND u.tenantid IS NULL OR u.tenantid = :tenantid
               ORDER BY {$sortsql}";
 
-        $rs = $DB->get_recordset_sql($sql, $params, 0, $CFG->maxusersperpage + 1);
+        $users = $DB->get_records_sql($sql, $params, 0, self::MAX_RESULTS + 1);
+        if (count($users) > self::MAX_RESULTS) {
+            return self::get_overflow_result();
+        }
 
-        return self::prepare_user_list($rs, $extrafields);
+        return self::get_list_result($users, $context);
     }
 
-    /**
-     * Return function that return label for given value.
-     *
-     * @param array $arguments
-     * @return callable
-     */
-    public static function get_label_callback(array $arguments): callable {
-        return function ($value) use ($arguments): string {
-            global $DB;
-
-            $record = $DB->get_record('user', ['id' => $value]);
-
-            $context = \context_tenant::instance($arguments['tenantid']);
-
-            return self::prepare_user_label($record, $context);
-        };
-    }
-
-    /**
-     * Validate user can be added as manager.
-     *
-     * @param int $userid
-     * @param int $tenantid tenant id
-     * @return string|null null means ids ok, string is error
-     */
-    public static function validate_userid(int $userid, int $tenantid): ?string {
+    #[\Override]
+    public static function validate_value(int $value, array $args, \context $context): ?string {
         global $DB;
 
-        $user = $DB->get_record('user', ['id' => $userid, 'deleted' => 0, 'confirmed' => 1]);
+        $tenantid = $args['tenantid'];
+
+        $user = $DB->get_record('user', ['id' => $value, 'deleted' => 0, 'confirmed' => 1]);
         if (!$user) {
             return get_string('error');
         }
 
+        // Tenant manager can be only global user or same tenant member.
         if ($user->tenantid && $user->tenantid != $tenantid) {
             return get_string('error');
         }

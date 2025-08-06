@@ -27,32 +27,32 @@
 defined('MOODLE_INTERNAL') || die();
 
 $functions = [
-    'tool_mutenancy_form_tenant_assoccohortid' => [
-        'classname' => tool_mutenancy\external\form_tenant_assoccohortid::class,
+    'tool_mutenancy_form_autocomplete_tenant_assoccohortid' => [
+        'classname' => tool_mutenancy\external\form_autocomplete\tenant_assoccohortid::class,
         'description' => 'Return list of cohorts for tenant associated users.',
         'type' => 'read',
         'ajax' => true,
         'loginrequired' => true,
     ],
 
-    'tool_mutenancy_form_tenant_managers_userids' => [
-        'classname' => tool_mutenancy\external\form_tenant_managers_userids::class,
+    'tool_mutenancy_form_autocomplete_tenant_managers_userids' => [
+        'classname' => tool_mutenancy\external\form_autocomplete\tenant_managers_userids::class,
         'description' => 'Return list of candidate users for tenant managers.',
         'type' => 'read',
         'ajax' => true,
         'loginrequired' => true,
     ],
 
-    'tool_mutenancy_form_associate_add_userids' => [
-        'classname' => tool_mutenancy\external\form_associate_add_userids::class,
+    'tool_mutenancy_form_autocomplete_associate_add_userids' => [
+        'classname' => tool_mutenancy\external\form_autocomplete\associate_add_userids::class,
         'description' => 'Return list of candidate users for tenant association.',
         'type' => 'read',
         'ajax' => true,
         'loginrequired' => true,
     ],
 
-    'tool_mutenancy_form_user_allocate_tenantid' => [
-        'classname' => tool_mutenancy\external\form_user_allocate_tenantid::class,
+    'tool_mutenancy_form_autocomplete_user_allocate_tenantid' => [
+        'classname' => tool_mutenancy\external\form_autocomplete\user_allocate_tenantid::class,
         'description' => 'Return list of tenant candidates for tenant managers.',
         'type' => 'read',
         'ajax' => true,

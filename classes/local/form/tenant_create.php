@@ -19,7 +19,7 @@
 
 namespace tool_mutenancy\local\form;
 
-use tool_mutenancy\external\form_tenant_assoccohortid;
+use tool_mutenancy\external\form_autocomplete\tenant_assoccohortid;
 use tool_mutenancy\local\tenant;
 
 /**
@@ -33,6 +33,7 @@ final class tenant_create extends \tool_mulib\local\ajax_form {
     #[\Override]
     protected function definition(): void {
         $mform = $this->_form;
+        $context = $this->_customdata['context'];
 
         $mform->addElement('text', 'name', get_string('tenant_name', 'tool_mutenancy'), ['size' => 40, 'maxlength' => 255]);
         $mform->setType('name', PARAM_TEXT);
@@ -47,11 +48,12 @@ final class tenant_create extends \tool_mulib\local\ajax_form {
         $mform->addElement('text', 'memberlimit', get_string('tenant_memberlimit', 'tool_mutenancy'), ['size' => 5]);
         $mform->setType('memberlimit', PARAM_INT);
 
-        form_tenant_assoccohortid::add_form_element(
+        tenant_assoccohortid::add_element(
             $mform,
             ['tenantid' => 0],
             'assoccohortid',
-            get_string('associate_cohort', 'tool_mutenancy')
+            get_string('associate_cohort', 'tool_mutenancy'),
+            $context
         );
         $mform->setType('assoccohortid', PARAM_INT);
 
@@ -80,6 +82,7 @@ final class tenant_create extends \tool_mulib\local\ajax_form {
     public function validation($data, $files): array {
         global $DB;
         $errors = parent::validation($data, $files);
+        $context = $this->_customdata['context'];
 
         if (trim($data['name']) === '') {
             $errors['name'] = get_string('required');
@@ -106,7 +109,7 @@ final class tenant_create extends \tool_mulib\local\ajax_form {
         }
 
         if ($data['assoccohortid']) {
-            $error = form_tenant_assoccohortid::validate_cohortid($data['assoccohortid'], 0);
+            $error = tenant_assoccohortid::validate_value($data['assoccohortid'], ['tenantid' => 0], $context);
             if ($error !== null) {
                 $errors['assoccohortid'] = $error;
             }

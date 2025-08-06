@@ -57,7 +57,7 @@ if ($USER->id == $user->id) {
     throw new \core\exception\invalid_parameter_exception('cannot allocate own account');
 }
 
-$form = new \tool_mutenancy\local\form\user_allocate(null, ['user' => $user]);
+$form = new \tool_mutenancy\local\form\user_allocate(null, ['user' => $user, 'context' => $syscontext]);
 
 if ($form->is_cancelled()) {
     if ($user->tenantid) {

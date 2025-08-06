@@ -54,7 +54,7 @@ if ($tenantlimit && $tenantlimit <= $DB->count_records('tool_mutenancy_tenant', 
     throw new \core\exception\invalid_parameter_exception('Tenant limit reached');
 }
 
-$form = new \tool_mutenancy\local\form\tenant_create();
+$form = new \tool_mutenancy\local\form\tenant_create(null, ['context' => $context]);
 
 if ($form->is_cancelled()) {
     $form->ajax_form_cancelled($returnurl);

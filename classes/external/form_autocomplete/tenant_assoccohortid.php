@@ -16,7 +16,7 @@
 
 // phpcs:disable moodle.Files.BoilerplateComment.CommentEndedTooSoon
 
-namespace tool_mutenancy\external;
+namespace tool_mutenancy\external\form_autocomplete;
 
 use core_external\external_function_parameters;
 use core_external\external_value;
@@ -28,13 +28,14 @@ use core_external\external_value;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomplete_field_cohort {
-    /**
-     * True means returned field data is array, false means value is scalar.
-     *
-     * @return bool
-     */
-    public static function is_multi_select_field(): bool {
+final class tenant_assoccohortid extends \tool_mulib\external\form_autocomplete\cohort {
+    /** @var string|null user table */
+    protected const ITEM_TABLE = 'cohort';
+    /** @var string|null not used, there is custom format_label() method */
+    protected const ITEM_FIELD = 'name';
+
+    #[\Override]
+    public static function get_multiple(): bool {
         return false;
     }
 
@@ -60,9 +61,15 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
     public static function execute(string $query, int $tenantid): array {
         global $DB;
 
-        ['query' => $query, 'tenantid' => $tenantid] = self::validate_parameters(
+        [
+            'query' => $query,
+            'tenantid' => $tenantid,
+        ] = self::validate_parameters(
             self::execute_parameters(),
-            ['query' => $query, 'tenantid' => $tenantid]
+            [
+                'query' => $query,
+                'tenantid' => $tenantid,
+            ]
         );
 
         if ($tenantid) {
@@ -73,7 +80,7 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
         self::validate_context($context);
         require_capability('tool/mutenancy:admin', $context);
 
-        [$searchsql, $params] = self::get_cohort_search_query($query, 'ch');
+        [$searchsql, $params] = self::get_search_query($query, ['name', 'idnumber', 'description'], 'ch');
         if ($tenantid) {
             $params['tenantid'] = $tenantid;
             $ortenantid = "OR c.tenantid = :tenantid";
@@ -87,21 +94,30 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
              LEFT JOIN {tool_mutenancy_tenant} t ON t.cohortid = ch.id
                  WHERE t.id IS NULL AND $searchsql
               ORDER BY ch.name ASC";
-        $rs = $DB->get_recordset_sql($sql, $params);
 
-        return self::prepare_cohort_list($rs);
+        $cohorts = [];
+        $rs = $DB->get_recordset_sql($sql, $params);
+        $i = 0;
+        foreach ($rs as $cohort) {
+            if (!self::is_cohort_visible($cohort)) {
+                continue;
+            }
+            $i++;
+            if ($i > self::MAX_RESULTS) {
+                $rs->close();
+                return self::get_overflow_result();
+            }
+            $cohorts[$cohort->id] = $cohort;
+        }
+        $rs->close();
+
+        return self::get_list_result($cohorts, $context);
     }
 
-    /**
-     * Validate user can select cohort as associated cohort users including cohort permissions.
-     *
-     * @param int $cohortid
-     * @param int $tenantid 0 means no tenant yet
-     * @return string|null null means ids ok, string is error
-     */
-    public static function validate_cohortid(int $cohortid, int $tenantid): ?string {
+    #[\Override]
+    public static function validate_value(int $value, array $args, \context $context): ?string {
         global $DB;
-        $cohort = $DB->get_record('cohort', ['id' => $cohortid]);
+        $cohort = $DB->get_record('cohort', ['id' => $value]);
         if (!$cohort) {
             return get_string('error');
         }
@@ -110,12 +126,14 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
             return get_string('error');
         }
 
+        $tenantid = $args['tenantid'];
+
         if ($tenantid) {
             $tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $tenantid]);
             if (!$tenant) {
                 return get_string('error');
             }
-            if ($tenant->assoccohortid == $cohortid) {
+            if ($tenant->assoccohortid == $cohort->id) {
                 // Allow whatever existing cohort is there.
                 return null;
             }
@@ -130,12 +148,12 @@ final class form_tenant_assoccohortid extends \tool_mulib\external\form_autocomp
             }
         }
 
-        if ($DB->record_exists('tool_mutenancy_tenant', ['cohortid' => $cohortid])) {
+        if ($DB->record_exists('tool_mutenancy_tenant', ['cohortid' => $cohort->id])) {
             // Do not allow tenant member cohorts.
             return get_string('error');
         }
 
-        if (!self::is_cohort_visible($cohort, $context)) {
+        if (!self::is_cohort_visible($cohort)) {
             return get_string('error');
         }
 

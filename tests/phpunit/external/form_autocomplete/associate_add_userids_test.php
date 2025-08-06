@@ -18,9 +18,9 @@
 // phpcs:disable moodle.Files.LineLength.TooLong
 // phpcs:disable moodle.Commenting.DocblockDescription.Missing
 
-namespace tool_mutenancy\phpunit\external;
+namespace tool_mutenancy\phpunit\external\form_autocomplete;
 
-use tool_mutenancy\external\form_associate_add_userids;
+use tool_mutenancy\external\form_autocomplete\associate_add_userids;
 
 /**
  * Multi-tenancy external function tests.
@@ -30,9 +30,9 @@ use tool_mutenancy\external\form_associate_add_userids;
  * @copyright   2025 Petr Skoda
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @coversDefaultClass \tool_mutenancy\external\form_associate_add_userids
+ * @coversDefaultClass \tool_mutenancy\external\form_autocomplete\associate_add_userids
  */
-final class form_associate_add_userids_test extends \advanced_testcase {
+final class associate_add_userids_test extends \advanced_testcase {
     public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
@@ -100,29 +100,29 @@ final class form_associate_add_userids_test extends \advanced_testcase {
         cohort_add_member($cohort1->id, $user2->id);
 
         $this->setUser($manager);
-        $result = form_associate_add_userids::execute('', $tenant1->id);
-        $this->assertNull($result['notice']);
+        $result = associate_add_userids::execute('', $tenant1->id);
+        $this->assertFalse($result['overflow']);
         $this->assertCount(4, $result['list']);
-        $this->assertSame($result['list'][0]['value'], $manager->id);
-        $this->assertSame($result['list'][1]['value'], $admin->id);
-        $this->assertSame($result['list'][2]['value'], $user1->id);
-        $this->assertSame($result['list'][3]['value'], $user0->id);
+        $this->assertSame($result['list'][0]['value'], (int)$manager->id);
+        $this->assertSame($result['list'][1]['value'], (int)$admin->id);
+        $this->assertSame($result['list'][2]['value'], (int)$user1->id);
+        $this->assertSame($result['list'][3]['value'], (int)$user0->id);
 
         $this->setUser($manager);
-        $result = form_associate_add_userids::execute('First', $tenant1->id);
-        $this->assertNull($result['notice']);
+        $result = associate_add_userids::execute('First', $tenant1->id);
+        $this->assertFalse($result['overflow']);
         $this->assertCount(1, $result['list']);
-        $this->assertSame($result['list'][0]['value'], $user1->id);
+        $this->assertSame($result['list'][0]['value'], (int)$user1->id);
 
         $this->setUser($admin);
-        $result = form_associate_add_userids::execute('First', $tenant1->id);
-        $this->assertNull($result['notice']);
+        $result = associate_add_userids::execute('First', $tenant1->id);
+        $this->assertFalse($result['overflow']);
         $this->assertCount(1, $result['list']);
-        $this->assertSame($result['list'][0]['value'], $user1->id);
+        $this->assertSame($result['list'][0]['value'], (int)$user1->id);
 
         $this->setUser($manager);
         try {
-            form_associate_add_userids::execute('', $tenant2->id);
+            associate_add_userids::execute('', $tenant2->id);
             $this->fail('Exception expected');
         } catch (\core\exception\moodle_exception $ex) {
             $this->assertInstanceOf(\required_capability_exception::class, $ex);
@@ -131,7 +131,7 @@ final class form_associate_add_userids_test extends \advanced_testcase {
 
         $this->setUser($admin);
         try {
-            form_associate_add_userids::execute('', $tenant2->id);
+            associate_add_userids::execute('', $tenant2->id);
             $this->fail('Exception expected');
         } catch (\core\exception\moodle_exception $ex) {
             $this->assertInstanceOf(\invalid_parameter_exception::class, $ex);
@@ -140,7 +140,7 @@ final class form_associate_add_userids_test extends \advanced_testcase {
 
         $this->setUser($admin);
         try {
-            form_associate_add_userids::execute('', $tenant3->id);
+            associate_add_userids::execute('', $tenant3->id);
             $this->fail('Exception expected');
         } catch (\core\exception\moodle_exception $ex) {
             $this->assertInstanceOf(\invalid_parameter_exception::class, $ex);
@@ -149,14 +149,15 @@ final class form_associate_add_userids_test extends \advanced_testcase {
     }
 
     /**
-     * @covers ::get_label_callback
+     * @covers ::format_label
      */
-    public function test_get_label_callback(): void {
+    public function test_format_label(): void {
         /** @var \tool_mutenancy_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('tool_mutenancy');
 
         $cohort1 = $this->getDataGenerator()->create_cohort();
         $tenant1 = $generator->create_tenant(['assoccohortid' => $cohort1->id]);
+        $tenantcontext1 = \context_tenant::instance($tenant1->id);
 
         $user0 = $this->getDataGenerator()->create_user([
             'firstname' => 'Global',
@@ -170,27 +171,26 @@ final class form_associate_add_userids_test extends \advanced_testcase {
             'email' => 'user1@example.com',
         ]);
 
-        $callback = form_associate_add_userids::get_label_callback(['tenantid' => $tenant1->id]);
-
-        $result = $callback($user0->id);
+        $result = associate_add_userids::format_label($user0, $tenantcontext1);
         $this->assertStringContainsString('Global User', $result);
         $this->assertStringNotContainsString($user0->email, $result);
 
         $this->setAdminUser();
-        $result = $callback($user0->id);
+        $result = associate_add_userids::format_label($user0, $tenantcontext1);
         $this->assertStringContainsString('Global User', $result);
         $this->assertStringContainsString($user0->email, $result);
     }
 
     /**
-     * @covers ::validate_userid
+     * @covers ::validate_value
      */
-    public function test_validate_userid(): void {
+    public function test_validate_value(): void {
         /** @var \tool_mutenancy_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('tool_mutenancy');
 
         $cohort1 = $this->getDataGenerator()->create_cohort();
         $tenant1 = $generator->create_tenant(['assoccohortid' => $cohort1->id]);
+        $tenantcontext1 = \context_tenant::instance($tenant1->id);
 
         $user0 = $this->getDataGenerator()->create_user([
             'firstname' => 'Global',
@@ -204,7 +204,7 @@ final class form_associate_add_userids_test extends \advanced_testcase {
             'email' => 'user1@example.com',
         ]);
 
-        $this->assertSame(null, form_associate_add_userids::validate_userid($user0->id, $tenant1->id));
-        $this->assertSame('Error', form_associate_add_userids::validate_userid($user1->id, $tenant1->id));
+        $this->assertSame(null, associate_add_userids::validate_value($user0->id, ['tenantid' => $tenant1->id], $tenantcontext1));
+        $this->assertSame('Error', associate_add_userids::validate_value($user1->id, ['tenantid' => $tenant1->id], $tenantcontext1));
     }
 }
