@@ -96,11 +96,7 @@ final class associate_add_userids extends \tool_mulib\external\form_autocomplete
               ORDER BY {$sortsql}";
 
         $users = $DB->get_records_sql($sql, $params, 0, self::MAX_RESULTS + 1);
-        if (count($users) > self::MAX_RESULTS) {
-            return self::get_overflow_result();
-        }
-
-        return self::get_list_result($users, $context);
+        return self::prepare_result($users, $context);
     }
 
     #[\Override]
