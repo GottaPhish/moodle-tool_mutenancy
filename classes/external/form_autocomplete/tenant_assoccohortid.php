@@ -29,9 +29,9 @@ use core_external\external_value;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class tenant_assoccohortid extends \tool_mulib\external\form_autocomplete\cohort {
-    /** @var string|null user table */
+    /** @var string|null cohort table */
     protected const ITEM_TABLE = 'cohort';
-    /** @var string|null not used, there is custom format_label() method */
+    /** @var string|null field used for item name */
     protected const ITEM_FIELD = 'name';
 
     #[\Override]
@@ -39,11 +39,7 @@ final class tenant_assoccohortid extends \tool_mulib\external\form_autocomplete\
         return false;
     }
 
-    /**
-     * Describes the external function arguments.
-     *
-     * @return external_function_parameters
-     */
+    #[\Override]
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'query' => new external_value(PARAM_RAW, 'The search query', VALUE_REQUIRED),

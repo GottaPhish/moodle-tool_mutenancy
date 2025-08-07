@@ -31,7 +31,7 @@ use core_external\external_value;
 final class user_allocate_tenantid extends \tool_mulib\external\form_autocomplete\base {
     /** @var string|null tenant table */
     protected const ITEM_TABLE = 'tool_mutenancy_tenant';
-    /** @var string|null override with name of item field used for label */
+    /** @var string|null field for item name */
     protected const ITEM_FIELD = 'name';
 
     #[\Override]
