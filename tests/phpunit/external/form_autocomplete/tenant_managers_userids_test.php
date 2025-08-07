@@ -91,22 +91,22 @@ final class tenant_managers_userids_test extends \advanced_testcase {
         $result = tenant_managers_userids::execute('', $tenant1->id);
         $this->assertFalse($result['overflow']);
         $this->assertCount(4, $result['list']);
-        $this->assertSame($result['list'][0]['value'], (int)$manager->id);
-        $this->assertSame($result['list'][1]['value'], (int)$admin->id);
-        $this->assertSame($result['list'][2]['value'], (int)$user1->id);
-        $this->assertSame($result['list'][3]['value'], (int)$user0->id);
+        $this->assertSame($result['list'][0]['value'], $manager->id);
+        $this->assertSame($result['list'][1]['value'], $admin->id);
+        $this->assertSame($result['list'][2]['value'], $user1->id);
+        $this->assertSame($result['list'][3]['value'], $user0->id);
 
         $this->setUser($manager);
         $result = tenant_managers_userids::execute('First', $tenant1->id);
         $this->assertFalse($result['overflow']);
         $this->assertCount(1, $result['list']);
-        $this->assertSame($result['list'][0]['value'], (int)$user1->id);
+        $this->assertSame($result['list'][0]['value'], $user1->id);
 
         $this->setUser($admin);
         $result = tenant_managers_userids::execute('First', $tenant1->id);
         $this->assertFalse($result['overflow']);
         $this->assertCount(1, $result['list']);
-        $this->assertSame($result['list'][0]['value'], (int)$user1->id);
+        $this->assertSame($result['list'][0]['value'], $user1->id);
     }
 
     /**
