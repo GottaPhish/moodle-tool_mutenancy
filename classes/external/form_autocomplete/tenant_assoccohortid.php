@@ -76,7 +76,7 @@ final class tenant_assoccohortid extends \tool_mulib\external\form_autocomplete\
         self::validate_context($context);
         require_capability('tool/mutenancy:admin', $context);
 
-        [$searchsql, $params] = self::get_search_query($query, ['name', 'idnumber', 'description'], 'ch');
+        [$searchsql, $params] = self::get_cohort_search_query($query, 'ch');
         if ($tenantid) {
             $params['tenantid'] = $tenantid;
             $ortenantid = "OR c.tenantid = :tenantid";
