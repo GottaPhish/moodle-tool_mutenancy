@@ -83,11 +83,7 @@ final class user_allocate_tenantid extends \tool_mulib\external\form_autocomplet
               ORDER BY t.name ASC";
 
         $tenants = $DB->get_records_sql($sql, $params, 0, self::MAX_RESULTS + 1);
-        if (count($tenants) > self::MAX_RESULTS) {
-            return self::get_overflow_result();
-        }
-
-        return self::get_list_result($tenants, $context);
+        return self::prepare_result($tenants, $context);
     }
 
     #[\Override]
