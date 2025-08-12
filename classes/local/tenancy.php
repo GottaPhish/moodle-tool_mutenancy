@@ -381,14 +381,19 @@ final class tenancy {
      * Returns tenant related restriction for adding users somewhere.
      *
      * @param string $useridfield
-     * @param \context $context
+     * @param \context $context relevant context, note current tenant id is used for non-tenant contexts
      * @param string $glue glue for non-empty result, for example "AND"; if '' used then "1=1" is returned instead ''
      * @return string WHERE condition linked via $userfield
      */
     public static function get_related_users_exists(string $useridfield, \context $context, string $glue = "AND"): string {
-        $tenantid = (int)$context->tenantid;
-        if (!$tenantid) {
-            $tenantid = (int)self::get_current_tenantid();
+        if (self::is_active()) {
+            $tenantid = (int)$context->tenantid;
+            if (!$tenantid) {
+                $tenantid = (int)self::get_current_tenantid();
+            }
+        } else {
+            debugging('tenancy::get_related_users_exists() should not be called if tenants not active', DEBUG_DEVELOPER);
+            $tenantid = 0;
         }
 
         if (!$tenantid) {
