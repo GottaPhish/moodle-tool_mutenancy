@@ -29,6 +29,11 @@ $string['associate_add'] = 'Associate users';
 $string['associate_add_info'] = 'Non-tenant users can be associated with tenant by adding them to the associated users cohort.
 It is possible for non-tenant users to be associated with multiple tenants. Multiple tenants may share the same associated users cohort.';
 $string['associate_cohort'] = 'Associated users cohort';
+$string['associate_cohort_create'] = 'Create associated users cohort';
+$string['associate_cohort_create_help'] = 'Select to create a new cohort for users that are associated with the tenant.';
+$string['associate_cohort_help'] = 'Select cohort that contains global users that are supposed to participate in the tenant.
+
+Global users can be associated with multiple tenants, but tenant accounts cannot be associated with any other tenant.';
 $string['associate_remove'] = 'Disassociate user';
 $string['associate_remove_info'] = 'Users are disassociated from tenant by removing them from the associated users cohort.
 This may affect multiple tenants when tenants share the same associated users cohort.';
@@ -58,6 +63,9 @@ $string['member_confirm_info'] = 'In most cases member accounts should not be co
 
 It is recommended to use *Resend confirmation email* option if user did not receive the confirmation email.';
 $string['member_create'] = 'Create account';
+$string['member_create_info'] = 'New tenant member account will be able to access their tenant courses and if allowed also global courses.
+
+They will not be able to access courses from any other tenant';
 $string['member_delete_info'] = 'Deleting of tenant member account is not reversible.';
 $string['member_managers_info'] = 'Tenant managers are not automatically visible in tenants. They should be added to
 the associated users cohort if they are expected to participate in the tenant.';
@@ -127,6 +135,7 @@ $string['tenant_archive_info'] = 'Archiving tenant:
 
 Archiving is a required step before tenant can be deleted.';
 $string['tenant_archived'] = 'Archived';
+$string['tenant_associates'] = 'Associated users';
 $string['tenant_category'] = 'Tenant category';
 $string['tenant_categoryidnumber'] = 'Tenant category ID number';
 $string['tenant_categoryname'] = 'Tenant category name';
@@ -150,6 +159,9 @@ $string['tenant_manager'] = 'Tenant manager';
 $string['tenant_managers'] = 'Tenant managers';
 $string['tenant_member'] = 'Tenant member';
 $string['tenant_memberlimit'] = 'Tenant members limit';
+$string['tenant_memberlimit_help'] = 'Specifies maximum number of tenant accounts in a tenant.
+
+Note that associated users are not counted towards this limit.';
 $string['tenant_name'] = 'Tenant name';
 $string['tenant_restore'] = 'Restore archived tenant';
 $string['tenant_restore_info'] = 'Restoring of tenant should revert most changes done during tenant archiving.

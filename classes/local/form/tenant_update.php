@@ -35,6 +35,7 @@ final class tenant_update extends \tool_mulib\local\ajax_form {
         $mform = $this->_form;
         $tenant = $this->_customdata['tenant'];
         $context = $this->_customdata['context'];
+        $syscontext = \context_system::instance();
 
         $mform->addElement('text', 'name', get_string('tenant_name', 'tool_mutenancy'), ['size' => 40, 'maxlength' => 255]);
         $mform->setType('name', PARAM_TEXT);
@@ -48,6 +49,7 @@ final class tenant_update extends \tool_mulib\local\ajax_form {
 
         $mform->addElement('text', 'memberlimit', get_string('tenant_memberlimit', 'tool_mutenancy'), ['size' => 5]);
         $mform->setType('memberlimit', PARAM_INT);
+        $mform->addHelpButton('memberlimit', 'tenant_memberlimit', 'tool_mutenancy');
 
         tenant_assoccohortid::add_element(
             $mform,
@@ -57,6 +59,13 @@ final class tenant_update extends \tool_mulib\local\ajax_form {
             $context
         );
         $mform->setType('assoccohortid', PARAM_INT);
+        $mform->addHelpButton('assoccohortid', 'associate_cohort', 'tool_mutenancy');
+
+        if (!$tenant->assoccohortid && has_capability('moodle/cohort:manage', $syscontext)) {
+            $mform->addElement('advcheckbox', 'assoccohortcreate', get_string('associate_cohort_create', 'tool_mutenancy'));
+            $mform->addHelpButton('assoccohortcreate', 'associate_cohort_create', 'tool_mutenancy');
+            $mform->hideIf('assoccohortid', 'assoccohortcreate', 'eq', 1);
+        }
 
         $mform->addElement('text', 'sitefullname', get_string('tenant_sitefullname', 'tool_mutenancy'), ['size' => 40, 'maxlength' => 255]);
         $mform->setType('sitefullname', PARAM_TEXT);

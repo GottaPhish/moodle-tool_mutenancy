@@ -62,6 +62,7 @@ Feature: Tenant administration
     And I should see "No" in the "Show tenant on login page" definition list item
     And I should see "Tenant 1" in the "Tenant category" definition list item
     And I should see "Tenant: Tenant 1" in the "Tenant cohort" definition list item
+    And I should see "Not set" in the "Associated users cohort" definition list item
     And I should see "Tenant 1" in the "Tenant site name" definition list item
     And I should see "ten1" in the "Tenant site short name" definition list item
     And I should see "0" in the "Users" definition list item
@@ -187,6 +188,34 @@ Feature: Tenant administration
     And I click on "Delete tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Tenant 1"
     And I should not see "Tenant 2"
+
+  Scenario: Site admin may create associated users cohort
+    Given the multi-tenancy is activated
+    And I log in as "admin"
+    And I navigate to "Multi-tenancy > Tenants" in site administration
+
+    When I press "Add tenant"
+    And I set the following fields in the ".modal-dialog" "css_element" to these values:
+      | Tenant name                    | Tenant 1      |
+      | Tenant ID                      | ten1          |
+      | Create associated users cohort | 1             |
+    And I click on "Add tenant" "button" in the ".modal-dialog" "css_element"
+    Then I should see "Tenant 1" in the "Tenant name" definition list item
+    And I should see "ten1" in the "Tenant ID" definition list item
+    And I should see "Associated users: Tenant 1" in the "Associated users cohort" definition list item
+
+    And I navigate to "Multi-tenancy > Tenants" in site administration
+    And I press "Add tenant"
+    And I set the following fields in the ".modal-dialog" "css_element" to these values:
+      | Tenant name                    | Tenant 2      |
+      | Tenant ID                      | ten2          |
+    And I click on "Add tenant" "button" in the ".modal-dialog" "css_element"
+    And I should see "Not set" in the "Associated users cohort" definition list item
+    When I press "Update tenant"
+    And I set the following fields in the ".modal-dialog" "css_element" to these values:
+      | Create associated users cohort | 1             |
+    And I click on "Update tenant" "button" in the ".modal-dialog" "css_element"
+    Then I should see "Associated users: Tenant 2" in the "Associated users cohort" definition list item
 
   Scenario: Tenant admin may assign tenant managers
     Given the multi-tenancy is activated

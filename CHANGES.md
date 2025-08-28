@@ -4,6 +4,8 @@
 
 Release date: xx/08/2025
 
+* Added help icons to tenant forms.
+* Added checkbox to create Associated users cohort when creating or updating tenants.
 * Added Tenant management section to primary menu.
 * Fixed compatibility with unsupported MS SQL databases.
 

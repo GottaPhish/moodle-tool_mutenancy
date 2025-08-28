@@ -80,7 +80,15 @@ final class tenant {
             $record->memberlimit = null;
         }
 
-        if (!empty($data->assoccohortid)) {
+        if (!empty($data->assoccohortcreate)) {
+            $cohort = (object)[
+                'name' => get_string('tenant_associates', 'tool_mutenancy') . ': ' . $record->name,
+                'contextid' => $syscontext->id,
+                'visible' => 0,
+                'idnumber' => '',
+            ];
+            $record->assoccohortid = cohort_add_cohort($cohort);
+        } else if (!empty($data->assoccohortid)) {
             $cohort = $DB->get_record('cohort', ['id' => $data->assoccohortid], '*', MUST_EXIST);
             if (
                 $cohort->component === 'tool_mutenancy'
@@ -214,6 +222,7 @@ final class tenant {
         require_once($CFG->dirroot . '/cohort/lib.php');
 
         $oldtenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $data->id], '*', MUST_EXIST);
+        $syscontext = \context_system::instance();
 
         $record = clone($oldtenant);
 
@@ -254,7 +263,15 @@ final class tenant {
             }
         }
 
-        if (property_exists($data, 'assoccohortid')) {
+        if (!$oldtenant->assoccohortid && !empty($data->assoccohortcreate)) {
+            $cohort = (object)[
+                'name' => get_string('tenant_associates', 'tool_mutenancy') . ': ' . $record->name,
+                'contextid' => $syscontext->id,
+                'visible' => 0,
+                'idnumber' => '',
+            ];
+            $record->assoccohortid = cohort_add_cohort($cohort);
+        } else if (property_exists($data, 'assoccohortid')) {
             if (!empty($data->assoccohortid)) {
                 $cohort = $DB->get_record('cohort', ['id' => $data->assoccohortid], '*', MUST_EXIST);
                 if (
