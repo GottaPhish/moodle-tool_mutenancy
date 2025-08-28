@@ -4,6 +4,7 @@
 
 Release date: xx/08/2025
 
+* Added Tenant management section to primary menu.
 * Fixed compatibility with unsupported MS SQL databases.
 
 ## mu-4.5.6-01
