@@ -19,7 +19,7 @@
 namespace tool_mutenancy\hook;
 
 /**
- * Hook for finding of tenant manager default capabilities..
+ * Hook for finding of tenant manager default capabilities.
  *
  * @package     tool_mutenancy
  * @copyright   2025 Petr Skoda
@@ -27,7 +27,7 @@ namespace tool_mutenancy\hook;
  */
 #[\core\attribute\label('Allows plugins to add default tenant manager capabilities.')]
 #[\core\attribute\tags('tool_mutenancy')]
-class tenant_manager_capabilities {
+final class tenant_manager_capabilities {
     /** @var string[] */
     protected $capabilities;
 

@@ -70,4 +70,11 @@ $settings->add(new admin_setting_configtext(
     4
 ));
 
+$settings->add(new admin_setting_configcheckbox(
+    'tool_mutenancy/tenantprimarynav',
+    new lang_string('setting_tenantprimarynav', 'tool_mutenancy'),
+    new lang_string('setting_tenantprimarynav_desc', 'tool_mutenancy'),
+    1
+));
+
 $ADMIN->add('tool_mutenancy', $settings, 'tool_mutenancy_tenants');
