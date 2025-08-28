@@ -107,6 +107,8 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
                 $name = get_string('error');
             }
             $details->add(get_string('associate_cohort', 'tool_mutenancy'), $name);
+        } else {
+            $details->add(get_string('associate_cohort', 'tool_mutenancy'), get_string('notset', 'tool_mulib'));
         }
 
         $details->add(get_string('tenant_sitefullname', 'tool_mutenancy'), format_string($tenant->sitefullname ?? $tenant->name));

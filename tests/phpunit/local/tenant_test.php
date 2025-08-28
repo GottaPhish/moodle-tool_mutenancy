@@ -151,6 +151,18 @@ final class tenant_test extends \advanced_testcase {
         $this->assertSame((int)$tenant3->id, $catcontext3->tenantid);
 
         $data = (object)[
+            'name' => 'Some tenant 3b',
+            'idnumber' => 't3b',
+            'assoccohortcreate' => 1,
+        ];
+        $tenant3b = tenant::create($data);
+        $cohort = $DB->get_record('cohort', ['id' => $tenant3b->assoccohortid], '*', MUST_EXIST);
+        $this->assertSame((string)$syscontext->id, $cohort->contextid);
+        $this->assertSame('Associated users: Some tenant 3b', $cohort->name);
+        $this->assertSame('0', $cohort->visible);
+        $this->assertSame('', $cohort->component);
+
+        $data = (object)[
             'name' => 'Some tenant 4',
             'idnumber' => 't4',
             'categoryid' => $category3->id,
@@ -337,6 +349,17 @@ final class tenant_test extends \advanced_testcase {
         $this->assertSame('', $cohort->description);
         $this->assertSame('0', $cohort->visible);
         $this->assertSame('tool_mutenancy', $cohort->component);
+
+        $data = (object)[
+            'id' => $tenant1->id,
+            'assoccohortcreate' => 1,
+        ];
+        $tenant1 = tenant::update($data);
+        $cohort = $DB->get_record('cohort', ['id' => $tenant1->assoccohortid], '*', MUST_EXIST);
+        $this->assertSame((string)$syscontext->id, $cohort->contextid);
+        $this->assertSame('Associated users: Some tenant 1', $cohort->name);
+        $this->assertSame('0', $cohort->visible);
+        $this->assertSame('', $cohort->component);
 
         $data = (object)[
             'name' => 'Some tenant 1',

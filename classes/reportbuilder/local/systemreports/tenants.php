@@ -21,6 +21,8 @@ namespace tool_mutenancy\reportbuilder\local\systemreports;
 use tool_mutenancy\reportbuilder\local\entities\tenant;
 use core_course\reportbuilder\local\entities\course_category;
 use core_reportbuilder\system_report;
+use moodle_url;
+use lang_string;
 
 /**
  * Embedded tenants report.
@@ -49,6 +51,7 @@ final class tenants extends system_report {
 
         $this->add_columns();
         $this->add_filters();
+        $this->add_actions();
 
         $this->set_downloadable(true);
     }
@@ -120,5 +123,30 @@ final class tenants extends system_report {
      */
     public function get_row_class(\stdClass $row): string {
         return $row->archived ? 'text-muted' : '';
+    }
+
+    /**
+     * Add the system report actions. An extra column will be appended to each row, containing all actions added here
+     *
+     * Note the use of ":id" placeholder which will be substituted according to actual values in the row
+     */
+    protected function add_actions(): void {
+        global $SCRIPT;
+
+        // Report builder download script is missing NO_DEBUG_DISPLAY
+        // and template rendering is changing session after it is closed,
+        // add a hacky workaround for now.
+        if ($SCRIPT === '/reportbuilder/download.php') {
+            return;
+        }
+
+        $url = new moodle_url('/admin/tool/mutenancy/management/tenant_update.php', ['id' => ':id']);
+        $link = new \tool_mulib\output\ajax_form\link($url, new lang_string('edit', 'moodle'), 't/edit');
+        $link->set_modal_title(get_string('tenant_update', 'tool_mutenancy'));
+        $link->set_form_size('lg');
+        $this->add_action($link->create_report_action()
+            ->add_callback(static function (\stdclass $row): bool {
+                return has_capability('tool/mutenancy:admin', \context_tenant::instance($row->id));
+            }));
     }
 }

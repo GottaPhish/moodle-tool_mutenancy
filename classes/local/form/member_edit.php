@@ -47,6 +47,11 @@ final class member_edit extends \tool_mulib\local\ajax_form {
         $user = $this->_customdata['user'];
         $userid = $user->id;
 
+        if ($userid == -1) {
+            $info = '<div class="alert alert-info">' . markdown_to_html(get_string('member_create_info', 'tool_mutenancy')) . '</div>';
+            $mform->addElement('html', $info);
+        }
+
         $strgeneral  = get_string('general');
         $strrequired = get_string('required');
 
