@@ -61,11 +61,11 @@ Feature: Tenant administration
     And I should see "/login/?tenant=ten1" in the "Tenant login URL" definition list item
     And I should see "No" in the "Show tenant on login page" definition list item
     And I should see "Tenant 1" in the "Tenant category" definition list item
-    And I should see "Tenant: Tenant 1" in the "Tenant cohort" definition list item
+    And I should see "Tenant users: Tenant 1" in the "Tenant cohort" definition list item
     And I should see "Not set" in the "Associated users cohort" definition list item
     And I should see "Tenant 1" in the "Tenant site name" definition list item
     And I should see "ten1" in the "Tenant site short name" definition list item
-    And I should see "0" in the "Users" definition list item
+    And I should see "0" in the "Tenant users" definition list item
     And I should see "No" in the "Archived" definition list item
 
     And I navigate to "Multi-tenancy > Tenants" in site administration
@@ -93,7 +93,7 @@ Feature: Tenant administration
     And I should see "Cohort 2" in the "Associated users cohort" definition list item
     And I should see "Tenant site 2" in the "Tenant site name" definition list item
     And I should see "TSS2" in the "Tenant site short name" definition list item
-    And I should see "0" in the "Users" definition list item
+    And I should see "0" in the "Tenant users" definition list item
     And I should see "No" in the "Archived" definition list item
 
     When I press "Update tenant"
@@ -119,7 +119,7 @@ Feature: Tenant administration
     And I should see "Cohort 2" in the "Associated users cohort" definition list item
     And I should see "Tenant site 2" in the "Tenant site name" definition list item
     And I should see "TSS2" in the "Tenant site short name" definition list item
-    And I should see "0" in the "Users" definition list item
+    And I should see "0" in the "Tenant users" definition list item
     And I should see "No" in the "Archived" definition list item
 
     When I press "Update tenant"
@@ -145,7 +145,7 @@ Feature: Tenant administration
     And I should see "Cohort 1" in the "Associated users cohort" definition list item
     And I should see "XTenant site 2" in the "Tenant site name" definition list item
     And I should see "XTSS2" in the "Tenant site short name" definition list item
-    And I should see "0" in the "Users" definition list item
+    And I should see "0" in the "Tenant users" definition list item
     And I should see "No" in the "Archived" definition list item
 
     When I press "Update tenant"
@@ -171,7 +171,7 @@ Feature: Tenant administration
     And I should see "Cohort 1" in the "Associated users cohort" definition list item
     And I should see "Tenant 2" in the "Tenant site name" definition list item
     And I should see "ten2" in the "Tenant site short name" definition list item
-    And I should see "0" in the "Users" definition list item
+    And I should see "0" in the "Tenant users" definition list item
     And I should see "No" in the "Archived" definition list item
 
     When I click on "Archive tenant" "link"
@@ -273,14 +273,14 @@ Feature: Tenant administration
       | Associated users cohort   | Cohort 1       |
     And I click on "Update tenant" "button" in the ".modal-dialog" "css_element"
     And I should see "Cohort 1" in the "Associated users cohort" definition list item
-    Then I should see "2" in the "Users" definition list item
+    Then I should see "2" in the "Tenant users" definition list item
 
     When I press "Update tenant"
     And I set the following fields in the ".modal-dialog" "css_element" to these values:
       | Associated users cohort   | Cohort 2       |
     And I click on "Update tenant" "button" in the ".modal-dialog" "css_element"
     Then I should see "Cohort 2" in the "Associated users cohort" definition list item
-    And I should see "3" in the "Users" definition list item
+    And I should see "3" in the "Tenant users" definition list item
 
     And I am on the "ten2" "tool_mutenancy > Tenant" page
     When I press "Update tenant"
@@ -288,4 +288,4 @@ Feature: Tenant administration
       | Associated users cohort   | Cohort 2       |
     And I click on "Update tenant" "button" in the ".modal-dialog" "css_element"
     And I should see "Cohort 2" in the "Associated users cohort" definition list item
-    And I should see "3" in the "Users" definition list item
+    And I should see "3" in the "Tenant users" definition list item

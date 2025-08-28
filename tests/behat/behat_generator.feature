@@ -11,9 +11,9 @@ Feature: Multi-tenancy generator tests
     And I log in as "admin"
     And I navigate to "Multi-tenancy > Tenants" in site administration
     And the following should exist in the "reportbuilder-table" table:
-      | Tenant name | Tenant ID | Tenant category | Users | Archived | Tenant login URL    |
-      | Tenant 1    | ten1      | Tenant 1        | 0     | No       | /login/?tenant=ten1 |
-      | Tenant 2    | TEN2      | Tenant 2        | 0     | No       | /login/?tenant=TEN2 |
+      | Tenant name | Tenant ID | Tenant category | Tenant users | Archived | Tenant login URL    |
+      | Tenant 1    | ten1      | Tenant 1        | 0            | No       | /login/?tenant=ten1 |
+      | Tenant 2    | TEN2      | Tenant 2        | 0            | No       | /login/?tenant=TEN2 |
 
     When the following "cohorts" exist:
       | name     | idnumber  |
@@ -29,11 +29,11 @@ Feature: Multi-tenancy generator tests
     And I should see "/login/?tenant=ten3" in the "Tenant login URL" definition list item
     And I should see "Yes" in the "Show tenant on login page" definition list item
     And I should see "Tenant 3" in the "Tenant category" definition list item
-    And I should see "Tenant: Tenant 3" in the "Tenant cohort" definition list item
+    And I should see "Tenant users: Tenant 3" in the "Tenant cohort" definition list item
     And I should see "Cohort 3" in the "Associated users cohort" definition list item
     And I should see "Tent Site full 3" in the "Tenant site name" definition list item
     And I should see "TSS3" in the "Tenant site short name" definition list item
-    And I should see "0" in the "Users" definition list item
+    And I should see "0" in the "Tenant users" definition list item
     And I should see "No" in the "Archived" definition list item
 
   Scenario: Tenant member creation via generator
