@@ -159,7 +159,7 @@ $string['tenant_manager'] = 'Tenant manager';
 $string['tenant_managers'] = 'Tenant managers';
 $string['tenant_member'] = 'Tenant member';
 $string['tenant_memberlimit'] = 'Tenant members limit';
-$string['tenant_memberlimit_help'] = 'Specifies maximum number of tenant accounts in a tenant.
+$string['tenant_memberlimit_help'] = 'Specifies maximum number of tenant member accounts that can be created in the tenant.
 
 Note that associated users are not counted towards this limit.';
 $string['tenant_name'] = 'Tenant name';
@@ -177,7 +177,7 @@ $string['tenant_switch_my'] = 'My tenants';
 $string['tenant_switch_notenant'] = 'No tenant';
 $string['tenant_switch_other'] = 'Other tenants';
 $string['tenant_update'] = 'Update tenant';
-$string['tenant_users'] = 'Users';
+$string['tenant_users'] = 'Tenant users';
 $string['tenants'] = 'Tenants';
 $string['user_allocate'] = 'Allocate user';
 $string['user_allocate_info'] = 'When allocating user to a tenant their tenant manager assignments are removed
