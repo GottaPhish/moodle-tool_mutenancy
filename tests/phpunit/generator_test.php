@@ -73,7 +73,7 @@ final class generator_test extends \advanced_testcase {
 
         $cohort = $DB->get_record('cohort', ['id' => $tenant1->cohortid], '*', MUST_EXIST);
         $this->assertSame((string)$syscontext->id, $cohort->contextid);
-        $this->assertSame('Tenant: Tenant 1', $cohort->name);
+        $this->assertSame('Tenant users: Tenant 1', $cohort->name);
         $this->assertSame('', $cohort->idnumber);
         $this->assertSame('', $cohort->description);
         $this->assertSame('0', $cohort->visible);
