@@ -91,7 +91,7 @@ final class tenant_test extends \advanced_testcase {
         $this->assertSame((int)$tenant1->id, $catcontext->tenantid);
         $cohort = $DB->get_record('cohort', ['id' => $tenant1->cohortid], '*', MUST_EXIST);
         $this->assertSame((string)$syscontext->id, $cohort->contextid);
-        $this->assertSame('Tenant: Some tenant 1', $cohort->name);
+        $this->assertSame('Tenant users: Some tenant 1', $cohort->name);
         $this->assertSame('', $cohort->idnumber);
         $this->assertSame('', $cohort->description);
         $this->assertSame('0', $cohort->visible);
