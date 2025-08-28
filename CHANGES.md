@@ -4,6 +4,7 @@
 
 Release date: xx/08/2025
 
+* Added bulk tenant members allocation and deallocation in Browse list of users.
 * Added help icons to tenant forms.
 * Added checkbox to create Associated users cohort when creating or updating tenants.
 * Added Tenant management section to primary menu.

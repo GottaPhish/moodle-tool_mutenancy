@@ -39,6 +39,16 @@ $string['associate_remove_info'] = 'Users are disassociated from tenant by remov
 This may affect multiple tenants when tenants share the same associated users cohort.';
 $string['auth_edit'] = 'Update authentication';
 $string['boost_edit'] = 'Edit Boost';
+$string['bulk_allocate'] = 'Allocate users to tenant';
+$string['bulk_allocate_info'] = 'Following users will be allocated to the selected tenant:
+
+{$a}
+
+Tenant manager assignments will be removed and users will loose access to all other tenants. Administrator accounts will not modified.';
+$string['bulk_deallocate'] = 'Deallocate tenant members';
+$string['bulk_deallocate_info'] = 'Following users will be deallocated from tenants and will become regular users:
+
+{$a}';
 $string['cachedef_config'] = 'Tenant config cache';
 $string['cachedef_tenant'] = 'Tenant record cache';
 $string['config_default'] = 'Default value';
