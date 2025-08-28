@@ -488,4 +488,29 @@ final class user {
         $params = ['userid' => $userid];
         return $DB->get_records_sql($sql, $params);
     }
+
+    /**
+     * Bulk user actions hook.
+     *
+     * @param \core_user\hook\extend_bulk_user_actions $hook
+     */
+    public static function hook_extend_bulk_user_actions(\core_user\hook\extend_bulk_user_actions $hook): void {
+        if (!tenancy::is_active()) {
+            return;
+        }
+
+        if (!has_capability('tool/mutenancy:allocate', \context_system::instance())) {
+            return;
+        }
+
+        $hook->add_action('tool_mutenancy_allocate', new \action_link(
+            new \moodle_url('/admin/tool/mutenancy/management/bulk_allocate.php'),
+            get_string('bulk_allocate', 'tool_mutenancy')
+        ));
+
+        $hook->add_action('tool_mutenancy_deallocate', new \action_link(
+            new \moodle_url('/admin/tool/mutenancy/management/bulk_deallocate.php'),
+            get_string('bulk_deallocate', 'tool_mutenancy')
+        ));
+    }
 }

@@ -127,3 +127,36 @@ Feature: Multi-tenancy features of browse users page
     And I click on "Tenant 2" "text" in the ".modal-dialog" "css_element"
     And I click on "Allocate user" "button" in the ".modal-dialog" "css_element"
     Then I should not see "Tenant" in the "Nulty Student" "table_row"
+
+  Scenario: Site admin may bulk allocate tenant members
+    Given I log in as "admin"
+    When I navigate to "Users > Accounts > Browse list of users" in site administration
+    And I click on "Nulty Student" "checkbox"
+    And I click on "Prvni Student" "checkbox"
+    And I click on "Druhy Student" "checkbox"
+    And the "Bulk user actions" select box should contain "Allocate users to tenant"
+    And I set the field "Bulk user actions" to "Allocate users to tenant"
+    And I set the following fields to these values:
+      | Tenant | Tenant 1 |
+    And I press "Allocate users to tenant"
+    Then the following should exist in the "reportbuilder-table" table:
+      | First name     | Email address        | Tenant   |
+      | Nulty Student  | student0@example.com | Tenant 1 |
+      | Prvni Student  | student1@example.com | Tenant 1 |
+      | Druhy Student  | student2@example.com | Tenant 1 |
+      | Treti Student  | student3@example.com | Tenant 3 |
+
+  Scenario: Site admin may bulk deallocate tenant members
+    Given I log in as "admin"
+    When I navigate to "Users > Accounts > Browse list of users" in site administration
+    And I click on "Nulty Student" "checkbox"
+    And I click on "Prvni Student" "checkbox"
+    And the "Bulk user actions" select box should contain "Allocate users to tenant"
+    And I set the field "Bulk user actions" to "Deallocate tenant members"
+    And I press "Deallocate tenant members"
+    Then the following should exist in the "reportbuilder-table" table:
+      | First name     | Email address        | Tenant   |
+      | Nulty Student  | student0@example.com |          |
+      | Prvni Student  | student1@example.com |          |
+      | Druhy Student  | student2@example.com | Tenant 2 |
+      | Treti Student  | student3@example.com | Tenant 3 |

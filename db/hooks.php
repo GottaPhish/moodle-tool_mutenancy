@@ -32,4 +32,9 @@ $callbacks = [
         'callback' => [\tool_mutenancy\local\navigation::class, 'primary_extend'],
         'priority' => 0,
     ],
+    [
+        'hook' => \core_user\hook\extend_bulk_user_actions::class,
+        'callback' => [\tool_mutenancy\local\user::class, 'hook_extend_bulk_user_actions'],
+        'priority' => 0,
+    ],
 ];
