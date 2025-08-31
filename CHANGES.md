@@ -2,7 +2,7 @@
 
 ## mu-5.0.2-02
 
-Release date: xx/08/2025
+Release date: 31/08/2025
 
 * Added bulk tenant members allocation and deallocation in Browse list of users.
 * Added help icons to tenant forms.
