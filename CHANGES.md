@@ -1,5 +1,11 @@
 # Changelog
 
+## mu-4.5.6-03
+
+Release date: xx/09/2025
+
+* Added event for user tenant allocation changes.
+
 ## mu-4.5.6-02
 
 Release date: 31/08/2025
