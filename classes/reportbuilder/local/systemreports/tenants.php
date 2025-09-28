@@ -83,24 +83,7 @@ final class tenants extends system_report {
         $this->add_columns_from_entities($columns);
 
         $this->get_column('course_category:namewithlink')
-            ->set_title(new \lang_string('tenant_category', 'tool_mutenancy'))
-            ->set_callback(static function ($ignored, \stdClass $category): string {
-                if (empty($category->id)) {
-                    return '';
-                }
-                $context = \context_coursecat::instance($category->id);
-                $url = null;
-                if (has_capability('moodle/category:manage', $context)) {
-                    $url = new \moodle_url('/course/management.php', ['categoryid' => $category->id]);
-                } else if (has_capability('moodle/category:viewcourselist', $context)) {
-                    $url = new \moodle_url('/course/index.php', ['categoryid' => $category->id]);
-                }
-                $name = format_string($category->name, true, ['context' => $context]);
-                if ($url) {
-                    $name = \html_writer::link($url, $name);
-                }
-                return $name;
-            });
+            ->set_title(new \lang_string('tenant_category', 'tool_mutenancy'));
     }
 
     /**
