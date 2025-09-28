@@ -40,8 +40,7 @@ final class navigationlib_test extends \advanced_testcase {
      * @covers \settings_navigation::initialise, \settings_navigation::load_tenant_settings
      */
     public function test_settings_navigation_initialise(): void {
-        global $CFG, $PAGE;
-        require_once("$CFG->libdir/navigationlib.php");
+        global $PAGE;
 
         if (tenancy::is_active()) {
             tenancy::deactivate();
