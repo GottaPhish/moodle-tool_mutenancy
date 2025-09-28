@@ -31,11 +31,11 @@
  * @return environment_results updated results object
  */
 function tool_mutenancy_environment_corepatch(environment_results $result): environment_results {
-    $release = 'mutenancy-5.0.2-01';
+    $release = 'mutenancy-5.1.0-01';
 
     $result->setInfo("Core Multi-tenancy patch ($release is required)");
 
-    $patchfile = __DIR__ . '/../../../patch/mutenancy.php';
+    $patchfile = __DIR__ . '/../../../../patch/mutenancy.php';
     if (!file_exists($patchfile)) {
         $result->setStatus(false);
         return $result;
