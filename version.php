@@ -33,7 +33,7 @@ $plugin->requires = 2025092600;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->supported = [501, 501];
 $plugin->incompatible = 502;
-$plugin->release = 'mu-5.1.0-01';
+$plugin->release = 'mu-5.1.0-01+';
 
 $plugin->dependencies = [
     'tool_mulib' => 2025100650,
