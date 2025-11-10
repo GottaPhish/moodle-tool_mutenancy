@@ -66,9 +66,10 @@ final class tenant_switch extends \tool_mulib\local\ajax_form {
         $options = [];
         $options[''][0] = $notenant;
 
-        $sql = "SELECT t.id, t.name
+        $sql = "SELECT DISTINCT t.id, t.name
                   FROM {tool_mutenancy_tenant} t
-                  JOIN {cohort_members} cm ON cm.cohortid = t.assoccohortid AND cm.userid = :me
+                  JOIN {cohort_members} cm ON cm.userid = :me
+                   AND (cm.cohortid = t.assoccohortid OR cm.cohortid = t.cohortid)
                  WHERE t.archived = 0";
         $tenants = $DB->get_records_sql_menu($sql, ['me' => $USER->id]);
         $tenants = array_map('format_string', $tenants);
@@ -78,7 +79,7 @@ final class tenant_switch extends \tool_mulib\local\ajax_form {
         }
 
         $syscontext = \context_system::instance();
-        if (!has_capability('tool/mutenancy:view', $syscontext)) {
+        if (!is_siteadmin() || !has_capability('tool/mutenancy:view', $syscontext)) {
             return $options;
         }
 
