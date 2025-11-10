@@ -58,4 +58,50 @@ $functions = [
         'ajax' => true,
         'loginrequired' => true,
     ],
+
+    'tool_mutenancy_create_tenant' => [
+        'classname'   => 'tool_mutenancy\external\create_tenant',
+
+        'description' => 'Creates new tenant.',
+
+        'type'        => 'write',
+
+        'ajax'        => true,
+
+        'capabilities' => 'tool/mutenancy:admin',
+
+        'services' => [
+            MOODLE_OFFICIAL_MOBILE_SERVICE,
+        ]
+    ],
+    'tool_mutenancy_create_user' => [
+        'classname' => 'tool_mutenancy\external\create_tenant_user',
+        'description' => 'Creates a new tenant member user.',
+        'type' => 'write',
+        'ajax' => true,
+        'capabilities' => 'tool/mutenancy:membercreate, moodle/user:create',
+        'services' => [
+            MOODLE_OFFICIAL_MOBILE_SERVICE,
+        ],
+    ],
+    'tool_mutenancy_duplicate_course' => [
+        'classname' => 'tool_mutenancy\external\duplicate_tenant_course',
+        'description' => 'Duplicate an existing course into a tenant category.',
+        'type' => 'write',
+        'ajax' => true,
+        'capabilities' => 'tool/mutenancy:admin, moodle/course:create, moodle/backup:backupcourse, moodle/restore:restorecourse',
+        'services' => [
+            MOODLE_OFFICIAL_MOBILE_SERVICE,
+        ],
+    ],
+    'tool_mutenancy_get_tenant_by_idnumber' => [
+        'classname' => 'tool_mutenancy\external\get_tenant_by_idnumber',
+        'description' => 'Fetch tenant details using idnumber.',
+        'type' => 'read',
+        'ajax' => true,
+        'capabilities' => 'tool/mutenancy:admin',
+        'services' => [
+            MOODLE_OFFICIAL_MOBILE_SERVICE,
+        ],
+    ],
 ];
