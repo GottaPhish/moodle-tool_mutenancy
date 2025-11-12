@@ -218,9 +218,9 @@ final class tenancy {
             return false;
         }
 
-        // if (self::get_user_tenantid($USER->id)) {
-        //     return false;
-        // }
+        if (self::get_user_tenantid($USER->id)) {
+            return false;
+        }
 
         if (has_capability('tool/mutenancy:view', $syscontext)) {
             return true;
@@ -252,10 +252,10 @@ final class tenancy {
             throw new \core\exception\invalid_parameter_exception('Invalid tenant id');
         }
 
-        // $usertenantid = self::get_user_tenantid($USER->id);
-        // if ($usertenantid && $usertenantid != $tenantid) {
-        //     throw new \core\exception\coding_exception('Tenant members cannot switch tenant');
-        // }
+        $usertenantid = self::get_user_tenantid($USER->id);
+        if ($usertenantid && $usertenantid != $tenantid) {
+            throw new \core\exception\coding_exception('Tenant members cannot switch tenant');
+        }
 
         if (isset($CFG->tool_mutenancy_forced_tenantid)) {
             debugging('Tenant is forced, un-enforcing before switch', DEBUG_DEVELOPER);
