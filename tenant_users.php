@@ -30,6 +30,7 @@ use tool_mutenancy\local\tenancy;
 /** @var core_renderer $OUTPUT */
 /** @var moodle_database $DB */
 /** @var moodle_page $PAGE */
+/** @var stdClass $USER */
 
 require(__DIR__ . '/../../../config.php');
 require_once("$CFG->libdir/adminlib.php");
@@ -45,6 +46,12 @@ if (!tenancy::is_active()) {
 $tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $tenantid], '*', MUST_EXIST);
 $context = context_tenant::instance($tenant->id);
 require_capability('tool/mutenancy:view', $context);
+
+if (!is_siteadmin($USER->id)) {
+    if (!$DB->record_exists('cohort_members', ['cohortid' => $tenant->cohortid, 'userid' => $USER->id])) {
+        throw new required_capability_exception($context, 'tool/mutenancy:view', 'nopermissions', '');
+    }
+}
 
 $PAGE->set_context($context);
 $PAGE->set_url('/admin/tool/mutenancy/tenant_users.php', ['id' => $tenant->id]);

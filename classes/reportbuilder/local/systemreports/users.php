@@ -99,13 +99,29 @@ final class users extends system_report {
      * @return bool
      */
     protected function can_view(): bool {
+        global $DB, $USER;
+
         if ($this->get_context()->contextlevel != CONTEXT_TENANT) {
             return false;
         }
         if (isguestuser() || !isloggedin()) {
             return false;
         }
-        return has_capability('tool/mutenancy:view', $this->get_context());
+        if (!has_capability('tool/mutenancy:view', $this->get_context())) {
+            return false;
+        }
+
+        if (is_siteadmin($USER->id)) {
+            return true;
+        }
+
+        $tenantid = $this->get_context()->instanceid;
+        $tenant = $DB->get_record('tool_mutenancy_tenant', ['id' => $tenantid], 'id, cohortid', IGNORE_MISSING);
+        if (!$tenant) {
+            return false;
+        }
+
+        return $DB->record_exists('cohort_members', ['cohortid' => $tenant->cohortid, 'userid' => $USER->id]);
     }
 
     /**

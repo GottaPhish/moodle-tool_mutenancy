@@ -21,6 +21,7 @@ namespace tool_mutenancy\reportbuilder\local\systemreports;
 use tool_mutenancy\reportbuilder\local\entities\tenant;
 use core_course\reportbuilder\local\entities\course_category;
 use core_reportbuilder\system_report;
+use core_reportbuilder\local\helpers\database;
 use moodle_url;
 use lang_string;
 
@@ -34,6 +35,8 @@ use lang_string;
 final class tenants extends system_report {
     #[\Override]
     protected function initialise(): void {
+        global $USER;
+
         $tenantentity = new tenant();
         $tenantalias = $tenantentity->get_table_alias('tool_mutenancy_tenant');
 
@@ -41,6 +44,19 @@ final class tenants extends system_report {
         $this->add_entity($tenantentity);
 
         $this->add_base_fields("{$tenantalias}.id, {$tenantalias}.archived");
+
+        if (!is_siteadmin($USER->id)) {
+            $paramuserid = database::generate_param_name();
+            $this->add_base_condition_sql(
+                "{$tenantalias}.id IN (
+                    SELECT t.id
+                      FROM {tool_mutenancy_tenant} t
+                      JOIN {cohort_members} cm ON cm.cohortid = t.cohortid
+                     WHERE cm.userid = :{$paramuserid}
+                )",
+                [$paramuserid => $USER->id]
+            );
+        }
 
         $categoryentity = new course_category();
         $categoryalias = $categoryentity->get_table_alias('course_categories');
