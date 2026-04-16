@@ -312,10 +312,10 @@ final class tenancy {
                 } else {
                     $GLOBALS['SITE']->fullname = $tenant->name;
                 }
-                if (isset($tenant->siteshortname)) {
-                    $GLOBALS['SITE']->shortname = $tenant->siteshortname;
-                } else {
+                if (isset($tenant->name)) {
                     $GLOBALS['SITE']->shortname = $tenant->name;
+                } else {
+                    $GLOBALS['SITE']->shortname = $tenant->shortname;
                 }
             }
             $GLOBALS['SITE']->tenantid = (int)$tenantid;
