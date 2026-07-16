@@ -51,6 +51,24 @@ class tenant_secondary extends \core\navigation\views\secondary {
         $url = new \moodle_url('/admin/tool/mutenancy/tenant_appearance.php', ['id' => $context->instanceid]);
         $this->add(get_string('secondary_tenant_appearance', 'tool_mutenancy'), $url, \navigation_node::TYPE_SETTING, null, 'tenant_appearance');
 
+        // GottaPhish: employee enrolment rules (who gets which courses, at what pace) — owned
+        // entirely by local_coursebuilder, no external plugin dependency. Only shown if the
+        // tenant manager actually holds the capability — unlike the tabs above, this comes from
+        // another plugin and may not be installed.
+        if (
+            \core_component::get_component_directory('local_coursebuilder')
+            && has_capability('local/coursebuilder:manageenrolmentrules', $context)
+        ) {
+            $url = new \moodle_url('/local/coursebuilder/enrolment_rules.php', ['id' => $context->instanceid]);
+            $this->add(
+                get_string('secondary_tenant_enrolmentrules', 'tool_mutenancy'),
+                $url,
+                \navigation_node::TYPE_SETTING,
+                null,
+                'tenant_enrolmentrules'
+            );
+        }
+
         $this->scan_for_active_node($this);
         $this->initialised = true;
     }

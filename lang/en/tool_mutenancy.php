@@ -124,6 +124,7 @@ $string['secondary_tenant_appearance'] = 'Appearance';
 $string['secondary_tenant_auth'] = 'Authentication';
 $string['secondary_tenant_details'] = 'Details';
 $string['secondary_tenant_users'] = 'Users';
+$string['secondary_tenant_enrolmentrules'] = 'Enrolment rules';
 $string['setting_tenantlimit'] = 'Tenant limit';
 $string['setting_tenantlimit_desc'] = 'Specifies how many tenants can be created. Note that sites with more than 100 tenants may encounter performance and usability problems.';
 $string['setting_tenantprimarynav'] = 'Add tenant management to primary menu';
