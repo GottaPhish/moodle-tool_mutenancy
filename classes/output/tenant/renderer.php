@@ -149,7 +149,9 @@ final class renderer extends \tool_mutenancy\output\tenant_renderer_base {
                 $action = new \tool_mulib\output\ajax_form\icon($url, get_string('tenant_archive', 'tool_mutenancy'), 'i/settings');
                 $action->set_form_size('sm');
             }
-            $action = $this->render($action);
+            if ($action !== '') {
+                $action = $this->render($action);
+            }
         }
 
         $details->add(get_string('tenant_archived', 'tool_mutenancy'), $yesno[$tenant->archived] . $action);
