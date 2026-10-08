@@ -120,6 +120,39 @@ final class tenancy {
     }
 
     /**
+     * Returns the tenant a role-based manager should default to.
+     *
+     * A tenant manager (a row in {tool_mutenancy_manager}) is not necessarily a
+     * cohort member of the tenant, so get_user_tenantid() returns null for them;
+     * if they also cannot switch they can never reach their own tenant's
+     * "Tenant management" / enrolment rules. When the user manages exactly one
+     * non-archived tenant we default to it. Managers of several tenants return 0
+     * and keep the "no tenant" default, picking a tenant with the switcher.
+     *
+     * @param int $userid
+     * @return int tenant id, or 0 when there is no single managed tenant
+     */
+    public static function get_sole_managed_tenantid(int $userid): int {
+        global $DB;
+
+        if (!$userid || isguestuser($userid)) {
+            return 0;
+        }
+
+        $sql = "SELECT DISTINCT t.id
+                  FROM {tool_mutenancy_manager} m
+                  JOIN {tool_mutenancy_tenant} t ON t.id = m.tenantid AND t.archived = 0
+                 WHERE m.userid = :userid";
+        $tenantids = $DB->get_fieldset_sql($sql, ['userid' => $userid]);
+
+        if (count($tenantids) === 1) {
+            return (int)reset($tenantids);
+        }
+
+        return 0;
+    }
+
+    /**
      * Force current tenant temporarily.
      *
      * @param int|null $tenatid
@@ -454,6 +487,11 @@ final class tenancy {
                     $SESSION->tool_mutenancy_tenantid = 0;
                 }
             }
+            if ((int)$SESSION->tool_mutenancy_tenantid === 0) {
+                // See callback_session_set_user(): default a sole-tenant manager
+                // to the tenant they manage, including on session-less page loads.
+                $SESSION->tool_mutenancy_tenantid = self::get_sole_managed_tenantid($USER->id);
+            }
             self::set_cookie($SESSION->tool_mutenancy_tenantid);
         }
 
@@ -468,6 +506,12 @@ final class tenancy {
         global $SESSION, $USER;
 
         $usertenantid = self::get_user_tenantid($USER->id);
+        if (!$usertenantid) {
+            // Role-based tenant managers are not cohort members; default them to
+            // the single tenant they manage so their "Tenant management" menu
+            // shows up without needing the (hidden) tenant switcher.
+            $usertenantid = self::get_sole_managed_tenantid($USER->id);
+        }
 
         // Guests and no-logged-in users cannot access tenants.
         $SESSION->tool_mutenancy_tenantid = (int)$usertenantid;
